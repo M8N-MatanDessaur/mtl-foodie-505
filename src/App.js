@@ -520,9 +520,11 @@ export default function App() {
   return (
     <Wrapper>
       <AppContainer>
-        <Title>
-          Ya quoi à manger <span>?</span>
-        </Title>
+        <Header>
+          <Title>
+            Ya quoi à manger <span>?</span>
+          </Title>
+        </Header>
         <SelectedRestaurant>
           <Overlay />
           {randomRestaurant ? (
@@ -541,18 +543,16 @@ export default function App() {
             <path d="M7 4v16l13-8L7 4Z"></path>
           </svg>
         </Randomizer>
+        <MarqueeContainer>
+          <Marquee>
+            T'as envie d'une poutine qui va te faire baver dans ton hoodie? Y'a des places pour ça, mon chum! Ou ben, si t'es plus dans l'mood pour du smoked meat tendre à s'en faire fondre l'coeur, y'a des endroits pour ça aussi!Pour des hot dogs qui vont te faire perdre l'contrôle de tes babines, vas-t'en chez "Les Pattes Folles". C'est tellement bon que tu vas pogner un rire de fou!
+            Si t'es plutôt amateur de fruits de mer, y'a "La Mer qui Déboite". Non seulement leurs plats sont délicieux, mais leur nom, osti, ça décrisse tout!
+            Tu veux un bon burger? Alors va chez "Le Gras Content". J'te jure, t'auras tellement l'air satisfait après l'avoir mangé que tu vas faire brailler les vaches!
+            Et pour les amateurs de cuisine végétarienne, y'a le "Potager des Foufounes". J'peux pas t'dire à quoi ça ressemble, mais le nom, ça vaut la peine d'y aller juste pour en parler après!
+            Faque là, mon pote, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
+          </Marquee>
+        </MarqueeContainer>
       </AppContainer>
-
-      <MarqueeContainer>
-      <Marquee>
-        T'as envie d'une poutine qui va te faire baver dans ton hoodie? Y'a des places pour ça, mon chum! Ou ben, si t'es plus dans l'mood pour du smoked meat tendre à s'en faire fondre l'coeur, y'a des endroits pour ça aussi!Pour des hot dogs qui vont te faire perdre l'contrôle de tes babines, vas-t'en chez "Les Pattes Folles". C'est tellement bon que tu vas pogner un rire de fou!
-        Si t'es plutôt amateur de fruits de mer, y'a "La Mer qui Déboite". Non seulement leurs plats sont délicieux, mais leur nom, osti, ça décrisse tout!
-        Tu veux un bon burger? Alors va chez "Le Gras Content". J'te jure, t'auras tellement l'air satisfait après l'avoir mangé que tu vas faire brailler les vaches!
-        Et pour les amateurs de cuisine végétarienne, y'a le "Potager des Foufounes". J'peux pas t'dire à quoi ça ressemble, mais le nom, ça vaut la peine d'y aller juste pour en parler après!
-        Faque là, mon pote, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
-      </Marquee>
-      </MarqueeContainer>
-      
     </Wrapper>
   );
 }
@@ -563,36 +563,47 @@ const Wrapper = styled.div`
   height: 100svh;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282c34;
+  background-image: url(https://uploads-ssl.webflow.com/62e3ee10882dc50bcae8d07a/631a5d4631d4c55a475f3e34_noise-50.png);
+  background-size: 20%; 
 `;
 
 
 const AppContainer = styled.div`
   position: relative;
+  height: 100%;
+  min-height: 100vh;
+  width: 70%;
   background-color: #282c34;
   background-image: url(https://uploads-ssl.webflow.com/62e3ee10882dc50bcae8d07a/631a5d4631d4c55a475f3e34_noise-50.png);
   background-size: 20%;
-  height: 100%;
-  min-height: 100vh;
   color: white;
   font-size: calc(10px + 2vmin);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 35px;
   overflow: hidden;
 
-  @media (max-width: 480px) {
-    padding: 15px;
-    padding-bottom: 75px;
+  border: 5px solid #2e5bf3;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    padding: 0;
+    border:none;
   }
 `;
 
 const SelectedRestaurant = styled.div`
   position: relative;
   height: 40%;
-  width: 60%;
-  border-radius: 20px;
+  height: calc(100svh - 204px);
+  height: calc(100% - 204px);
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -602,28 +613,25 @@ const SelectedRestaurant = styled.div`
   background-color: #213377;
 
   border: 5px solid #2e5bf3;
-
-  border-radius: 15px;
   box-shadow: inset 7px 7px 17px #1d2026,
-            inset -7px -7px 17px #333842;
+            inset -7px -7px 17px #333842; 
 
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 60%;
-  }
-  
+@media (max-width: 768px) {
+  height: calc(100svh - 164px);
+  height: calc(100% - 164px);
+}
 `;
 
 const Randomizer = styled.button`
-  margin-top: 20px;
-
+  width: 100%;
   padding: 17px 40px;
-  border-radius: 10px;
   border: 0;
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
   font-size: 15px;
-  box-shadow: #2342ad 0px 10px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   & svg {
     stroke: #213377;
@@ -634,8 +642,9 @@ const Randomizer = styled.button`
  
 &:active {
   background-color: #2e5bf3;
-  box-shadow: #2342ad 0px 0px 0px 0px;
-  transform: translateY(5px);
+  & svg{
+    transform: scale(0.8);
+  }
  }
 
   &:hover {
@@ -677,26 +686,6 @@ const Overlay = styled.div`
   pointer-events: none;
 `;
 
-const Title = styled.h1`
-  position: relative;
-  color: #fff;
-  font-size: 3rem;
-  margin-bottom: 20px;
-  text-align: center;
-  filter: drop-shadow(0 0 15px #00f8fb);
-  text-shadow: 0 0 15px #00f8fb;
-
-& span {
-  position: absolute;
-  left: 105%;
-  transform: scale(1.3) rotate(35deg);
-}
-
-@media (max-width: 768px) {
-  font-size: 2rem;
-}
-`;
-
 const Main = styled.h2`
   font-size: 1.2rem;
   color: #fff;
@@ -711,21 +700,21 @@ const Sub = styled.p`
 `;
 
 const MarqueeContainer = styled.div`
-position: absolute;
-bottom: 0;
-left: 0;
-border-top: 5px solid #2e5bf3;
 border-bottom: 5px solid #2e5bf3;
+height: 70px;
 display: flex;
 align-items: center;
 justify-content: center;
+
+@media (max-width: 768px) {
+  50px;
+}
 `;
 
 const Marquee = styled.p`
   font-size: 3rem;
   color: #ffffff80;
   text-align: center;
-  margin-bottom: 10px;
   overflow: hidden;
   white-space: nowrap;
   animation: marquee 120s linear infinite;
@@ -742,4 +731,40 @@ const Marquee = styled.p`
   @media (max-width: 768px) {
     font-size: 2rem;
   }
+`;
+
+const Header = styled.header`
+width: 100%;
+height: 70px;
+border-bottom: 2px solid #2e5bf3;
+background-color: #2e5bf3;
+display: flex;
+align-items: center;
+justify-content: start;
+padding: 10px 20px;
+z-index: 100;
+
+@media (max-width: 768px) {
+  height: 50px;
+}
+`;
+
+const Title = styled.h1`
+  position: relative;
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+  filter: drop-shadow(0 0 15px #00f8fb);
+  text-shadow: 0 0 15px #00f8fb;
+
+& span {
+  position: absolute;
+  left: 105%;
+  transform: scale(1.3) rotate(35deg);
+}
+
+@media (max-width: 768px) {
+  font-size: 1.5rem;
+}
+
 `;
