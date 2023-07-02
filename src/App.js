@@ -707,6 +707,8 @@ const MapContainer = styled.div`
   height: 100%;
   margin-top: 20px;
   filter: hue-rotate(318deg);
+  border: 5px solid #fff;
+  border-radius: 10px;
 `;
 
 const MapFrame = styled.iframe`
