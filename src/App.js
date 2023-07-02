@@ -616,7 +616,7 @@ const SelectedRestaurant = styled.div`
             inset -7px -7px 17px #333842; 
 
 @media (max-width: 768px) {
-  //height: calc(100% - 160px);
+  height: calc(100% - 160px);
 }
 `;
 
