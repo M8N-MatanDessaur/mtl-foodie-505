@@ -571,7 +571,6 @@ const Wrapper = styled.div`
 const AppContainer = styled.div`
   position: relative;
   height: 100%;
-  min-height: 100vh;
   width: 70%;
   background-color: #282c34;
   background-image: url(https://uploads-ssl.webflow.com/62e3ee10882dc50bcae8d07a/631a5d4631d4c55a475f3e34_noise-50.png);
@@ -588,7 +587,6 @@ const AppContainer = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     height: 100%;
-    min-height: 100vh;
     padding: 0;
     border:none;
   }
