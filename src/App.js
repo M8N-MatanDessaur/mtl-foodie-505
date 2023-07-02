@@ -511,12 +511,32 @@ const RestaurantList = [
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
 
-  // Function to pick a random restaurant
   const pickRandomRestaurant = () => {
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
-    setRandomRestaurant(RestaurantList[randomIndex]);
+    const randomRestaurant = RestaurantList[randomIndex];
+    if (randomRestaurant) {
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapContainer = (
+        <MapContainer>
+          <MapFrame src={mapUrl} allowFullScreen></MapFrame>
+        </MapContainer>
+      );
+      const mapFrame = (
+        <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
+          {randomRestaurant.name}
+        </MapLink>
+      );
+      setRandomRestaurant({
+        ...randomRestaurant,
+        mapContainer,
+        mapFrame
+      });
+    } else {
+      setRandomRestaurant(null);
+    }
   };
-
+  
+  
   return (
     <Wrapper>
       <AppContainer>
@@ -528,15 +548,18 @@ export default function App() {
         <SelectedRestaurant>
           <Overlay />
           {randomRestaurant ? (
-            <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
-              {randomRestaurant.name}
-            </MapLink>
+            <>
+                 {randomRestaurant.mapContainer}
+            {randomRestaurant.mapFrame}
+            </>
           ) : (
             <>
               <Main>
                 Appuis s'ul pitton ▷ pour choisir aléatoirement où manger!
-                </Main>
-              <Sub>y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton! </Sub>
+              </Main>
+              <Sub>
+                y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton!
+              </Sub>
             </>
           )}
         </SelectedRestaurant>
@@ -558,6 +581,7 @@ export default function App() {
     </Wrapper>
   );
 }
+
 
 const Wrapper = styled.div`
   position: relative;
@@ -657,12 +681,13 @@ const Randomizer = styled.button`
 `;
 
 const MapLink = styled.a`
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #fff;
   text-decoration: none;
   background-color: #2e5bf3;
   padding: 20px 40px;
   border-radius: 50px;
+  margin-top: 20px;
   border: 5px solid #ffffff;
 
   &:hover {
@@ -672,8 +697,22 @@ const MapLink = styled.a`
   }
 
   @media (max-width: 480px) {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
+`;
+
+
+const MapContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  filter: hue-rotate(318deg);
+`;
+
+const MapFrame = styled.iframe`
+  width: 100%;
+  height: 100%;
+  border: 0;
 `;
 
 const Overlay = styled.div`
