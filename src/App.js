@@ -518,6 +518,7 @@ export default function App() {
   };
 
   return (
+    <Wrapper>
       <AppContainer>
         <Header>
           <Title>
@@ -554,13 +555,14 @@ export default function App() {
           </Marquee>
         </MarqueeContainer>
       </AppContainer>
+    </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
