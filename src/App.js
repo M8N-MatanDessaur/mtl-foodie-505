@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
-import JSConfetti from 'js-confetti'
 
 const RestaurantList = [
   { name: "Place Carmin", links: "https://www.google.com/maps/place/Place+Carmin/data=!4m2!3m1!1s0x4cc91ba1ae8cfdc1:0x90033e0608e72636" },
@@ -511,20 +510,15 @@ const RestaurantList = [
 
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
-  const jsConfetti = new JSConfetti()
-
 
   // Function to pick a random restaurant
   const pickRandomRestaurant = () => {
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     setRandomRestaurant(RestaurantList[randomIndex]);
-    jsConfetti.addConfetti({
-      emojis: ['🍔', '🌯', '💥', '🍛', '🍜', '🥩'],
-   })
   };
 
   return (
-    <>
+    <Wrapper>
       <AppContainer>
         <Title>
           Ya quoi à manger <span>?</span>
@@ -559,9 +553,18 @@ export default function App() {
       </Marquee>
       </MarqueeContainer>
       
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  position: relative;
+  height: 100%;
+  height: 100svh;
+  width: 100%;
+  overflow: hidden;
+`;
+
 
 const AppContainer = styled.div`
   position: relative;
@@ -679,15 +682,8 @@ const Title = styled.h1`
   font-size: 3rem;
   margin-bottom: 20px;
   text-align: center;
-  text-shadow:
-  0 0 5px #fff,
-  0 0 10px #fff,
-  0 0 25px #fff,
-  0 0 45px #08b,
-  0 0 85px #08b,
-  0 0 105px #08b,
-  0 0 125px #08b,
-  0 0 155px #08b;
+  filter: drop-shadow(0 0 15px #00f8fb);
+  text-shadow: 0 0 15px #00f8fb;
 
 & span {
   position: absolute;
@@ -696,7 +692,7 @@ const Title = styled.h1`
 }
 
 @media (max-width: 768px) {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 `;
 
