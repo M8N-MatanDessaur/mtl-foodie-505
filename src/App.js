@@ -617,14 +617,14 @@ const SelectedRestaurant = styled.div`
             inset -7px -7px 17px #333842; 
 
 @media (max-width: 768px) {
-  height: calc(100svh - 164px);
-  height: calc(100% - 164px);
+  height: calc(100svh - 160px);
+  height: calc(100% - 160px);
 }
 `;
 
 const Randomizer = styled.button`
   width: 100%;
-  padding: 17px 40px;
+  height: 65px;
   border: 0;
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
@@ -653,6 +653,10 @@ const Randomizer = styled.button`
       stroke: #fff;
     }
     transition: all 200ms ease-in-out;
+  }
+
+  @media (max-width: 768px) {
+    height: 60px;
   }
 `;
 
