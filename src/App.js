@@ -534,7 +534,7 @@ export default function App() {
           ) : (
             <>
               <Main>
-                Appuis s'ul pitton ▷ pour choisir aléatoirement
+                Appuis s'ul pitton ▷ pour choisir aléatoirement où manger!
                 </Main>
               <Sub>y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton! </Sub>
             </>
