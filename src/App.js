@@ -532,7 +532,9 @@ export default function App() {
             </MapLink>
           ) : (
             <>
-              <Main>Appuis pour choisir aléatoirement</Main>
+              <Main>
+                Appuis s'ul pitton ▷ pour choisir aléatoirement
+                </Main>
               <Sub>y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton! </Sub>
             </>
           )}
