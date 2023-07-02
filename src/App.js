@@ -518,7 +518,6 @@ export default function App() {
   };
 
   return (
-    <Wrapper>
       <AppContainer>
         <Header>
           <Title>
@@ -553,7 +552,6 @@ export default function App() {
           </Marquee>
         </MarqueeContainer>
       </AppContainer>
-    </Wrapper>
   );
 }
 
