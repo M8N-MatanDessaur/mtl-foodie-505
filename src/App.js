@@ -601,7 +601,6 @@ const AppContainer = styled.div`
 const SelectedRestaurant = styled.div`
   position: relative;
   height: 40%;
-  height: calc(100svh - 204px);
   height: calc(100% - 204px);
   width: 100%;
   display: flex;
@@ -617,8 +616,7 @@ const SelectedRestaurant = styled.div`
             inset -7px -7px 17px #333842; 
 
 @media (max-width: 768px) {
-  height: calc(100svh - 160px);
-  height: calc(100% - 160px);
+  //height: calc(100% - 160px);
 }
 `;
 
