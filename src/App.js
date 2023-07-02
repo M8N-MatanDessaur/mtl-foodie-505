@@ -510,8 +510,10 @@ const RestaurantList = [
 
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const pickRandomRestaurant = () => {
+    setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
@@ -534,9 +536,12 @@ export default function App() {
     } else {
       setRandomRestaurant(null);
     }
+    setTimeout(() => {
+    setLoading(false); 
+    }, 1000);
   };
-  
-  
+
+
   return (
     <Wrapper>
       <AppContainer>
@@ -546,11 +551,14 @@ export default function App() {
           </Title>
         </Header>
         <SelectedRestaurant>
+          <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
+          ALE&nbsp;<LoadingSpinner />&nbsp;RESTO
+          </LoadingOverlay>
           <Overlay />
           {randomRestaurant ? (
             <>
-                 {randomRestaurant.mapContainer}
-            {randomRestaurant.mapFrame}
+              {randomRestaurant.mapContainer}
+              {randomRestaurant.mapFrame}
             </>
           ) : (
             <>
@@ -599,7 +607,7 @@ const Wrapper = styled.div`
 const AppContainer = styled.div`
   position: relative;
   height: 100%;
-  width: 70%;
+  width: 450px;
   background-color: #282c34;
   background-image: url(https://uploads-ssl.webflow.com/62e3ee10882dc50bcae8d07a/631a5d4631d4c55a475f3e34_noise-50.png);
   background-size: 20%;
@@ -609,8 +617,9 @@ const AppContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-
-  border: 5px solid #2e5bf3;
+  box-shadow: 0 0 500px 50px #2e5bf390;
+  border-left: 5px solid #2e5bf3;
+  border-right: 5px solid #2e5bf3;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -623,7 +632,7 @@ const AppContainer = styled.div`
 const SelectedRestaurant = styled.div`
   position: relative;
   height: 40%;
-  height: calc(100% - 204px);
+  height: calc(100% - 160px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -636,15 +645,11 @@ const SelectedRestaurant = styled.div`
   border: 5px solid #2e5bf3;
   box-shadow: inset 7px 7px 17px #1d2026,
             inset -7px -7px 17px #333842; 
-
-@media (max-width: 768px) {
-  height: calc(100% - 160px);
-}
 `;
 
 const Randomizer = styled.button`
   width: 100%;
-  height: 65px;
+  height: 60px;
   border: 0;
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
@@ -674,14 +679,10 @@ const Randomizer = styled.button`
     }
     transition: all 200ms ease-in-out;
   }
-
-  @media (max-width: 768px) {
-    height: 60px;
-  }
 `;
 
 const MapLink = styled.a`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #fff;
   text-decoration: none;
   background-color: #2e5bf3;
@@ -694,10 +695,6 @@ const MapLink = styled.a`
     transform: scale(1.1);
     transition: 200ms;
     filter: drop-shadow(5px 5px 25px #2e5bf3);
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.2rem;
   }
 `;
 
@@ -741,42 +738,34 @@ const Sub = styled.p`
 `;
 
 const MarqueeContainer = styled.div`
-border-bottom: 5px solid #2e5bf3;
-height: 70px;
-display: flex;
-align-items: center;
-justify-content: center;
-
-@media (max-width: 768px) {
+  border-bottom: 5px solid #2e5bf3;
   height: 50px;
-}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 `;
 
 const Marquee = styled.p`
-  font-size: 3rem;
+  font-size: 2rem;
   color: #ffffff80;
   text-align: center;
-  overflow: hidden;
   white-space: nowrap;
-  animation: marquee 120s linear infinite;
-  
+  animation: marquee 130s linear infinite;
+
   @keyframes marquee {
     0% {
-      transform: translateX(0);
+      transform: translateX(50%);
     }
     100% {
       transform: translateX(-100%);
     }
   }
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
 `;
 
 const Header = styled.header`
 width: 100%;
-height: 70px;
+height: 50px;
 border-bottom: 2px solid #2e5bf3;
 background-color: #2e5bf3;
 display: flex;
@@ -785,18 +774,15 @@ justify-content: start;
 padding: 10px 20px;
 z-index: 100;
 
-@media (max-width: 768px) {
-  height: 50px;
-}
 `;
 
 const Title = styled.h1`
   position: relative;
   color: #fff;
-  font-size: 3rem;
+  font-size: 1.5rem;
   text-align: center;
   filter: drop-shadow(0 0 15px #00f8fb);
-  text-shadow: 0 0 15px #00f8fb;
+  text-shadow: 0 0 30px #00f8fb;
 
 & span {
   position: absolute;
@@ -804,8 +790,39 @@ const Title = styled.h1`
   transform: scale(1.3) rotate(35deg);
 }
 
-@media (max-width: 768px) {
-  font-size: 1.5rem;
-}
+`;
 
+
+const LoadingOverlay = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  display: ${props => props.loading ? 'flex' : 'none'};
+`;
+
+
+const LoadingSpinner = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #2e5bf3;
+  border-top: 5px solid #fff;
+  animation: spin 1s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
 `;
