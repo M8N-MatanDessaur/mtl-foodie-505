@@ -560,9 +560,7 @@ export default function App() {
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
-  height: 100svh;
   width: 100%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
