@@ -797,7 +797,7 @@ const LoadingOverlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  background: black;
+  background: #1a1d25;
   background-size: 100% 4px;
   z-index: 10;
   pointer-events: none;
