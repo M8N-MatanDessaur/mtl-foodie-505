@@ -514,7 +514,15 @@ export default function App() {
   const [listOpened, setListOpened] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const vibrate = () => {
+    if ('vibrate' in navigator) {
+      navigator.vibrate(200);
+    }
+  };
+  
+
   const pickRandomRestaurant = () => {
+    vibrate();
     setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
@@ -544,10 +552,12 @@ export default function App() {
   };
 
   const toggleModal = () => {
+    vibrate();
     setShowModal(!showModal);
   };
 
   const toggleList = () => {
+    vibrate();
     setListOpened(!listOpened);
   };
 
@@ -573,11 +583,11 @@ export default function App() {
           </LoadingOverlay>
 
           <ListOverlay listOpened={listOpened}>
-          <CloseButton onClick={toggleList}>
-                <svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
-                </svg>
-              </CloseButton>
+            <CloseButton onClick={toggleList}>
+              <svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
+              </svg>
+            </CloseButton>
             <ListTitle>La liste pour les fines bouches</ListTitle>
             <ListWrapper>
               {RestaurantList.map((restaurant) => (
