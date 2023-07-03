@@ -886,8 +886,6 @@ const MarqueeContainer = styled.div`
   overflow: hidden;
 `;
 
-
-
 const Header = styled.header`
 width: 100%;
 height: 50px;
