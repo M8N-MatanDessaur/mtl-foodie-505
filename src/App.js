@@ -557,7 +557,7 @@ export default function App() {
         </MapContainer>
       );
       const mapFrame = (
-        <MapLink href={randomRestaurant.links} onClick={mapButtonPressed();} target="_blank" rel="noopener noreferrer">
+        <MapLink href={randomRestaurant.links} onClick={mapButtonPressed()} target="_blank" rel="noopener noreferrer">
           {randomRestaurant.name}
         </MapLink>
       );
