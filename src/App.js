@@ -528,7 +528,7 @@ export default function App() {
 
   const buttonPressed = () => {
     if ('vibrate' in navigator) {
-      audio.play();
+      audio2.play();
       navigator.vibrate(100);
     }
   };
