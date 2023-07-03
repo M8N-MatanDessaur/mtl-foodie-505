@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import buttonSound from './button_pressed.mp3';
 import buttonSoundAlt from './button_pressed_alt.mp3';
+import buttonSoundGo from './button_pressed_go.mp3';
 
 
 const RestaurantList = [
@@ -518,6 +519,7 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
+  const audio3 = new Audio(buttonSoundGo);
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
@@ -532,6 +534,14 @@ export default function App() {
       navigator.vibrate(100);
     }
   };
+
+  const mapButtonPressed = () => {
+    if ('vibrate' in navigator) {
+      audio3.play();
+      navigator.vibrate(100);
+    }
+  };
+  
   
 
   const pickRandomRestaurant = () => {
@@ -547,7 +557,7 @@ export default function App() {
         </MapContainer>
       );
       const mapFrame = (
-        <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
+        <MapLink href={randomRestaurant.links} onClick={mapButtonPressed();} target="_blank" rel="noopener noreferrer">
           {randomRestaurant.name}
         </MapLink>
       );
