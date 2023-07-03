@@ -665,7 +665,7 @@ export default function App() {
         <ModalWrapper>
           <ModalContent>
             <CoffeeButton>
-              <a href="https://www.buymeacoffee.com/matandessaur" target="_blank">Buy me a coffee ☕</a>
+              <a href="https://www.buymeacoffee.com/matandessaur" target="_blank">Achetez-moi un café ☕</a>
             </CoffeeButton>
             <ModalText>
               <br />
