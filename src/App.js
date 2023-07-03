@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import buttonSound from './button_pressed.mp3';
+import buttonSoundAlt from './button_pressed_alt.mp3';
 
 
 const RestaurantList = [
@@ -516,8 +517,16 @@ export default function App() {
   const [listOpened, setListOpened] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const audio = new Audio(buttonSound);
+  const audio2 = new Audio(buttonSoundAlt);
 
-  const vibrate = () => {
+  const mainButtonPressed = () => {
+    if ('vibrate' in navigator) {
+      audio.play();
+      navigator.vibrate(100);
+    }
+  };
+
+  const buttonPressed = () => {
     if ('vibrate' in navigator) {
       audio.play();
       navigator.vibrate(100);
@@ -526,7 +535,7 @@ export default function App() {
   
 
   const pickRandomRestaurant = () => {
-    vibrate();
+    mainButtonPressed ();
     setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
