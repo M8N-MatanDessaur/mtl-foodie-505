@@ -35,7 +35,6 @@ html {
 html,body,#root{
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 canvas,
@@ -78,12 +77,6 @@ a{
 ::-moz-selection {
     background: #00000010;
     color: currentColor
-}
-
-::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    background: transparent
 }
 
 code{

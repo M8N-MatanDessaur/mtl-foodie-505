@@ -511,6 +511,7 @@ const RestaurantList = [
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [listOpened, setListOpened] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const pickRandomRestaurant = () => {
@@ -546,6 +547,10 @@ export default function App() {
     setShowModal(!showModal);
   };
 
+  const toggleList = () => {
+    setListOpened(!listOpened);
+  };
+
 
 
   return (
@@ -562,9 +567,28 @@ export default function App() {
           </InfoLink>
         </Header>
         <SelectedRestaurant>
+
           <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
             ALE&nbsp;<LoadingSpinner />&nbsp;RESTO
           </LoadingOverlay>
+
+          <ListOverlay listOpened={listOpened}>
+          <CloseButton onClick={toggleList}>
+                <svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
+                </svg>
+              </CloseButton>
+            <ListTitle>La liste pour les fines bouches</ListTitle>
+            <ListWrapper>
+              {RestaurantList.map((restaurant) => (
+                <ListItem>
+                  <ListLink href={restaurant.links} target="_blank" rel="noopener noreferrer">
+                    {restaurant.name}
+                  </ListLink>
+                </ListItem>
+              ))}
+            </ListWrapper>
+          </ListOverlay>
           <Overlay />
           {randomRestaurant ? (
             <>
@@ -582,11 +606,18 @@ export default function App() {
             </>
           )}
         </SelectedRestaurant>
-        <Randomizer onClick={pickRandomRestaurant}>
-          <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 4v16l13-8L7 4Z"></path>
-          </svg>
-        </Randomizer>
+        <ButtonWrapper>
+          <Randomizer onClick={pickRandomRestaurant}>
+            <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 4v16l13-8L7 4Z"></path>
+            </svg>
+          </Randomizer>
+          <ListButton onClick={toggleList}>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6h16v2H4V6Zm0 5h16v2H4v-2Zm0 5h16v2H4v-2Z"></path>
+            </svg>
+          </ListButton>
+        </ButtonWrapper>
         <MarqueeContainer>
           <marquee>
             Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
@@ -600,15 +631,15 @@ export default function App() {
         <ModalWrapper>
           <ModalContent>
             <ModalText>
-              <br/>
-            Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin. 
-            Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
-            <br/>
-            Créé par un fan de bouffe, pour les fans de bouffe.
-            <br/> <br/>
-            Pour les nerds, Aleoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
-            <br/> <br/>
-            Pour les curieux, le nom <b><i>aleoresto</i></b> vien du jeu de mots d'<u><i>aleatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto". 
+              <br />
+              Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin.
+              Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
+              <br />
+              Créé par un fan de bouffe, pour les fans de bouffe.
+              <br /> <br />
+              Pour les nerds, Aleoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
+              <br /> <br />
+              Pour les curieux, le nom <b><i>aleoresto</i></b> vien du jeu de mots d'<u><i>aleatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
             </ModalText>
             <CloseButton onClick={toggleModal}><svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
@@ -673,16 +704,61 @@ const SelectedRestaurant = styled.div`
   background-color: #213377;
 
   border: 5px solid #2e5bf3;
+  border-bottom: none;
   box-shadow: inset 7px 7px 17px #1d2026,
             inset -7px -7px 17px #333842; 
 `;
 
-const Randomizer = styled.button`
+const ButtonWrapper = styled.div`
+  position: relative;
+  height: 60px;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  `;
+
+const Randomizer = styled.button`
+  width: 80%;
   height: 60px;
   border: 0;
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  & svg {
+    stroke: #213377;
+    fill: #213377;
+    height: 30px;
+    width: 30px;
+  }
+ 
+&:active {
+  background-color: #2e5bf3;
+  & svg{
+    transform: scale(0.8);
+  }
+ }
+
+  &:hover {
+    & svg {
+      fill: #fff;
+      stroke: #fff;
+    }
+    transition: all 200ms ease-in-out;
+  }
+`;
+
+const ListButton = styled.button`
+  width: 20%;
+  height: 60px;
+  background-color: #2e5bf3;
+  letter-spacing: 1.5px;
+  border: 0;
+  border-left: 3px solid #213377;
   font-size: 15px;
   display: flex;
   align-items: center;
@@ -841,7 +917,6 @@ const LoadingOverlay = styled.div`
   display: ${props => props.loading ? 'flex' : 'none'};
 `;
 
-
 const LoadingSpinner = styled.div`
   width: 50px;
   height: 50px;
@@ -909,3 +984,83 @@ const CloseButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+
+const ListOverlay = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #1a1d25;
+  background-size: 100% 4px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  display: ${props => props.listOpened ? 'flex' : 'none'};
+`;
+
+const ListWrapper = styled.div`
+  position: relative;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  height: 500px;
+  overflow: scroll;
+
+  scrollbar-width: thin;
+  scrollbar-color: #d1d1d1 #1a1d25;
+  &::-webkit-scrollbar {
+      width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+      border-radius: 50px;
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: #d1d1d1;
+      border-radius: 20px;
+      border: 3px solid #1a1d25;
+  }
+  &::-webkit-scrollbar-corner {
+      background-color: rgba(0,0,0,0);
+  }
+
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  `;
+
+const ListItems = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const ListItem = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+  padding: 10px;
+  `;
+
+const ListLink = styled.a`
+  color: #fff;
+  text-decoration: none;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: bold;
+  `;
+
+const ListTitle = styled.h3`
+position: absolute;
+top: 10px;
+left: 10px;
+  color: #fff;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  `;
