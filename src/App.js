@@ -520,7 +520,7 @@ export default function App() {
   const vibrate = () => {
     if ('vibrate' in navigator) {
       audio.play();
-      navigator.vibrate(200);
+      navigator.vibrate(100);
     }
   };
   
