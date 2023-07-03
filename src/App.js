@@ -603,7 +603,12 @@ export default function App() {
               <br/>
             Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin. 
             Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
-            Créé par un fan de bouffe, pour les fans de bouffe, Aleoresto est l'appli parfaite pour les amateurs de bouffe qui veulent découvrir de nouveaux endroits où se bourrer la face!
+            <br/>
+            Créé par un fan de bouffe, pour les fans de bouffe.
+            <br/> <br/>
+            Pour les nerds, Aleoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
+            <br/> <br/>
+            Pour les curieux, le nom <b><i>aleoresto</i></b> vien du jeu de mots d'<u><i>aleatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto". 
             </ModalText>
             <CloseButton onClick={toggleModal}><svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
