@@ -537,7 +537,7 @@ export default function App() {
       setRandomRestaurant(null);
     }
     setTimeout(() => {
-    setLoading(false); 
+      setLoading(false);
     }, 1000);
   };
 
@@ -547,12 +547,12 @@ export default function App() {
       <AppContainer>
         <Header>
           <Title>
-            Ya quoi à manger <span>?</span>
+            Ya quoi à manger icitte<span>?</span>
           </Title>
         </Header>
         <SelectedRestaurant>
           <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
-          ALE&nbsp;<LoadingSpinner />&nbsp;RESTO
+            ALE&nbsp;<LoadingSpinner />&nbsp;RESTO
           </LoadingOverlay>
           <Overlay />
           {randomRestaurant ? (
@@ -578,11 +578,10 @@ export default function App() {
         </Randomizer>
         <MarqueeContainer>
           <Marquee>
-            T'as envie d'une poutine qui va te faire baver dans ton hoodie? Y'a des places pour ça, mon chum! Ou ben, si t'es plus dans l'mood pour du smoked meat tendre à s'en faire fondre l'coeur, y'a des endroits pour ça aussi!Pour des hot dogs qui vont te faire perdre l'contrôle de tes babines, vas-t'en chez "Les Pattes Folles". C'est tellement bon que tu vas pogner un rire de fou!
-            Si t'es plutôt amateur de fruits de mer, y'a "La Mer qui Déboite". Non seulement leurs plats sont délicieux, mais leur nom, osti, ça décrisse tout!
-            Tu veux un bon burger? Alors va chez "Le Gras Content". J'te jure, t'auras tellement l'air satisfait après l'avoir mangé que tu vas faire brailler les vaches!
-            Et pour les amateurs de cuisine végétarienne, y'a le "Potager des Foufounes". J'peux pas t'dire à quoi ça ressemble, mais le nom, ça vaut la peine d'y aller juste pour en parler après!
-            Faque là, mon pote, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
+            Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
+            Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
+            Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
+            Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
           </Marquee>
         </MarqueeContainer>
       </AppContainer>
@@ -689,7 +688,7 @@ const MapLink = styled.a`
   padding: 20px 40px;
   border-radius: 50px;
   margin-top: 20px;
-  border: 5px solid #ffffff;
+  border: 5px solid #6487fe;
 
   &:hover {
     transform: scale(1.1);
@@ -704,8 +703,8 @@ const MapContainer = styled.div`
   height: 100%;
   margin-top: 20px;
   filter: hue-rotate(318deg);
-  border: 5px solid #fff;
-  border-radius: 10px;
+  border: 5px solid #cd77fa;
+  border-radius: 5px;
 `;
 
 const MapFrame = styled.iframe`
@@ -751,7 +750,7 @@ const Marquee = styled.p`
   color: #ffffff80;
   text-align: center;
   white-space: nowrap;
-  animation: marquee 130s linear infinite;
+  animation: marquee 100s linear infinite;
 
   @keyframes marquee {
     0% {
