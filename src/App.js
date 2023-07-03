@@ -600,6 +600,7 @@ export default function App() {
         <ModalWrapper>
           <ModalContent>
             <ModalText>
+              <br/>
             Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin. 
             Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
             Créé par un fan de bouffe, pour les fans de bouffe, Aleoresto est l'appli parfaite pour les amateurs de bouffe qui veulent découvrir de nouveaux endroits où se bourrer la face!
@@ -887,7 +888,7 @@ background-color: #fff;
 padding: 20px;
 border-radius: 5px;
 width: 350px;
-height: 450px;
+height: fit-content;
 overflow: scroll;
 }
 `;
