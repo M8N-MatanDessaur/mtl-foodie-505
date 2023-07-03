@@ -602,7 +602,7 @@ export default function App() {
         <SelectedRestaurant>
 
           <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
-            ALE&nbsp;<LoadingSpinner />&nbsp;RESTO
+            ALÉ&nbsp;<LoadingSpinner />&nbsp;RESTO
           </LoadingOverlay>
 
           <ListOverlay listOpened={listOpened}>
@@ -672,7 +672,7 @@ export default function App() {
               <br /> <br />
               Pour les nerds, Aleoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
               <br /> <br />
-              Pour les curieux, le nom <b><i>aleoresto</i></b> vien du jeu de mots d'<u><i>aleatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
+              Pour les curieux, le nom <b><i>aléoresto</i></b> vien du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
             </ModalText>
             <CloseButton onClick={toggleModal}><svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
@@ -987,8 +987,24 @@ padding: 20px;
 border-radius: 5px;
 width: 350px;
 height: fit-content;
-overflow: scroll;
-}
+overflow: auto;
+
+scrollbar-width: thin;
+  scrollbar-color: #d1d1d1 #1a1d25;
+  &::-webkit-scrollbar {
+      width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+      border-radius: 50px;
+  }
+  &::-webkit-scrollbar-thumb {
+      background-color: #d1d1d1;
+      border-radius: 20px;
+      border: 3px solid #1a1d25;
+  }
+  &::-webkit-scrollbar-corner {
+      background-color: rgba(0,0,0,0);
+  }
 `;
 
 const ModalText = styled.p`
