@@ -565,12 +565,12 @@ export default function App() {
   };
 
   const toggleModal = () => {
-    vibrate();
+    buttonPressed();
     setShowModal(!showModal);
   };
 
   const toggleList = () => {
-    vibrate();
+    buttonPressed();
     setListOpened(!listOpened);
   };
 
