@@ -748,7 +748,7 @@ const Overlay = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  background: linear-gradient(180deg, transparent 50%, #00000050 51%);
+  background: linear-gradient(180deg, transparent 50%, #00000030 51%);
   background-size: 100% 4px;
   z-index: 10;
   pointer-events: none;
