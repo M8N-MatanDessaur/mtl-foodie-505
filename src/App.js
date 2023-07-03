@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import buttonSound from './button_pressed.mp3';
+
 
 const RestaurantList = [
   { name: "Place Carmin", links: "https://www.google.com/maps/place/Place+Carmin/data=!4m2!3m1!1s0x4cc91ba1ae8cfdc1:0x90033e0608e72636" },
@@ -513,9 +515,11 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [listOpened, setListOpened] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const audio = new Audio(buttonSound);
 
   const vibrate = () => {
     if ('vibrate' in navigator) {
+      audio.play();
       navigator.vibrate(200);
     }
   };
