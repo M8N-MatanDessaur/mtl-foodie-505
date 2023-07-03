@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
+import Marquee from "react-fast-marquee";
 import buttonSound from './button_pressed.mp3';
 import buttonSoundAlt from './button_pressed_alt.mp3';
 import buttonSoundGo from './button_pressed_go.mp3';
@@ -652,12 +653,12 @@ export default function App() {
           </ListButton>
         </ButtonWrapper>
         <MarqueeContainer>
-          <marquee>
+          <Marquee>
             Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
             Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
             Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
             Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
-          </marquee>
+          </Marquee>
         </MarqueeContainer>
       </AppContainer>
       {showModal && (
