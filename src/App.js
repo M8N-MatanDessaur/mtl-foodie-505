@@ -664,14 +664,17 @@ export default function App() {
       {showModal && (
         <ModalWrapper>
           <ModalContent>
+            <CoffeeButton>
+              <a href="https://www.buymeacoffee.com/matandessaur" target="_blank">Buy me a coffee ☕</a>
+            </CoffeeButton>
             <ModalText>
               <br />
-              Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin.
+              Aléoresto te balance des restos au pif, avec toutes les infos dont t'as besoin.
               Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
               <br />
               Créé par un fan de bouffe, pour les fans de bouffe.
               <br /> <br />
-              Pour les nerds, Aleoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
+              Pour les nerds, Aléoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code>.
               <br /> <br />
               Pour les curieux, le nom <b><i>aléoresto</i></b> vien du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
             </ModalText>
@@ -1009,7 +1012,7 @@ scrollbar-width: thin;
 const ModalText = styled.p`
   font-size: 1rem;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
 `;
 
 const CloseButton = styled.button`
@@ -1111,4 +1114,22 @@ left: 10px;
   font-size: 1rem;
   font-weight: bold;
   margin-bottom: 10px;
+  `;
+
+  const CoffeeButton = styled.button`
+  position: absolute;
+  bottom: 15px;
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #eabf45;
+  border-radius: 50px;
+  color: #000;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   `;
