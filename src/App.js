@@ -511,6 +511,7 @@ const RestaurantList = [
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const pickRandomRestaurant = () => {
     setLoading(true);
@@ -541,6 +542,11 @@ export default function App() {
     }, 1000);
   };
 
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+
 
   return (
     <Wrapper>
@@ -549,6 +555,11 @@ export default function App() {
           <Title>
             Ya quoi à manger icitte<span>?</span>
           </Title>
+          <InfoLink onClick={toggleModal}>
+            <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M3.25 12a8.75 8.75 0 1 1 17.5 0 8.75 8.75 0 0 1-17.5 0ZM13 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 2.75a.75.75 0 0 1 .75.75v5a.75.75 0 0 1-1.5 0v-5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+            </svg>
+          </InfoLink>
         </Header>
         <SelectedRestaurant>
           <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
@@ -585,6 +596,20 @@ export default function App() {
           </Marquee>
         </MarqueeContainer>
       </AppContainer>
+      {showModal && (
+        <ModalWrapper>
+          <ModalContent>
+            <ModalText>
+            Aleoresto te balance des restos au pif, avec toutes les infos dont t'as besoin. 
+            Le resto est choisi de façon aléatoire d'une liste des meilleurs spots de bouffe à MTL.
+            Créé par un fan de bouffe, pour les fans de bouffe, Aleoresto est l'appli parfaite pour les amateurs de bouffe qui veulent découvrir de nouveaux endroits où se bourrer la face!
+            </ModalText>
+            <CloseButton onClick={toggleModal}><svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
+            </svg></CloseButton>
+          </ModalContent>
+        </ModalWrapper>
+      )}
     </Wrapper>
   );
 }
@@ -769,11 +794,29 @@ border-bottom: 2px solid #2e5bf3;
 background-color: #2e5bf3;
 display: flex;
 align-items: center;
-justify-content: start;
+justify-content: space-between;
 padding: 10px 20px;
 z-index: 100;
-
 `;
+
+const InfoLink = styled.a`
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+
+  & svg {
+    height: 30px;
+    width: 30px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.8);
+    }
+  }
+  `;
 
 const Title = styled.h1`
   position: relative;
@@ -823,5 +866,55 @@ const LoadingSpinner = styled.div`
     100% {
       transform: rotate(360deg) scale(1);
     }
+  }
+`;
+
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.8);
+`;
+
+const ModalContent = styled.div`
+position: relative;
+background-color: #fff;
+padding: 20px;
+border-radius: 5px;
+width: 350px;
+height: 450px;
+overflow: scroll;
+}
+`;
+
+const ModalText = styled.p`
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  border-radius: 5px;
+  color: #fff;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+
+  & svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  &:hover {
+    opacity: 0.8;
   }
 `;
