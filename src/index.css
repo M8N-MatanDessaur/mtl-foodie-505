@@ -92,6 +92,12 @@ code{
     color:#00729b;
 }
 
+marquee{
+    font-family: 'poppins', sans-serif;
+    font-size: 1.6rem;
+    color:#ffffff90;
+}
+
 @media (max-width:768px) {
     html {
         font-size: 14px
