@@ -436,7 +436,7 @@ const RestaurantList = [
   { name: "Towne 380 | Steakhouse & Seafood", links: "https://www.google.com/maps/place/Towne+380+%7C+Steakhouse+%26+Seafood/data=!4m2!3m1!1s0x4cc92187b4304ae5:0x86f7feaf22adee0a" },
   { name: "IMADAKE IZAKAYA", links: "https://www.google.com/maps/place/IMADAKE+IZAKAYA/data=!4m2!3m1!1s0x4cc91a729d9d957d:0xaeeee959f468388f" },
   { name: "Picks", links: "https://www.google.com/maps/place/Picks/data=!4m2!3m1!1s0x4cc91a6c7736b813:0x9d158385bb3fe1ba" },
-  { name: "Avesta", links: "https://www.google.com/maps/place/Avesta/data=!4m2!3m1!1s0x4cc91a6c583b2f79:0xef5bab4279696048" },
+  { name: "Avesta", links: "https://www.google.com/maps/place/Avesta/@45.4915687,-73.5873987,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91a6c583b2f79:0xef5bab4279696048!8m2!3d45.491565!4d-73.5825278!16s%2Fg%2F1v8y3nbf?entry=ttu" },
   { name: "Maman Montreal", links: "https://www.google.com/maps/place/Maman+Montreal/data=!4m2!3m1!1s0x4cc91bf7cb69fbcf:0xa9f558b4f0803183" },
   { name: "SHAY", links: "https://www.google.com/maps/place/SHAY/data=!4m2!3m1!1s0x4cc91bb816295785:0x3b04edc9e3405da3" },
   { name: "KINKA IZAKAYA MONTREAL", links: "https://www.google.com/maps/place/KINKA+IZAKAYA+MONTREAL/data=!4m2!3m1!1s0x4cc91a6b94acba67:0xaf36f5bc8421e249" },
