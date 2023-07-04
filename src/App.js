@@ -375,7 +375,7 @@ const RestaurantList = [
   { name: "Rosette Cremerie", links: "https://www.google.com/maps/place/Rosette+Cr%C3%A8merie/data=!4m2!3m1!1s0x4cc91b1fb94394d9:0xc6d0b4c1f8e5ae6f" },
   { name: "CASA MINHOTA - Resto Portugais - Tapas / Seafood", links: "https://www.google.com/maps/place/CASA+MINHOTA+-+Resto+Portugais+-+Tapas+%2F+Seafood/data=!4m2!3m1!1s0x4cc91a3350e17735:0x7cb7829c55b439a" },
   { name: "La Maison Grecque", links: "https://www.google.com/maps/place/La+Maison+Grecque/data=!4m2!3m1!1s0x4cc91bcc025120ab:0xce724d44c17e29f8" },
-  { name: "Josephine", links: "https://www.google.com/maps/place/Jos%C3%A9phine/data=!4m2!3m1!1s0x4cc91b878ad4dc07:0x73e88f9c8cb35151" },
+  { name: "Josephine", links: "https://www.google.com/maps/place/Jos%C3%A9phine/@45.5208826,-73.5756215,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91b878ad4dc07:0x73e88f9c8cb35151!8m2!3d45.5208826!4d-73.5756215!16s%2Fg%2F11gh35whyv?entry=ttu" },
   { name: "La Prunelle", links: "https://www.google.com/maps/place/La+Prunelle/data=!4m2!3m1!1s0x4cc91bcc6c4ba459:0x4e009a5757876831" },
   { name: "Sushi Momo", links: "https://www.google.com/maps/place/Sushi+Momo/data=!4m2!3m1!1s0x4cc91bcccb2e33ff:0xe8658ffe7e1823d6" },
   { name: "Chez Anna", links: "https://www.google.com/maps/place/Chez+Anna/data=!4m2!3m1!1s0x4cc91b110b61c95d:0xf573ac6a404c19fb" },
