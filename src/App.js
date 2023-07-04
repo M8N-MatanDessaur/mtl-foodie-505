@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, keyframes } from 'styled-components';
 import Marquee from "react-fast-marquee";
 import Cookies from 'universal-cookie';
@@ -538,6 +538,7 @@ const RestaurantList = [
 ];
 
 export default function App() {
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [changeMode, setChangeMode] = useState(false);
@@ -557,6 +558,23 @@ export default function App() {
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
+
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation({ latitude, longitude });
+        },
+        (error) => {
+          console.error('Error getting current location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by your browser');
+    }
+  }, []);
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
@@ -587,7 +605,7 @@ export default function App() {
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
       const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapContainer = (
         <MapContainer>
           {localized ? (
