@@ -86,7 +86,7 @@ const RestaurantList = [
   { name: "Mazbi Restaurant", links: "https://www.google.com/maps/place/Mazbi+Restaurant/data=!4m2!3m1!1s0x4cc91bd1264666a9:0x432d8323c1291f3a" },
   { name: "Monsieur B", links: "https://www.google.com/maps/place/Monsieur+B/data=!4m2!3m1!1s0x4cc91bd6d2611c51:0x85634aae24f0e635" },
   { name: "Yokato Yokabai Ramen", links: "https://www.google.com/maps/place/Yokato+Yokabai+Ramen/data=!4m2!3m1!1s0x4cc91bcdce6fef43:0xb9d59a5426dbb271" },
-  { name: "AMBER", links: "https://www.google.com/maps/place/AMBER/data=!4m2!3m1!1s0x4cc91b720e4e1195:0xf6d5b336059a5f6d" },
+  { name: "AMBER", links: "https://www.google.com/maps/place/AMBER/@45.5539894,-73.6428653,13z/data=!4m10!1m2!2m1!1samber!3m6!1s0x4cc91b720e4e1195:0xf6d5b336059a5f6d!8m2!3d45.520564!4d-73.5791225!15sCgVhbWJlcloHIgVhbWJlcpIBEWluZGlhbl9yZXN0YXVyYW50mgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVEyYldWUGNYcG5SUkFC4AEA!16s%2Fg%2F11hv1b78yb?entry=ttu" },
   { name: "La Toxica", links: "https://www.google.com/maps/place/La+Toxica/data=!4m2!3m1!1s0x4cc919b0231da113:0x7cbcacb5e97f4192" },
   { name: "Gatto Matto", links: "https://www.google.com/maps/place/Gatto+Matto/data=!4m2!3m1!1s0x4cc92339c9191a3b:0x20a892fc3c1f198a" },
   { name: "Restaurant Tora Bora", links: "https://www.google.com/maps/place/Restaurant+Tora+Bora/data=!4m2!3m1!1s0x4cc91bcea94dbdb3:0xa0e30f9d54fdf542" },
@@ -235,16 +235,16 @@ const RestaurantList = [
   { name: "Tiramisu", links: "https://www.google.com/maps/place/Tiramisu/data=!4m2!3m1!1s0x4cc91be874669e41:0xab1bc94f4129bcf4" },
   { name: "Bucky Rooster's Fritures", links: "https://www.google.com/maps/place/Bucky+Rooster's+Fritures/data=!4m2!3m1!1s0x4cc91181b84a7a59:0xd5a3dceb10b88149" },
   { name: "Chez Hailar", links: "https://www.google.com/maps/place/Chez+Hailar/data=!4m2!3m1!1s0x4cc91a6adae0462f:0x3316eebdeaa34f2e" },
-  { name: "MONO", links: "https://www.google.com/maps/place/MONO/data=!4m2!3m1!1s0x4cc91b8751713d4b:0x9587e1a822169f0c" },
+  { name: "MONO", links: "https://www.google.com/maps/place/MONO+House+of+Sandwich+and+Beer/@45.4981866,-73.6505078,13z/data=!4m10!1m2!2m1!1smono!3m6!1s0x4cc91b8751713d4b:0x9587e1a822169f0c!8m2!3d45.4981866!4d-73.57841!15sCgRtb25vWgYiBG1vbm-SAQ1zYW5kd2ljaF9zaG9wmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVVJsT1UweVMxOTNSUkFC4AEA!16s%2Fg%2F11r258bs_q?entry=ttu" },
   { name: "Yumi Burger", links: "https://www.google.com/maps/place/Yumi+Burger/data=!4m2!3m1!1s0x4cc91bbb174b5dcb:0x595d7ba4900a07e2" },
-  { name: "LFK", links: "https://www.google.com/maps/place/LFK/data=!4m2!3m1!1s0x4cc9197e0ccd988d:0x8de30108e41962cc" },
+  { name: "LFK", links: "https://www.google.com/maps/place/LFK/@45.5497422,-73.5347383,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNxa6MKy3m_jcBFbY9LcCd9kB60iJlEHUe3QCdT!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNxa6MKy3m_jcBFbY9LcCd9kB60iJlEHUe3QCdT%3Dw128-h86-k-no!7i2048!8i1367!4m11!1m2!2m1!1sLFK!3m7!1s0x4cc9197e0ccd988d:0x8de30108e41962cc!8m2!3d45.54969!4d-73.5345588!10e5!15sCgNMRktaBSIDbGZrkgERY3Jlb2xlX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F11f4qqkv85?entry=ttu" },
   { name: "Flyjin", links: "https://www.google.com/maps/place/Flyjin/data=!4m2!3m1!1s0x4cc91a59015fb67b:0x5286e850f7b8eea4" },
   { name: "Tommy Cafe- Rue Notre-Dame Ouest", links: "https://www.google.com/maps/place/Tommy+Caf%C3%A9+-+Rue+Notre-Dame+Ouest/data=!4m2!3m1!1s0x4cc91a59fb3b2041:0x15b2dc306b05dbcd" },
   { name: "Les Pokes Boys (Laurier)", links: "https://www.google.com/maps/place/Les+Pokes+Boys+(Laurier)/data=!4m2!3m1!1s0x4cc919359b02e769:0x7a5f6a1446eb3638" },
   { name: "Brama - Usine de bouffe", links: "https://www.google.com/maps/place/Brama+-+Usine+%C3%A0+bouffe/data=!4m2!3m1!1s0x4cc9196808ab1ef3:0xc9cf83efd94b7361" },
   { name: "Marouch", links: "https://www.google.com/maps/place/Marouch/data=!4m2!3m1!1s0x4cc92301b44bc5b3:0x21d8038a5973d71b" },
   { name: "Restaurant Beroya", links: "https://www.google.com/maps/place/Restaurant+Beroya/data=!4m2!3m1!1s0x4cc923bbb533d92f:0x42691441bd98338" },
-  { name: "Cali", links: "https://www.google.com/maps/place/Cal%C3%AC/data=!4m2!3m1!1s0x4cc92314d0db4515:0x9d130bfd87d6086b" },
+  { name: "Cali", links: "https://www.google.com/maps/place/Cal%C3%AC/@45.5522418,-73.7622496,17z/data=!3m2!4b1!5s0x4cc923a6d0678b53:0xa5128714cb999016!4m6!3m5!1s0x4cc92314d0db4515:0x9d130bfd87d6086b!8m2!3d45.5522381!4d-73.7596747!16s%2Fg%2F11ph0_5czg?entry=ttu" },
   { name: "Crusty's", links: "https://www.google.com/maps/place/Crusty's/data=!4m2!3m1!1s0x4cc911782b006e33:0x9293e1e922922867" },
   { name: "Gon Bui Restaurant Bar", links: "https://www.google.com/maps/place/Gon+Bui+Restaurant+Bar/data=!4m2!3m1!1s0x4cc9230b733e089f:0xf58b9614ab0c5391" },
   { name: "Bistro La Franquette", links: "https://www.google.com/maps/place/Bistro+La+Franquette/data=!4m2!3m1!1s0x4cc9115ff86724d9:0xe816a9f6cb4dace9" },
@@ -254,8 +254,8 @@ const RestaurantList = [
   { name: "Les Deux Gamins", links: "https://www.google.com/maps/place/Les+Deux+Gamins/data=!4m2!3m1!1s0x4cc91a4aa917670d:0xe462d94879c6cee1" },
   { name: "Auberge du Dragon Rouge", links: "https://www.google.com/maps/place/Auberge+du+Dragon+Rouge/data=!4m2!3m1!1s0x4cc918ddc712c4b3:0xe95becb803c5dcbf" },
   { name: "McKiernan Rotisserie", links: "https://www.google.com/maps/place/McKiernan+R%C3%B4tisserie/data=!4m2!3m1!1s0x4cc911f5aa698351:0x3da277f29f268280" },
-  { name: "Cadet", links: "https://www.google.com/maps/place/Cadet/data=!4m2!3m1!1s0x4cc91a4c2b6d71c3:0xec1f3f81a5275f98" },
-  { name: "Candide", links: "https://www.google.com/maps/place/Candide/data=!4m2!3m1!1s0x4cc91a6458328a8b:0x3afa14eee393093c" },
+  { name: "Cadet", links: "https://www.google.com/maps/place/Cadet/@45.6058738,-73.7868812,11z/data=!4m10!1m2!2m1!1scadet!3m6!1s0x4cc91a4c2b6d71c3:0xec1f3f81a5275f98!8m2!3d45.5102976!4d-73.5644156!15sCgVjYWRldFoHIgVjYWRldJIBCnJlc3RhdXJhbnTgAQA!16s%2Fg%2F11byyjpr03?entry=ttu" },
+  { name: "Candide", links: "https://www.google.com/maps/place/Candide/@45.4890836,-73.5720374,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91a6458328a8b:0x3afa14eee393093c!8m2!3d45.4890799!4d-73.5694625!16s%2Fg%2F11bwk77k7k?entry=ttu" },
   { name: "La graine brulee", links: "https://www.google.com/maps/place/La+graine+br%C3%BBl%C3%A9e/data=!4m2!3m1!1s0x4cc91bb27c18a511:0xf7214094276a6101" },
   { name: "Les Oiseaux", links: "https://www.google.com/maps/place/Les+Oiseaux/data=!4m2!3m1!1s0x4cc91bceb583d9c1:0x99bababf037edb" },
   { name: "Maynard", links: "https://www.google.com/maps/place/Maynard/data=!4m2!3m1!1s0x4cc91b4b27deb67f:0xa8969628303130fd" },
@@ -338,7 +338,7 @@ const RestaurantList = [
   { name: "Garde Manger", links: "https://www.google.com/maps/place/Garde+Manger/data=!4m2!3m1!1s0x4cc91a58354ed7c9:0x220dea0eff66d174" },
   { name: "Slice + Soda", links: "https://www.google.com/maps/place/Slice+%2B+Soda/data=!4m2!3m1!1s0x4cc91b766699ae17:0x7d1d826d1d65cf74" },
   { name: "Stash Cafe", links: "https://www.google.com/maps/place/Stash+Caf%C3%A9/data=!4m2!3m1!1s0x4cc91a584a0e48a3:0x10c736e3f8581465" },
-  { name: "Pyrenees", links: "https://www.google.com/maps/place/Pyr%C3%A9n%C3%A9es/data=!4m2!3m1!1s0x4cc91a58fc440571:0x5bead50ece338d34" },
+  { name: "Pyrenees", links: "https://www.google.com/maps/place/Pyr%C3%A9n%C3%A9es/@45.5012898,-73.5609939,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91a58fc440571:0x5bead50ece338d34!8m2!3d45.5012861!4d-73.556123!16s%2Fg%2F1vysw4lr?entry=ttu" },
   { name: "MajesThe Asian Restaurant & Bar MajesThe", links: "https://www.google.com/maps/place/MajesTh%C3%A9+Asian+Restaurant+%26+Bar+MajesTh%C3%A9/data=!4m2!3m1!1s0x4cc91a48b1b6892f:0x3d4fe3224828f6bb" },
   { name: "OKOK", links: "https://www.google.com/maps/place/OKOK/data=!4m2!3m1!1s0x4cc9191304c3eba7:0x5ae8dcba6f711363" },
   { name: "Bouffe-moi !", links: "https://www.google.com/maps/place/Bouffe-moi+!/data=!4m2!3m1!1s0x4cc9195436ccd8ed:0xb76e068a374c2f1a" },
@@ -446,7 +446,7 @@ const RestaurantList = [
   { name: "Daldongnae Korean BBQ", links: "https://www.google.com/maps/place/Daldongnae+Korean+BBQ/data=!4m2!3m1!1s0x4cc91be4e247752f:0xfccb5bdc9da8bf3e" },
   { name: "Chateau Kabab (Downtown)", links: "https://www.google.com/maps/place/Ch%C3%A2teau+Kabab+(Downtown)/data=!4m2!3m1!1s0x4cc91a6afbdedde7:0xad8d2ecdf798208c" },
   { name: "Gyu-Kaku Japanese BBQ", links: "https://www.google.com/maps/place/Gyu-Kaku+Japanese+BBQ/data=!4m2!3m1!1s0x4cc91a69fc8b4adb:0x9b12ffa7d4bfd5c4" },
-  { name: "Beatrice", links: "https://www.google.com/maps/place/Beatrice/data=!4m2!3m1!1s0x4cc91a6abedf23a5:0x1ab52be3754d15a6" },
+  { name: "Beatrice", links: "https://www.google.com/maps/place/Beatrice/@45.4970231,-73.5836031,17z/data=!3m2!4b1!5s0x4cc91a6abedc74d1:0xd3c8d760e468d7fe!4m6!3m5!1s0x4cc91a6abedf23a5:0x1ab52be3754d15a6!8m2!3d45.4970194!4d-73.5810282!16s%2Fg%2F1thq0b9b?entry=ttu" },
   { name: "Restaurant Le Fils a Maman", links: "https://www.google.com/maps/place/Restaurant+Le+Fils+%C3%A0+Maman/data=!4m2!3m1!1s0x4cc9221d888a738b:0x58a515b2f77dfdb6" },
   { name: "Burger Bar Crescent", links: "https://www.google.com/maps/place/Burger+Bar+Crescent/data=!4m2!3m1!1s0x4cc91a41dc9b1263:0x6ea93b94233e25af" },
   { name: "Bar George", links: "https://www.google.com/maps/place/Bar+George/data=!4m2!3m1!1s0x4cc91a41975c7943:0xd36f5ad8ca917aa5" },
@@ -511,6 +511,28 @@ const RestaurantList = [
   { name: "Regine Cafe", links: "https://www.google.com/maps/place/R%C3%A9gine+Caf%C3%A9/data=!4m2!3m1!1s0x4cc91943598e3659:0xd588e1e961d613a3" },
   { name: "H Food Express", links: "https://www.google.com/maps/place/H+Food+Express/data=!4m2!3m1!1s0x4cc91fc1917fa497:0x1051934d4b3064fe" },
   { name: "Zykaa", links: "https://www.google.com/maps/place/Zykaa/data=!4m2!3m1!1s0x4cc91dbf70e7e133:0xf305ebc9fbd1e29f" },
+  { name: "Escondite", links: "https://www.google.com/maps/place/Escondite+Vieux+Port/@45.5981454,-73.6906551,11z/data=!4m10!1m2!2m1!1sEscondite!3m6!1s0x4cc91b671e0d1515:0x9fc097f294508cab!8m2!3d45.505375!4d-73.553839!15sCglFc2NvbmRpdGUiA4gBAVoLIgllc2NvbmRpdGWSARJtZXhpY2FuX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F11fl8_kn4m?entry=ttu" },
+  { name: "Xolo Café Resto", links: "https://www.google.com/maps/place/Xolo+Caf%C3%A9+Resto/@45.561967,-73.5976072,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPnM-QI7G31RBd0m68L0nk4f6zTlmqERnIg4VQn!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPnM-QI7G31RBd0m68L0nk4f6zTlmqERnIg4VQn%3Dw86-h114-k-no!7i3024!8i4032!4m7!3m6!1s0x4cc91f9b2f2f7731:0x79e96d5483c38d02!8m2!3d45.5620883!4d-73.5974976!10e5!16s%2Fg%2F11ng208cgb?entry=ttu" },
+  { name: "El Meson", links: "https://www.google.com/maps/place/El+Meson/@45.4327169,-73.6820555,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc916947d4f5367:0x4823b0df47c6e854!8m2!3d45.4327132!4d-73.6794806!16s%2Fg%2F1tfvgv0y?entry=ttu" },
+  { name: "La Cantina", links: "https://www.google.com/maps/place/La+Cantina/@45.5001212,-73.5755799,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPTimZaSz-_19yPa7GvON1nyRUOiT5czxjsd7XS!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPTimZaSz-_19yPa7GvON1nyRUOiT5czxjsd7XS%3Dw86-h114-k-no!7i3024!8i4032!4m11!1m2!2m1!1sLa+Cantina!3m7!1s0x4cc91b8d9777f21d:0xd2d021a13a43d0f6!8m2!3d45.50022!4d-73.575782!10e5!15sCgpMYSBDYW50aW5hWgwiCmxhIGNhbnRpbmGSARJtZXhpY2FuX3Jlc3RhdXJhbnSaASRDaGREU1VoTk1HOW5TMFZKUTBGblNVTTJPVmxMUnpsblJSQULgAQA!16s%2Fg%2F11hdsy3p9n?entry=ttu" },
+  { name: "Maria Bonita", links: "https://www.google.com/maps/place/Maria+Bonita/@45.5257547,-73.59452,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOHJwwX4WUM48Tn3ieEwI72SJTegeZ-8_cPf0FU!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOHJwwX4WUM48Tn3ieEwI72SJTegeZ-8_cPf0FU%3Dw114-h86-k-no!7i4032!8i3024!4m7!3m6!1s0x4cc9197db99f4db3:0x3b68e869a5027ba0!8m2!3d45.5236601!4d-73.5938796!10e5!16s%2Fg%2F1tdlgxky?entry=ttu" },
+  { name: "Ibéricos Taverne à Tapas Espagnoles", links: "https://www.google.com/maps/place/Ib%C3%A9ricos+Taverne+%C3%A0+Tapas+Espagnoles/@45.5239022,-73.5846189,17z/data=!4m15!1m8!3m7!1s0x4cc91bd1a335b183:0xb97825885738f022!2sIb%C3%A9ricos+Taverne+%C3%A0+Tapas+Espagnoles!8m2!3d45.5239022!4d-73.5824302!10e5!16s%2Fg%2F11crx_msl2!3m5!1s0x4cc91bd1a335b183:0xb97825885738f022!8m2!3d45.5239022!4d-73.5824302!16s%2Fg%2F11crx_msl2?entry=ttu" },
+  { name: "Bloomfield", links: "https://www.google.com/maps/place/Bloomfield/@45.5227482,-73.6129725,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPLw8rX5bZ8YPmYlsrkJVKaGI_VOWdoLo-G1BAE!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPLw8rX5bZ8YPmYlsrkJVKaGI_VOWdoLo-G1BAE%3Dw86-h114-k-no!7i3024!8i4032!4m7!3m6!1s0x4cc919761abe82a1:0x6145c58ab0e6d72d!8m2!3d45.5228071!4d-73.6131!10e5!16s%2Fg%2F11gbl3p7ns?entry=ttu" },
+  { name: "Pub Wolf & Workman", links: "https://www.google.com/maps/place/Pub+Wolf+%26+Workman/@45.5037134,-73.5547834,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOoNXmp0JXEygVA1hQiEA-qoFyibniBn4U6fpXg!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOoNXmp0JXEygVA1hQiEA-qoFyibniBn4U6fpXg%3Dw129-h86-k-no!7i5760!8i3840!4m7!3m6!1s0x4cc91bfb6d439143:0x6eeaffb438b9a0ec!8m2!3d45.5037576!4d-73.554915!10e5!16s%2Fg%2F11fkpvvm1g?entry=ttu" },
+  { name: "BOSSA Prêt à manger", links: "https://www.google.com/maps/place/BOSSA+Pr%C3%AAt+%C3%A0+manger/@45.5496062,-73.5739802,3a,105.1y,90t/data=!3m8!1e2!3m6!1sAF1QipOmccBw_0C5gegiGffxduFxkL8K3REWbSWPEkO7!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOmccBw_0C5gegiGffxduFxkL8K3REWbSWPEkO7%3Dw114-h86-k-no!7i670!8i504!4m11!1m2!2m1!1sChicken+Parm+Sandwich+at+Bossa!3m7!1s0x4cc91b401c8578d9:0x69c5940046d14f52!8m2!3d45.5495144!4d-73.5736802!10e5!15sCh5DaGlja2VuIFBhcm0gU2FuZHdpY2ggYXQgQm9zc2FaICIeY2hpY2tlbiBwYXJtIHNhbmR3aWNoIGF0IGJvc3NhkgENc2FuZHdpY2hfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSNGJWQXlYelJuUlJBQuABAA!16s%2Fg%2F11pzhj7ycz?entry=ttu" },
+  { name: "Larrys", links: "https://www.google.com/maps/place/larrys/@45.5241229,-73.594524,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOVv3IYQ4br8UO_lW4pUDE5IMAVmHZw1Eqk07cY!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOVv3IYQ4br8UO_lW4pUDE5IMAVmHZw1Eqk07cY%3Dw129-h86-k-no!7i1200!8i800!4m7!3m6!1s0x4cc9197e0bca7a41:0x9a455ee6741360f5!8m2!3d45.5240853!4d-73.5946844!10e5!16s%2Fg%2F11c3xdby24?entry=ttu" },
+  { name: "Anemone", links: "https://www.google.com/maps/place/Anemone/@45.5287842,-73.6160222,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipMnBPxSgm1oRKm5r7mkjh3tyjTNpGnuD82b2xXE!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMnBPxSgm1oRKm5r7mkjh3tyjTNpGnuD82b2xXE%3Dw114-h86-k-no!7i4080!8i3072!4m7!3m6!1s0x4cc9197339c037c7:0xb7cb374c613a1922!8m2!3d45.5288804!4d-73.6162384!10e5!16s%2Fg%2F11tj8hf5yn?entry=ttu" },
+  { name: "Nili", links: "https://www.google.com/maps/place/Nili/@45.5227292,-73.601759,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNJzEswXMhQjTHeBxb0FPKBhiyxV8gPJPmqSbYd!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNJzEswXMhQjTHeBxb0FPKBhiyxV8gPJPmqSbYd%3Dw86-h114-k-no!7i3024!8i4032!4m7!3m6!1s0x4cc919ec09fdc99d:0xc72e2b27d15e733a!8m2!3d45.5228204!4d-73.6018438!10e5!16s%2Fg%2F11t5zgwc2_?entry=ttu" },
+  { name: "9TailFox", links: "https://www.google.com/maps/place/9+Tail+Fox/@45.4806826,-73.5789968,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipO1otz841Nf-uZzoUVUObxwsvVpU2ePSfu_h-np!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipO1otz841Nf-uZzoUVUObxwsvVpU2ePSfu_h-np%3Dw86-h152-k-no!7i1080!8i1920!4m7!3m6!1s0x4cc91bdc74d602e5:0x796358b5159c2550!8m2!3d45.480768!4d-73.579095!10e5!16s%2Fg%2F11tfkqhlv4?entry=ttu" },
+  { name: "Ketiw", links: "https://www.google.com/maps/place/Ketiw+Comptoir+Cambodgien/@45.4653465,-73.5692174,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91183fb155757:0xf1efa24a563746a4!8m2!3d45.4653428!4d-73.5666425!16s%2Fg%2F11qb86fnln?entry=ttu" },
+  { name: "Casse-croûte Sissi & Paul", links: "https://www.google.com/maps/place/Casse-cro%C3%BBte+Sissi+%26+Paul/@45.553933,-73.6042407,17z/data=!4m15!1m8!3m7!1s0x4cc91949fc85ae91:0xd767c7d598f4c34d!2sCasse-cro%C3%BBte+Sissi+%26+Paul!8m2!3d45.553933!4d-73.602052!10e5!16s%2Fg%2F11cjk2ydyf!3m5!1s0x4cc91949fc85ae91:0xd767c7d598f4c34d!8m2!3d45.553933!4d-73.602052!16s%2Fg%2F11cjk2ydyf?entry=ttu" },
+  { name: "Vin Mon Lapin", links: "https://www.google.com/maps/place/Vin+Mon+Lapin/@45.5330026,-73.6106333,3a,101.2y,90t/data=!3m8!1e2!3m6!1sAF1QipMdSUGNM8G-PLV8YPk1v9daiBCzHUQBsYPjrF-3!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMdSUGNM8G-PLV8YPk1v9daiBCzHUQBsYPjrF-3%3Dw128-h86-k-no!7i719!8i480!4m7!3m6!1s0x4cc9196da59b9c11:0xb54ca374bd37d150!8m2!3d45.533007!4d-73.6106429!10e5!16s%2Fg%2F11f3th9s0j?entry=ttu" },
+  { name: "Alma", links: "https://www.google.com/maps/place/ALMA/@45.5210337,-73.6467598,14z/data=!4m10!1m2!2m1!1sAlma!3m6!1s0x4cc9199d6e54eaed:0x3cd6f85e6493e17b!8m2!3d45.5210337!4d-73.6107109!15sCgRBbG1hWgYiBGFsbWGSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11f55kpcgx?entry=ttu" },
+  {name:  "La Capital Tacos", links:"https://www.google.com/maps/place/La+Capital+Tacos/@45.5084429,-73.5632453,17z/data=!4m15!1m8!3m7!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!2sLa+Capital+Tacos!8m2!3d45.5084429!4d-73.5610566!10e5!16s%2Fg%2F11bc6z9csp!3m5!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!8m2!3d45.5084429!4d-73.5610566!16s%2Fg%2F11bc6z9csp?entry=ttu"},
+  {name:  "Dobe & Andy", links:"https://www.google.com/maps/place/Restaurant+Dobe+%26+Andy/@45.5073308,-73.5638657,17z/data=!3m2!4b1!5s0x4cc91a4fdca3ebef:0x11c8d63fbb6b5675!4m6!3m5!1s0x4cc91a51d3d331d5:0xffc11e12cbb9a0f3!8m2!3d45.5073271!4d-73.5612908!16s%2Fg%2F1td_y6c5?entry=ttu" },
+  {name:  "Jatoba", links:"https://www.google.com/maps/place/Jatoba/@45.5031903,-73.5673713,3a,75y,320h,90t/data=!3m8!1e1!3m6!1sAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj%3Dw86-h86-k-no-pi-20-ya328.0678-ro-0-fo100!7i8192!8i4096!4m7!3m6!1s0x4cc91a450340fbbb:0x6bde13066961bc3d!8m2!3d45.5032786!4d-73.567343!10e5!16s%2Fg%2F11b6x5g89h?entry=ttu"},
+  {name:  "Foxy", links:"https://www.google.com/maps/place/Foxy/@45.4894146,-73.6499327,12z/data=!4m10!1m2!2m1!1sFoxy!3m6!1s0x4cc91a646ff7828b:0x1e66ba9ab2ecf92b!8m2!3d45.4894146!4d-73.5675352!15sCgRGb3h5WgYiBGZveHmSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11bx89nsxy?entry=ttu"},
+  {name:  "Léché Desserts", links:"https://www.google.com/maps/place/L%C3%A9ch%C3%A9+Desserts/@45.4740834,-73.5920992,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ%3Dw114-h86-k-no!7i12000!8i9000!4m11!1m2!2m1!1zTMOpY2jDqSBEZXNzZXJ0cw!3m7!1s0x4cc9109918bbfc8f:0xccaa9aec5f77d331!8m2!3d45.4741469!4d-73.5922371!10e5!15sChBMw6ljaMOpIERlc3NlcnRzWhIiEGzDqWNow6kgZGVzc2VydHOSAQxkZXNzZXJ0X3Nob3DgAQA!16s%2Fg%2F1hm67444n?entry=ttu"},
 ];
 
 export default function App() {
@@ -542,11 +564,11 @@ export default function App() {
       navigator.vibrate(100);
     }
   };
-  
-  
+
+
 
   const pickRandomRestaurant = () => {
-    mainButtonPressed ();
+    mainButtonPressed();
     setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
@@ -1116,7 +1138,7 @@ left: 10px;
   margin-bottom: 10px;
   `;
 
-  const CoffeeButton = styled.button`
+const CoffeeButton = styled.button`
   position: absolute;
   bottom: 15px;
   right: 50%;
