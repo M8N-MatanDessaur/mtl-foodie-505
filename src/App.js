@@ -573,7 +573,7 @@ export default function App() {
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapContainer = (
         <MapContainer>
@@ -615,21 +615,21 @@ export default function App() {
   };
 
   const toggleLocalized = () => {
-  buttonPressed();
-  setLocalized(!localized);
-  if (randomRestaurant) {
-    const mapUrl = localized ? randomRestaurant.mapUrl : randomRestaurant.mapUrlLocalized;
-    const updatedMapContainer = (
-      <MapContainer>
-        <MapFrame src={mapUrl} allowFullScreen></MapFrame>
-      </MapContainer>
-    );
-    setRandomRestaurant(prevRandomRestaurant => ({
-      ...prevRandomRestaurant,
-      mapContainer: updatedMapContainer,
-    }));
-  }
-};
+    coffeeButtonPressed();
+    setLocalized(!localized);
+    if (randomRestaurant) {
+      const mapUrl = localized ? randomRestaurant.mapUrl : randomRestaurant.mapUrlLocalized;
+      const updatedMapContainer = (
+        <MapContainer>
+          <MapFrame src={mapUrl} allowFullScreen></MapFrame>
+        </MapContainer>
+      );
+      setRandomRestaurant(prevRandomRestaurant => ({
+        ...prevRandomRestaurant,
+        mapContainer: updatedMapContainer,
+      }));
+    }
+  };
 
 
 
