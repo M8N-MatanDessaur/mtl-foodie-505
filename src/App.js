@@ -231,7 +231,7 @@ const RestaurantList = [
   { name: "Pullman bar a vin", links: "https://www.google.com/maps/place/Pullman+bar+%C3%A0+vin/data=!4m2!3m1!1s0x4cc91a48fee3b355:0x33e6fcc03300391" },
   { name: "Restaurant Moccione", links: "https://www.google.com/maps/place/Restaurant+Moccione/data=!4m2!3m1!1s0x4cc919121bc31e87:0x1eaadd42721335e5" },
   { name: "Lahmajoune Villeray", links: "https://www.google.com/maps/place/Lahmajoune+Villeray/data=!4m2!3m1!1s0x4cc919fc3c9698f7:0x536579225aa49e56" },
-  { name: "Elena", links: "https://www.google.com/maps/place/Elena/data=!4m2!3m1!1s0x4cc911e0fbb9b3a1:0x280b13d5103b90e" },
+  { name: "Elena", links: "https://www.google.com/maps/place/Elena/@45.4698329,-73.594287,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc911e0fbb9b3a1:0x280b13d5103b90e!8m2!3d45.4698292!4d-73.5917121!16s%2Fg%2F11hb008v98?entry=ttu" },
   { name: "Tiramisu", links: "https://www.google.com/maps/place/Tiramisu/data=!4m2!3m1!1s0x4cc91be874669e41:0xab1bc94f4129bcf4" },
   { name: "Bucky Rooster's Fritures", links: "https://www.google.com/maps/place/Bucky+Rooster's+Fritures/data=!4m2!3m1!1s0x4cc91181b84a7a59:0xd5a3dceb10b88149" },
   { name: "Chez Hailar", links: "https://www.google.com/maps/place/Chez+Hailar/data=!4m2!3m1!1s0x4cc91a6adae0462f:0x3316eebdeaa34f2e" },
