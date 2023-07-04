@@ -162,7 +162,7 @@ const RestaurantList = [
   { name: "Chef Jo", links: "https://www.google.com/maps/place/Chef+Jo/data=!4m2!3m1!1s0x4cc91f02c293b2fb:0xd855c90881a001dc" },
   { name: "Chez Simon Cantine Urbaine", links: "https://www.google.com/maps/place/Chez+Simon+Cantine+Urbaine/data=!4m2!3m1!1s0x4cc91dd1e9ce2415:0x9ec111b1700bad94" },
   { name: "Ouzeri", links: "https://www.google.com/maps/place/Ouzeri/data=!4m2!3m1!1s0x4cc91bd12ea5dc33:0xd696b8c16c75763e" },
-  { name: "Else's", links: "https://www.google.com/maps/place/Else's/data=!4m2!3m1!1s0x4cc91bcb2e7cbeb7:0x2795610c61b7f054" },
+  { name: "Else\'s", links: "https://www.google.com/maps/place/Else\'s/data=!4m2!3m1!1s0x4cc91bcb2e7cbeb7:0x2795610c61b7f054" },
   { name: "BOUILLON BILK", links: "https://www.google.com/maps/place/BOUILLON+BILK/data=!4m2!3m1!1s0x4cc91a4c1789dc9b:0x441fe9250df1633b" },
   { name: "Brit & Chips", links: "https://www.google.com/maps/place/Brit+%26+Chips/data=!4m2!3m1!1s0x4cc91a593e5b087f:0x7e5705c1ef6e12a2" },
   { name: "moa moa", links: "https://www.google.com/maps/place/moa+moa/data=!4m2!3m1!1s0x4cc911fcd098007f:0x7408a4c7fe50dc1c" },
@@ -573,7 +573,7 @@ export default function App() {
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.links)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapContainer = (
         <MapContainer>
