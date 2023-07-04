@@ -573,8 +573,8 @@ export default function App() {
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.links)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapContainer = (
         <MapContainer>
           {localized ? (
