@@ -528,17 +528,18 @@ const RestaurantList = [
   { name: "Casse-croûte Sissi & Paul", links: "https://www.google.com/maps/place/Casse-cro%C3%BBte+Sissi+%26+Paul/@45.553933,-73.6042407,17z/data=!4m15!1m8!3m7!1s0x4cc91949fc85ae91:0xd767c7d598f4c34d!2sCasse-cro%C3%BBte+Sissi+%26+Paul!8m2!3d45.553933!4d-73.602052!10e5!16s%2Fg%2F11cjk2ydyf!3m5!1s0x4cc91949fc85ae91:0xd767c7d598f4c34d!8m2!3d45.553933!4d-73.602052!16s%2Fg%2F11cjk2ydyf?entry=ttu" },
   { name: "Vin Mon Lapin", links: "https://www.google.com/maps/place/Vin+Mon+Lapin/@45.5330026,-73.6106333,3a,101.2y,90t/data=!3m8!1e2!3m6!1sAF1QipMdSUGNM8G-PLV8YPk1v9daiBCzHUQBsYPjrF-3!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMdSUGNM8G-PLV8YPk1v9daiBCzHUQBsYPjrF-3%3Dw128-h86-k-no!7i719!8i480!4m7!3m6!1s0x4cc9196da59b9c11:0xb54ca374bd37d150!8m2!3d45.533007!4d-73.6106429!10e5!16s%2Fg%2F11f3th9s0j?entry=ttu" },
   { name: "Alma", links: "https://www.google.com/maps/place/ALMA/@45.5210337,-73.6467598,14z/data=!4m10!1m2!2m1!1sAlma!3m6!1s0x4cc9199d6e54eaed:0x3cd6f85e6493e17b!8m2!3d45.5210337!4d-73.6107109!15sCgRBbG1hWgYiBGFsbWGSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11f55kpcgx?entry=ttu" },
-  {name:  "La Capital Tacos", links:"https://www.google.com/maps/place/La+Capital+Tacos/@45.5084429,-73.5632453,17z/data=!4m15!1m8!3m7!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!2sLa+Capital+Tacos!8m2!3d45.5084429!4d-73.5610566!10e5!16s%2Fg%2F11bc6z9csp!3m5!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!8m2!3d45.5084429!4d-73.5610566!16s%2Fg%2F11bc6z9csp?entry=ttu"},
-  {name:  "Dobe & Andy", links:"https://www.google.com/maps/place/Restaurant+Dobe+%26+Andy/@45.5073308,-73.5638657,17z/data=!3m2!4b1!5s0x4cc91a4fdca3ebef:0x11c8d63fbb6b5675!4m6!3m5!1s0x4cc91a51d3d331d5:0xffc11e12cbb9a0f3!8m2!3d45.5073271!4d-73.5612908!16s%2Fg%2F1td_y6c5?entry=ttu" },
-  {name:  "Jatoba", links:"https://www.google.com/maps/place/Jatoba/@45.5031903,-73.5673713,3a,75y,320h,90t/data=!3m8!1e1!3m6!1sAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj%3Dw86-h86-k-no-pi-20-ya328.0678-ro-0-fo100!7i8192!8i4096!4m7!3m6!1s0x4cc91a450340fbbb:0x6bde13066961bc3d!8m2!3d45.5032786!4d-73.567343!10e5!16s%2Fg%2F11b6x5g89h?entry=ttu"},
-  {name:  "Foxy", links:"https://www.google.com/maps/place/Foxy/@45.4894146,-73.6499327,12z/data=!4m10!1m2!2m1!1sFoxy!3m6!1s0x4cc91a646ff7828b:0x1e66ba9ab2ecf92b!8m2!3d45.4894146!4d-73.5675352!15sCgRGb3h5WgYiBGZveHmSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11bx89nsxy?entry=ttu"},
-  {name:  "Léché Desserts", links:"https://www.google.com/maps/place/L%C3%A9ch%C3%A9+Desserts/@45.4740834,-73.5920992,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ%3Dw114-h86-k-no!7i12000!8i9000!4m11!1m2!2m1!1zTMOpY2jDqSBEZXNzZXJ0cw!3m7!1s0x4cc9109918bbfc8f:0xccaa9aec5f77d331!8m2!3d45.4741469!4d-73.5922371!10e5!15sChBMw6ljaMOpIERlc3NlcnRzWhIiEGzDqWNow6kgZGVzc2VydHOSAQxkZXNzZXJ0X3Nob3DgAQA!16s%2Fg%2F1hm67444n?entry=ttu"},
+  { name: "La Capital Tacos", links: "https://www.google.com/maps/place/La+Capital+Tacos/@45.5084429,-73.5632453,17z/data=!4m15!1m8!3m7!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!2sLa+Capital+Tacos!8m2!3d45.5084429!4d-73.5610566!10e5!16s%2Fg%2F11bc6z9csp!3m5!1s0x4cc91a51e9e087ab:0x90c477520726e5bf!8m2!3d45.5084429!4d-73.5610566!16s%2Fg%2F11bc6z9csp?entry=ttu" },
+  { name: "Dobe & Andy", links: "https://www.google.com/maps/place/Restaurant+Dobe+%26+Andy/@45.5073308,-73.5638657,17z/data=!3m2!4b1!5s0x4cc91a4fdca3ebef:0x11c8d63fbb6b5675!4m6!3m5!1s0x4cc91a51d3d331d5:0xffc11e12cbb9a0f3!8m2!3d45.5073271!4d-73.5612908!16s%2Fg%2F1td_y6c5?entry=ttu" },
+  { name: "Jatoba", links: "https://www.google.com/maps/place/Jatoba/@45.5031903,-73.5673713,3a,75y,320h,90t/data=!3m8!1e1!3m6!1sAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPI5sEpDdVWzcJLY96YBCIynX1DtaF4I17gPVLj%3Dw86-h86-k-no-pi-20-ya328.0678-ro-0-fo100!7i8192!8i4096!4m7!3m6!1s0x4cc91a450340fbbb:0x6bde13066961bc3d!8m2!3d45.5032786!4d-73.567343!10e5!16s%2Fg%2F11b6x5g89h?entry=ttu" },
+  { name: "Foxy", links: "https://www.google.com/maps/place/Foxy/@45.4894146,-73.6499327,12z/data=!4m10!1m2!2m1!1sFoxy!3m6!1s0x4cc91a646ff7828b:0x1e66ba9ab2ecf92b!8m2!3d45.4894146!4d-73.5675352!15sCgRGb3h5WgYiBGZveHmSAQpyZXN0YXVyYW504AEA!16s%2Fg%2F11bx89nsxy?entry=ttu" },
+  { name: "Léché Desserts", links: "https://www.google.com/maps/place/L%C3%A9ch%C3%A9+Desserts/@45.4740834,-73.5920992,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipP7Ks1JZJZhcifo2o829ajl9idyOdIgXbRqjcfJ%3Dw114-h86-k-no!7i12000!8i9000!4m11!1m2!2m1!1zTMOpY2jDqSBEZXNzZXJ0cw!3m7!1s0x4cc9109918bbfc8f:0xccaa9aec5f77d331!8m2!3d45.4741469!4d-73.5922371!10e5!15sChBMw6ljaMOpIERlc3NlcnRzWhIiEGzDqWNow6kgZGVzc2VydHOSAQxkZXNzZXJ0X3Nob3DgAQA!16s%2Fg%2F1hm67444n?entry=ttu" },
 ];
 
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [listOpened, setListOpened] = useState(false);
+  const [localized, setLocalized] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
@@ -573,9 +574,14 @@ export default function App() {
     const randomRestaurant = RestaurantList[randomIndex];
     if (randomRestaurant) {
       const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=current+location&destination=${encodeURIComponent(randomRestaurant.name)},${encodeURIComponent(randomRestaurant.address)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       const mapContainer = (
         <MapContainer>
-          <MapFrame src={mapUrl} allowFullScreen></MapFrame>
+          {localized ? (
+            <MapFrame src={mapUrlLocalized} allowFullScreen></MapFrame>
+          ) : (
+            <MapFrame src={mapUrl} allowFullScreen></MapFrame>
+          )}
         </MapContainer>
       );
       const mapFrame = (
@@ -586,7 +592,9 @@ export default function App() {
       setRandomRestaurant({
         ...randomRestaurant,
         mapContainer,
-        mapFrame
+        mapFrame,
+        mapUrl,
+        mapUrlLocalized,
       });
     } else {
       setRandomRestaurant(null);
@@ -605,6 +613,23 @@ export default function App() {
     buttonPressed();
     setListOpened(!listOpened);
   };
+
+  const toggleLocalized = () => {
+  buttonPressed();
+  setLocalized(!localized);
+  if (randomRestaurant) {
+    const mapUrl = localized ? randomRestaurant.mapUrl : randomRestaurant.mapUrlLocalized;
+    const updatedMapContainer = (
+      <MapContainer>
+        <MapFrame src={mapUrl} allowFullScreen></MapFrame>
+      </MapContainer>
+    );
+    setRandomRestaurant(prevRandomRestaurant => ({
+      ...prevRandomRestaurant,
+      mapContainer: updatedMapContainer,
+    }));
+  }
+};
 
 
 
@@ -662,6 +687,11 @@ export default function App() {
           )}
         </SelectedRestaurant>
         <ButtonWrapper>
+          <LocalisedButton onClick={toggleLocalized} localized={localized}>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
+            </svg>
+          </LocalisedButton>
           <Randomizer onClick={pickRandomRestaurant}>
             <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 4v16l13-8L7 4Z"></path>
@@ -777,7 +807,7 @@ const ButtonWrapper = styled.div`
   `;
 
 const Randomizer = styled.button`
-  width: 80%;
+  width: 60%;
   height: 60px;
   border: 0;
   background-color: #2e5bf3;
@@ -844,6 +874,42 @@ const ListButton = styled.button`
     transition: all 200ms ease-in-out;
   }
 `;
+
+const LocalisedButton = styled.button`
+  width: 20%;
+  height: 60px;
+  background-color: #2e5bf3;
+  letter-spacing: 1.5px;
+  border: 0;
+  border-right: 3px solid #213377;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  & svg {
+    stroke:  ${props => props.localized ? '#13d713' : '#213377'};
+    fill:  ${props => props.localized ? '#13d713' : '#213377'};
+    height: 30px;
+    width: 30px;
+  }
+ 
+&:active {
+  background-color: #2e5bf3;
+  & svg{
+    transform: scale(0.8);
+  }
+ }
+
+  &:hover {
+    & svg {
+      fill: #fff;
+      stroke: #fff;
+    }
+    transition: all 200ms ease-in-out;
+  }
+`;
+
 
 const MapLink = styled.a`
   font-size: 1.2rem;
