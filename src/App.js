@@ -221,7 +221,7 @@ const RestaurantList = [
   { name: "La Grotte des Fromages", links: "https://www.google.com/maps/place/La+Grotte+des+Fromages/data=!4m2!3m1!1s0x4cc91ee998fd45ff:0x314fffc8ac7e5d2f" },
   { name: "Entre-Deux", links: "https://www.google.com/maps/place/Entre-Deux/data=!4m2!3m1!1s0x4cc9113f2eeb4fb3:0xe3ab5d118a7fd57c" },
   { name: "CafeToranj", links: "https://www.google.com/maps/place/Caf%C3%A9+Toranj/data=!4m2!3m1!1s0x4cc910b14fabaf79:0x43b980ced25550d" },
-  { name: "Vago", links: "https://www.google.com/maps/place/Vago/data=!4m2!3m1!1s0x4cc91a0ce1684b1f:0x9740969d5ef47f5f" },
+  { name: "Vago", links: "https://www.google.com/maps/place/Vago/@45.5067255,-73.6223281,13z/data=!4m10!1m2!2m1!1sVago!3m6!1s0x4cc91a0ce1684b1f:0x9740969d5ef47f5f!8m2!3d45.487247!4d-73.590662!15sCgRWYWdvWgYiBHZhZ2-SARJpdGFsaWFuX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F1tdyqdmz?entry=ttu" },
   { name: "Ferreira Cafe", links: "https://www.google.com/maps/place/Ferreira+Caf%C3%A9/data=!4m2!3m1!1s0x4cc91a4166ca2577:0xd99d0a2d8995a7da" },
   { name: "Lola Rosa Place-des-Arts", links: "https://www.google.com/maps/place/Lola+Rosa+Place-des-Arts/data=!4m2!3m1!1s0x4cc91bdef9a249fb:0xda80e79010500ccc" },
   { name: "Arepera", links: "https://www.google.com/maps/place/Arepera/data=!4m2!3m1!1s0x4cc91bccea2cfe05:0xd90f68b7fbeb01c9" },
