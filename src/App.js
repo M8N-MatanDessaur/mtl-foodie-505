@@ -237,7 +237,7 @@ const RestaurantList = [
   { name: "Chez Hailar", links: "https://www.google.com/maps/place/Chez+Hailar/data=!4m2!3m1!1s0x4cc91a6adae0462f:0x3316eebdeaa34f2e" },
   { name: "MONO", links: "https://www.google.com/maps/place/MONO+House+of+Sandwich+and+Beer/@45.4981903,-73.5832809,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91b8751713d4b:0x9587e1a822169f0c!8m2!3d45.4981866!4d-73.57841!16s%2Fg%2F11r258bs_q?entry=ttu" },
   { name: "Yumi Burger", links: "https://www.google.com/maps/place/Yumi+Burger/data=!4m2!3m1!1s0x4cc91bbb174b5dcb:0x595d7ba4900a07e2" },
-  { name: "LFK", links: "https://www.google.com/maps/place/LFK/@45.5497422,-73.5347383,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipNxa6MKy3m_jcBFbY9LcCd9kB60iJlEHUe3QCdT!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipNxa6MKy3m_jcBFbY9LcCd9kB60iJlEHUe3QCdT%3Dw128-h86-k-no!7i2048!8i1367!4m11!1m2!2m1!1sLFK!3m7!1s0x4cc9197e0ccd988d:0x8de30108e41962cc!8m2!3d45.54969!4d-73.5345588!10e5!15sCgNMRktaBSIDbGZrkgERY3Jlb2xlX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F11f4qqkv85?entry=ttu" },
+  { name: "LFK", links: "https://www.google.com/maps/place/LFK/@45.54969,-73.5448585,15z/data=!4m10!1m2!2m1!1sLFK!3m6!1s0x4cc9197e0ccd988d:0x8de30108e41962cc!8m2!3d45.54969!4d-73.5345588!15sCgNMRktaBSIDbGZrkgERY3Jlb2xlX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F11f4qqkv85?entry=ttu" },
   { name: "Flyjin", links: "https://www.google.com/maps/place/Flyjin/data=!4m2!3m1!1s0x4cc91a59015fb67b:0x5286e850f7b8eea4" },
   { name: "Tommy Cafe- Rue Notre-Dame Ouest", links: "https://www.google.com/maps/place/Tommy+Caf%C3%A9+-+Rue+Notre-Dame+Ouest/data=!4m2!3m1!1s0x4cc91a59fb3b2041:0x15b2dc306b05dbcd" },
   { name: "Les Pokes Boys (Laurier)", links: "https://www.google.com/maps/place/Les+Pokes+Boys+(Laurier)/data=!4m2!3m1!1s0x4cc919359b02e769:0x7a5f6a1446eb3638" },
