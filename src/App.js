@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { styled } from 'styled-components';
+import { styled, keyframes } from 'styled-components';
 import Marquee from "react-fast-marquee";
+import Cookies from 'universal-cookie';
+
 import buttonSound from './button_pressed.mp3';
 import buttonSoundAlt from './button_pressed_alt.mp3';
 import buttonSoundGo from './button_pressed_go.mp3';
@@ -538,9 +540,20 @@ const RestaurantList = [
 export default function App() {
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [changeMode, setChangeMode] = useState(false);
   const [listOpened, setListOpened] = useState(false);
   const [localized, setLocalized] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const cookies = new Cookies();
+  const cookieOptions = {
+    sameSite: 'none',
+    secure: true
+  };
+
+  cookies.set('cookieName', 'cookieValue', cookieOptions);
+
+
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
@@ -615,6 +628,7 @@ export default function App() {
   };
 
   const toggleLocalized = () => {
+    setChangeMode(true);
     coffeeButtonPressed();
     setLocalized(!localized);
     if (randomRestaurant) {
@@ -629,6 +643,9 @@ export default function App() {
         mapContainer: updatedMapContainer,
       }));
     }
+    setTimeout(() => {
+      setChangeMode(false);
+    }, 500);
   };
 
 
@@ -642,27 +659,33 @@ export default function App() {
           </Title>
           <InfoLink onClick={toggleModal}>
             <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M3.25 12a8.75 8.75 0 1 1 17.5 0 8.75 8.75 0 0 1-17.5 0ZM13 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 2.75a.75.75 0 0 1 .75.75v5a.75.75 0 0 1-1.5 0v-5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd"></path>
+              <path fillRule="evenodd" d="M3.25 12a8.75 8.75 0 1 1 17.5 0 8.75 8.75 0 0 1-17.5 0ZM13 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 2.75a.75.75 0 0 1 .75.75v5a.75.75 0 0 1-1.5 0v-5a.75.75 0 0 1 .75-.75Z" clipRule="evenodd"></path>
             </svg>
           </InfoLink>
         </Header>
         <SelectedRestaurant>
 
-          <LoadingOverlay loading={loading}> {/* Pass the loading state to the LoadingOverlay */}
+          <LoadingOverlay loading={loading}>
             ALÉ&nbsp;<LoadingSpinner />&nbsp;RESTO
           </LoadingOverlay>
 
+          <ChangeModeOverlay changeMode={changeMode}>
+            <svg width="58" height="58" fill="green" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
+            </svg>
+          </ChangeModeOverlay>
+
           <ListOverlay listOpened={listOpened}>
             <CloseButton onClick={toggleList}>
-              <svg fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg fill="none" stroke="white" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="m12 12-5 5m5-5L7 7l5 5Zm0 0 5 5-5-5Zm0 0 5-5-5 5Z"></path>
               </svg>
             </CloseButton>
             <ListTitle>La liste pour les fines bouches</ListTitle>
             <ListWrapper>
-              {RestaurantList.map((restaurant) => (
+              {RestaurantList.map((restaurant, index) => (
                 <ListItem>
-                  <ListLink href={restaurant.links} target="_blank" rel="noopener noreferrer">
+                  <ListLink href={restaurant.links} key={index} target="_blank" rel="noopener noreferrer">
                     {restaurant.name}
                   </ListLink>
                 </ListItem>
@@ -693,7 +716,7 @@ export default function App() {
             </svg>
           </LocalisedButton>
           <Randomizer onClick={pickRandomRestaurant}>
-            <svg stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 4v16l13-8L7 4Z"></path>
             </svg>
           </Randomizer>
@@ -1037,6 +1060,35 @@ const LoadingOverlay = styled.div`
   justify-content: center;
 
   display: ${props => props.loading ? 'flex' : 'none'};
+`;
+
+const fadeInAnimation = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const ChangeModeOverlay = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #1a1d25;
+  background-size: 100% 4px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > svg {
+    opacity: ${props => (props.changeMode ? 1 : 0)};
+    animation: ${fadeInAnimation} 0.5s ease; /* Adjust the duration and timing function as needed */
+  }
+
+  display: ${props => props.changeMode ? 'flex' : 'none'};
 `;
 
 const LoadingSpinner = styled.div`
