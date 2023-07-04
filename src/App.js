@@ -141,7 +141,7 @@ const RestaurantList = [
   { name: "Kurobuta Izakaya & Ramen Ya Restaurant", links: "https://www.google.com/maps/place/Kurobuta+Izakaya+%26+Ramen+Ya+Restaurant/data=!4m2!3m1!1s0x4cc91bd2a0d33cd5:0xfb078dfd3c8618cd" },
   { name: "P'tit Plateau / little plateau", links: "https://www.google.com/maps/place/P'tit+Plateau+%2F+little+plateau/data=!4m2!3m1!1s0x4cc91bd201ccaded:0x3ede866e9b17ea5b" },
   { name: "Bagel Etc", links: "https://www.google.com/maps/place/Bagel+Etc/data=!4m2!3m1!1s0x4cc91bd2bd0ef6a7:0x2a477d5af2774534" },
-  { name: "Lawrence", links: "https://www.google.com/maps/place/Lawrence/data=!4m2!3m1!1s0x4cc9197e0b6c2d89:0x476fcc9aaaa651e4" },
+  { name: "Lawrence", links: "https://www.google.com/maps/place/Lawrence/@45.5241404,-73.6126767,15z/data=!3m1!5s0x4cc9197e0aded459:0xd7774e3e77abe52e!4m10!1m2!2m1!1sLawrence!3m6!1s0x4cc9197e0b6c2d89:0x476fcc9aaaa651e4!8m2!3d45.5241404!4d-73.5946523!15sCghMYXdyZW5jZVoKIghsYXdyZW5jZZIBFmZpbmVfZGluaW5nX3Jlc3RhdXJhbnTgAQA!16s%2Fg%2F1tdfh9dq?entry=ttu" },
   { name: "Bar Le Sparrow", links: "https://www.google.com/maps/place/Bar+Le+Sparrow/data=!4m2!3m1!1s0x4cc9197c2bb4cf6f:0x96b2b75ab53dc88b" },
   { name: "OPLANTE Vegan Sushi & Wok Vegetalien Montreal (x Yuan)", links: "https://www.google.com/maps/place/OPLANTE+Vegan+Sushi+%26+Wok+V%C3%A9g%C3%A9talien+Montreal+(x+Yuan)/data=!4m2!3m1!1s0x4cc91b3c7ab91b5f:0x9b068e54b7ab3453" },
   { name: "K-BBQ", links: "https://www.google.com/maps/place/K-BBQ/data=!4m2!3m1!1s0x4cc93b79badb6fbd:0x1267c0fb8582efd2" },
