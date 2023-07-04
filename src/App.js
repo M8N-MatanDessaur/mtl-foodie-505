@@ -100,7 +100,7 @@ const RestaurantList = [
   { name: "Restaurant Kapsalon", links: "https://www.google.com/maps/place/Restaurant+Kapsalon/data=!4m2!3m1!1s0x4cc911a6832a20e7:0x35985277fd882d71" },
   { name: "MR. CAJUN", links: "https://www.google.com/maps/place/MR.+CAJUN/data=!4m2!3m1!1s0x4cc91bf602f912df:0xd6878000cfb8c000" },
   { name: "Le P'tit Rustik", links: "https://www.google.com/maps/place/Le+P'tit+Rustik/data=!4m2!3m1!1s0x4cc91bcc6cbcba27:0x215d166cce0a1c1c" },
-  { name: "Peche", links: "https://www.google.com/maps/place/P%C3%A9ch%C3%A9/data=!4m2!3m1!1s0x4cc91b77396526c9:0x5f82caa3a8a527e8" },
+  { name: "Peche", links: "https://www.google.com/maps/place/P%C3%A9ch%C3%A9/@45.52044,-73.575659,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91b77396526c9:0x5f82caa3a8a527e8!8m2!3d45.52044!4d-73.575659!16s%2Fg%2F11fqsvk982?entry=ttu" },
   { name: "Teochew Foodie", links: "https://www.google.com/maps/place/Teochew+Foodie/data=!4m2!3m1!1s0x4cc91b4c150de96d:0x14bd0e7d488ecef5" },
   { name: "Soleil de Saigon", links: "https://www.google.com/maps/place/Soleil+de+Saigon/data=!4m2!3m1!1s0x4cc91b314ade141b:0xd82a993070521895" },
   { name: "Pho Jean-Talon", links: "https://www.google.com/maps/place/Pho+Jean-Talon/data=!4m2!3m1!1s0x4cc919d63b522699:0x19da8dbf6d3a1686" },
