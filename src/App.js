@@ -645,7 +645,7 @@ export default function App() {
     }
     setTimeout(() => {
       setChangeMode(false);
-    }, 500);
+    }, 1000);
   };
 
 
