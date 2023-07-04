@@ -569,10 +569,12 @@ export default function App() {
         },
         (error) => {
           console.error('Error getting current location:', error);
+          setCurrentLocation(null);
         }
       );
     } else {
       console.error('Geolocation is not supported by your browser');
+      setCurrentLocation(null);
     }
   }, []);
 
@@ -603,9 +605,12 @@ export default function App() {
     setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
     const randomRestaurant = RestaurantList[randomIndex];
+    let mapUrlLocalized = '';
     if (randomRestaurant) {
       const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      const mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      if(currentLocation!==null) {
+       mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      }
       const mapContainer = (
         <MapContainer>
           {localized ? (
@@ -728,7 +733,7 @@ export default function App() {
           )}
         </SelectedRestaurant>
         <ButtonWrapper>
-          <LocalisedButton onClick={toggleLocalized} localized={localized} disabled={!randomRestaurant}>
+          <LocalisedButton onClick={toggleLocalized} localized={localized} disabled={!randomRestaurant || currentLocation===null}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
             </svg>
