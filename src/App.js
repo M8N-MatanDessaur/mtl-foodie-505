@@ -706,7 +706,7 @@ export default function App() {
             </CloseButton>
             <ListTitle>La liste pour les fines bouches</ListTitle>
             <ListWrapper>
-              {RestaurantList.map((restaurant, index) => (
+              {RestaurantList.sort((a, b) => a.name.localeCompare(b.name)).map((restaurant, index) => (
                 <ListItem>
                   <ListLink href={restaurant.links} key={index} target="_blank" rel="noopener noreferrer">
                     {restaurant.name}
