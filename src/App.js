@@ -558,13 +558,12 @@ export default function App() {
     }
   };
 
-  const mapButtonPressed = () => {
+  const coffeeButtonPressed = () => {
     if ('vibrate' in navigator) {
       audio3.play();
       navigator.vibrate(100);
     }
   };
-
 
 
   const pickRandomRestaurant = () => {
@@ -686,7 +685,7 @@ export default function App() {
       {showModal && (
         <ModalWrapper>
           <ModalContent>
-            <CoffeeButton>
+            <CoffeeButton onClick={coffeeButtonPressed}>
               <a href="https://www.buymeacoffee.com/matandessaur" target="_blank">Achetez-moi un café ☕</a>
             </CoffeeButton>
             <ModalText>
@@ -1154,4 +1153,9 @@ const CoffeeButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-wrap: nowrap;
+
+  & a{
+    text-wrap: nowrap;
+  }
   `;
