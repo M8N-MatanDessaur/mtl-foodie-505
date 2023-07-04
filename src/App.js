@@ -19,7 +19,7 @@ const RestaurantList = [
   { name: "Restaurant Gandhi", links: "https://www.google.com/maps/place/Restaurant+Gandhi/data=!4m2!3m1!1s0x4cc91a584db207cb:0x39a9920abcbb7ff0" },
   { name: "Sushi ville", links: "https://www.google.com/maps/place/Sushi+ville/data=!4m2!3m1!1s0x4cc918dd291d74e7:0x4eb250520ca3741e" },
   { name: "TT Café", links: "https://www.google.com/maps/place/TT+Caf%C3%A9/data=!4m2!3m1!1s0x4cc911ef0c766e59:0x2d2c76c7b5402cc6" },
-  { name: "NOMI", links: "https://www.google.com/maps/place/NOMI/data=!4m2!3m1!1s0x4cc91bb28a13aaf1:0x8564a0afe8c4dc0a" },
+  { name: "NOMI", links: "https://www.google.com/maps/place/NOMI/@45.5030442,-73.5669806,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91bb28a13aaf1:0x8564a0afe8c4dc0a!8m2!3d45.5030442!4d-73.5669806!16s%2Fg%2F11t88d3_v5?entry=ttu" },
   { name: "Restaurant la perle antillaise(cuisine Creole)", links: "https://www.google.com/maps/place/Restaurant+la+perle+antillaise(cuisine+Creole)/data=!4m2!3m1!1s0x4cc919d632dbf1d3:0xc03b5d2972a0efff" },
   { name: "L'hamburger", links: "https://www.google.com/maps/place/L'hamburger/data=!4m2!3m1!1s0x4cc9198af6d782ef:0xff2efd5fd9e150a8" },
   { name: "Terrasse Carla", links: "https://www.google.com/maps/place/Terrasse+Carla/data=!4m2!3m1!1s0x4cc91a510bbc0909:0xd18d7faa0f93641f" },
