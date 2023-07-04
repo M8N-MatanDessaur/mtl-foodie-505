@@ -607,9 +607,9 @@ export default function App() {
     const randomRestaurant = RestaurantList[randomIndex];
     let mapUrlLocalized = '';
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       if(currentLocation!==null) {
-       mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)}&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+       mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       }
       const mapContainer = (
         <MapContainer>
