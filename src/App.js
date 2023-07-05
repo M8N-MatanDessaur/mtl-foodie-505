@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { styled, keyframes } from 'styled-components';
 import Marquee from "react-fast-marquee";
 import Cookies from 'universal-cookie';
+import { Toaster, toast } from 'react-hot-toast';
 
 import buttonSound from './button_pressed.mp3';
 import buttonSoundAlt from './button_pressed_alt.mp3';
@@ -568,12 +569,12 @@ export default function App() {
           setCurrentLocation({ latitude, longitude });
         },
         (error) => {
-          console.error('Error getting current location:', error);
+          toast.error('Error getting current location', error);
           setCurrentLocation(null);
         }
       );
     } else {
-      console.error('Geolocation is not supported by your browser');
+      toast.error('Geolocation is not supported by your browser');
       setCurrentLocation(null);
     }
   }, []);
@@ -687,6 +688,17 @@ export default function App() {
           </InfoLink>
         </Header>
         <SelectedRestaurant>
+          <Toaster 
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: '#363636',
+                color: '#fff',
+                fontSize: '16px',
+              },
+            }}
+          />
 
           <LoadingOverlay loading={loading}>
             ALÉ&nbsp;<LoadingSpinner />&nbsp;RESTO
@@ -733,12 +745,12 @@ export default function App() {
           )}
         </SelectedRestaurant>
         <ButtonWrapper>
-          <LocalisedButton onClick={toggleLocalized} localized={localized} disabled={!randomRestaurant || currentLocation===null}>
+          <LocalisedButton onClick={toggleLocalized} currentLocation={currentLocation} localized={localized} disabled={!randomRestaurant || currentLocation===null}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
             </svg>
           </LocalisedButton>
-          <Randomizer onClick={pickRandomRestaurant}>
+          <Randomizer onClick={pickRandomRestaurant} currentLocation={currentLocation}>
             <svg strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 4v16l13-8L7 4Z"></path>
             </svg>
@@ -853,7 +865,7 @@ const ButtonWrapper = styled.div`
   `;
 
 const Randomizer = styled.button`
-  width: 60%;
+  width: ${props => props.currentLocation===null ? "80%" : "60%"};
   height: 60px;
   border: 0;
   background-color: #2e5bf3;
@@ -922,16 +934,17 @@ const ListButton = styled.button`
 `;
 
 const LocalisedButton = styled.button`
-  width: 20%;
   height: 60px;
+  width: ${props => props.currentLocation===null ? "0" : "20%"};
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
   border: 0;
   border-right: 3px solid #213377;
+  border-width: ${props => props.currentLocation===null ? "0" : "3px"};
   font-size: 15px;
-  display: flex;
   align-items: center;
   justify-content: center;
+  display: flex;
   
   & svg {
     stroke:  ${props => props.localized ? '#13d713' : '#213377'};
