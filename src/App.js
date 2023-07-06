@@ -546,6 +546,7 @@ export default function App() {
   const [listOpened, setListOpened] = useState(false);
   const [localized, setLocalized] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [countdown, setCountdown] = useState(0);
 
   const cookies = new Cookies();
   const cookieOptions = {
@@ -602,6 +603,25 @@ export default function App() {
 
 
   const pickRandomRestaurant = () => {
+
+    if (loading || countdown > 0) {
+      return; // Prevent picking a random restaurant while loading or countdown is active
+    }
+
+    // Countdown timer
+    let countdownValue = 3;
+    setCountdown(countdownValue);
+    const countdownInterval = setInterval(() => {
+      countdownValue--;
+      if (countdownValue === 0) {
+        clearInterval(countdownInterval);
+        setCountdown(0);
+        setLoading(false);
+      } else {
+        setCountdown(countdownValue);
+      }
+    }, 400);
+
     mainButtonPressed();
     setLoading(true);
     const randomIndex = Math.floor(Math.random() * RestaurantList.length);
@@ -609,8 +629,8 @@ export default function App() {
     let mapUrlLocalized = '';
     if (randomRestaurant) {
       const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      if(currentLocation!==null) {
-       mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      if (currentLocation !== null) {
+        mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       }
       const mapContainer = (
         <MapContainer>
@@ -688,7 +708,7 @@ export default function App() {
           </InfoLink>
         </Header>
         <SelectedRestaurant>
-          <Toaster 
+          <Toaster
             position="top-center"
             toastOptions={{
               duration: 3000,
@@ -727,7 +747,9 @@ export default function App() {
               ))}
             </ListWrapper>
           </ListOverlay>
+
           <Overlay />
+
           {randomRestaurant ? (
             <>
               {randomRestaurant.mapContainer}
@@ -745,15 +767,29 @@ export default function App() {
           )}
         </SelectedRestaurant>
         <ButtonWrapper>
-          <LocalisedButton onClick={toggleLocalized} currentLocation={currentLocation} localized={localized} disabled={!randomRestaurant || currentLocation===null}>
+          <LocalisedButton onClick={toggleLocalized} currentLocation={currentLocation} localized={localized} disabled={!randomRestaurant || currentLocation === null}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
             </svg>
           </LocalisedButton>
-          <Randomizer onClick={pickRandomRestaurant} currentLocation={currentLocation}>
-            <svg strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7 4v16l13-8L7 4Z"></path>
-            </svg>
+          <Randomizer
+            onClick={pickRandomRestaurant}
+            currentLocation={currentLocation}
+            disabled={countdown > 0}
+            countdownActive={countdown > 0}
+          >
+            {countdown > 0 ? (
+              <CountdownDisplay>{countdown}</CountdownDisplay>
+            ) : (
+              <svg
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7 4v16l13-8L7 4Z"></path>
+              </svg>
+            )}
           </Randomizer>
           <ListButton onClick={toggleList}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -865,7 +901,7 @@ const ButtonWrapper = styled.div`
   `;
 
 const Randomizer = styled.button`
-  width: ${props => props.currentLocation===null ? "80%" : "60%"};
+  width: ${props => props.currentLocation === null ? "80%" : "60%"};
   height: 60px;
   border: 0;
   background-color: #2e5bf3;
@@ -897,6 +933,13 @@ const Randomizer = styled.button`
     transition: all 200ms ease-in-out;
   }
 `;
+
+const CountdownDisplay = styled.h3`
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #fff;
+  `;
+
 
 const ListButton = styled.button`
   width: 20%;
@@ -935,12 +978,12 @@ const ListButton = styled.button`
 
 const LocalisedButton = styled.button`
   height: 60px;
-  width: ${props => props.currentLocation===null ? "0" : "20%"};
+  width: ${props => props.currentLocation === null ? "0" : "20%"};
   background-color: #2e5bf3;
   letter-spacing: 1.5px;
   border: 0;
   border-right: 3px solid #213377;
-  border-width: ${props => props.currentLocation===null ? "0" : "3px"};
+  border-width: ${props => props.currentLocation === null ? "0" : "3px"};
   font-size: 15px;
   align-items: center;
   justify-content: center;
