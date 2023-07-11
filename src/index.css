@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Montserrat&display=swap);
 
+/* RESET CSS FOR PWA : By Matan Dessaur */
 *,
 ::after,
 ::before {
@@ -8,19 +9,28 @@
 
 * {
     margin: 0;
+
     text-size-adjust: none;
     -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+
     user-select: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 }
 
-html {
+html,body,#root{
     height: 100%;
+    width: 100%;
+}
+
+html {
     font-family: Poppins, sans-serif;
     font-size: 16px;
     line-height: 1.5;
@@ -30,11 +40,6 @@ html {
     text-rendering: optimizeLegibility;
     background-color: var(--background-color);
     scroll-behavior: smooth;
-}
-
-html,body,#root{
-    height: 100%;
-    width: 100%;
 }
 
 canvas,
