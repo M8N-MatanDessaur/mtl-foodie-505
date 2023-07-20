@@ -242,9 +242,8 @@ export default function App() {
   };
 
   // Toggle the localization radius
-  const toggleRad = (e) => {
+  const toggleRad = () => {
     setChangeMode(true);
-    e.preventDefault();
     coffeeButtonPressed();
     if (radius === 2) {
       setRadius(8);
