@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function LocalizationButton({ toggleLocalized, currentLocation, localized, randomRestaurant }) {
+export default function LocalizationButton({ toggleLocalized, currentLocation, localized, randomRestaurant, toggleRad, radius }) {
     return (
-        <Button onClick={toggleLocalized} currentLocation={currentLocation} localized={localized} disabled={!randomRestaurant || currentLocation === null}>
+        <Button radius={radius}  onContextMenu={e=>toggleRad(e)} onClick={toggleLocalized} currentLocation={currentLocation} localized={localized} disabled={!randomRestaurant || currentLocation === null}>
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C7.59 2 4 5.589 4 9.995 3.971 16.44 11.696 21.784 12 22c0 0 8.03-5.56 8-12 0-4.411-3.589-8-8-8Zm0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4Z"></path>
             </svg>
@@ -25,8 +25,18 @@ const Button = styled.button`
   display: flex;
   
   & svg {
-    stroke:  ${props => props.localized ? '#13d713' : '#213377'};
-    fill:  ${props => props.localized ? '#13d713' : '#213377'};
+    stroke: ${props => {
+      if (props.radius === 2) return props.localized ? '#13d713' : '#213377';
+      if (props.radius === 8) return props.localized ? '#9fd713' : '#213377';
+      if (props.radius === 20) return props.localized ? '#d7d713' : '#213377';
+      if (props.radius === 45) return props.localized ? '#d71a13' : '#213377';
+    }};
+    fill: ${props => {
+      if (props.radius === 2) return props.localized ? '#13d713' : '#213377';
+      if (props.radius === 8) return props.localized ? '#9fd713' : '#213377';
+      if (props.radius === 20) return props.localized ? '#d7d713' : '#213377';
+      if (props.radius === 45) return props.localized ? '#d71a13' : '#213377';
+    }};
     height: 30px;
     width: 30px;
   }

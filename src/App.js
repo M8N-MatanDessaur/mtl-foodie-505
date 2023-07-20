@@ -38,6 +38,8 @@ export default function App() {
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
 
+  const [radius, setRadius] = useState(2); // Radius in kilometers
+
   // Audio
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
@@ -56,7 +58,7 @@ export default function App() {
           setCurrentLocation(null);
         }
       );
-    } 
+    }
     // Alert user if geolocation is not supported
     else {
       toast.error('Geolocation is not supported by your browser');
@@ -102,7 +104,7 @@ export default function App() {
     if (loading || countdown > 0) {
       return;
     }
-  
+
     // Countdown animation
     let countdownValue = 3;
     setCountdown(countdownValue);
@@ -116,14 +118,13 @@ export default function App() {
         setCountdown(countdownValue);
       }
     }, 400);
-  
+
     mainButtonPressed();
     setLoading(true);
-  
+
     // Filter restaurant list based on the 'localized' value
     let restaurantList = RestaurantList;
     if (localized && currentLocation) {
-      const radius = 8;  // Radius in kilometers
       restaurantList = RestaurantList.filter(restaurant => {
         const restaurantLocation = {
           latitude: parseFloat(restaurant.Latitude),
@@ -133,11 +134,11 @@ export default function App() {
         return dist <= radius;
       });
     }
-  
+
     // Pick a random restaurant
     const randomIndex = Math.floor(Math.random() * restaurantList.length);
     const randomRestaurant = restaurantList[randomIndex];
-  
+
     // Proceed if we have a random restaurant
     if (randomRestaurant) {
       let mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
@@ -154,7 +155,7 @@ export default function App() {
           )}
         </MapContainer>
       );
-  
+
       // Create a link to the restaurant on Google Maps
       const mapFrame = (
         <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
@@ -171,30 +172,30 @@ export default function App() {
     } else {
       setRandomRestaurant(null);
     }
-  
+
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
-  
+
   // Haversine distance function
   const haversineDistance = (coords1, coords2) => {
     const R = 6371; // Radius of the Earth in km
     const dLat = deg2rad(coords2.latitude - coords1.latitude);
     const dLng = deg2rad(coords2.longitude - coords1.longitude);
-    const a = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
       Math.cos(deg2rad(coords1.latitude)) * Math.cos(deg2rad(coords2.latitude)) *
-      Math.sin(dLng/2) * Math.sin(dLng/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const dist = R * c; // Distance in km
     return dist;
   };
-  
+
   const deg2rad = (deg) => {
-    return deg * (Math.PI/180);
+    return deg * (Math.PI / 180);
   };
-  
+
 
   // Toggle the info modal
   const toggleModal = () => {
@@ -230,6 +231,28 @@ export default function App() {
     }, 1000);
   };
 
+  // Toggle the localization radius
+  const toggleRad = (e) => {
+    setChangeMode(true);
+    e.preventDefault();
+    coffeeButtonPressed();
+    if (radius === 2) {
+      setRadius(8);
+    }
+    else if (radius === 8) {
+      setRadius(20);
+    }
+    else if (radius === 20) {
+      setRadius(45);
+    }
+    else if (radius === 45) {
+      setRadius(2);
+    }
+    setTimeout(() => {
+      setChangeMode(false);
+    }, 1000);
+  };
+
   return (
     <Wrapper>
       <AppContainer>
@@ -237,7 +260,7 @@ export default function App() {
         <ScanlineScreen>
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
-          <ScanlineScreenLocalisationModeOverlay changeMode={changeMode} />
+          <ScanlineScreenLocalisationModeOverlay changeMode={changeMode} radius={radius} localized={localized} />
           <RestaurantListOverlay listOpened={listOpened} toggleList={toggleList} RestaurantList={RestaurantList} />
           <FullScreenOverlay />
 
@@ -255,11 +278,19 @@ export default function App() {
               <Sub>
                 y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton!
               </Sub>
+              {currentLocation !== null && (
+              <Explication>
+                <p>Si tu veux que j'te trouve un spot à proximité, appuis sur le pitton <span><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" d="M5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 5.25-7 13-7 13S5 14.25 5 9Zm4.5 0a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0Z" clip-rule="evenodd"></path>
+                </svg></span> pour activer la localisation.</p>
+                <p>Appuis su'l même pitton pour changer le radius de proximité, c'est aussi simple que ça !</p>
+              </Explication>
+              )}
             </>
           )}
         </ScanlineScreen>
         <ButtonWrapper>
-          <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
+          <LocalizationButton radius={radius} toggleRad={toggleRad} toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurant} currentLocation={currentLocation} countdown={countdown} />
           <ListToggleButton toggleList={toggleList} />
         </ButtonWrapper>
@@ -380,6 +411,35 @@ const Sub = styled.p`
   color: #fff;
   text-align: center;
 `;
+
+const Explication = styled.div`
+  font-size: 0.8rem;
+  color: #fff;
+  text-align: left;
+  margin-top: 35px;
+  line-height: 1.2rem;
+  padding: 10px 20px;
+  background-color: #2e5bf3f0;
+  border-radius: 15px;
+  border: 5px solid #6487fe;
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: inline-block;
+    margin-left: 1px;
+    margin-right: 1px;
+    vertical-align: middle;
+  }
+
+  svg {
+    fill: #fff;
+    vertical-align: middle;
+  }
+`;
+
 
 const MarqueeContainer = styled.div`
   border-bottom: 5px solid #2e5bf3;
