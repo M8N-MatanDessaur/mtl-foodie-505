@@ -171,6 +171,16 @@ export default function App() {
       });
     } else {
       setRandomRestaurant(null);
+
+      toast('Aucun restaurant trouvé. Essayez de changer de rayon ou de désactiver la localisation.', {
+        duration: 5000, // Durée d'affichage du toast en millisecondes
+        position: 'top-center', // Position du toast sur l'écran
+        style: {
+          background: '#363636', // Couleur d'arrière-plan du toast
+          color: '#fff', // Couleur du texte du toast
+          fontSize: '18px', // Taille de police du texte du toast
+        }
+      });
     }
 
     setTimeout(() => {
