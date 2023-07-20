@@ -6,10 +6,12 @@ export default function LocalizationButton({ toggleLocalized, currentLocation, l
     const [touchEnd, setTouchEnd] = useState(0);
 
     const handleTouchStart = (e) => {
+        e.preventDefault(); // Add this line
         setTouchStart(new Date().getTime());
     }
 
     const handleTouchEnd = (e) => {
+        e.preventDefault(); // And this line
         setTouchEnd(new Date().getTime());
 
         // If touch duration was more than 500 milliseconds, treat it as a long press
@@ -33,7 +35,6 @@ export default function LocalizationButton({ toggleLocalized, currentLocation, l
         </Button>
     )
 }
-
 
 const Button = styled.button`
   height: 60px;
