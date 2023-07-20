@@ -98,14 +98,12 @@ export default function App() {
 
   // Pick a random restaurant from the list
   const pickRandomRestaurant = () => {
-
     // Prevent spamming the button
     if (loading || countdown > 0) {
       return;
     }
-
-    // Countdown animation 
-    // The countdown is used to prevent spamming the button with a loading animation
+  
+    // Countdown animation
     let countdownValue = 3;
     setCountdown(countdownValue);
     const countdownInterval = setInterval(() => {
@@ -118,27 +116,45 @@ export default function App() {
         setCountdown(countdownValue);
       }
     }, 400);
-
-    // Pick a random restaurant
+  
     mainButtonPressed();
     setLoading(true);
-    const randomIndex = Math.floor(Math.random() * RestaurantList.length);
-    const randomRestaurant = RestaurantList[randomIndex];
-    let mapUrlLocalized = '';
+  
+    // Filter restaurant list based on the 'localized' value
+    let restaurantList = RestaurantList;
+    if (localized && currentLocation) {
+      const radius = 8;  // Radius in kilometers
+      restaurantList = RestaurantList.filter(restaurant => {
+        const restaurantLocation = {
+          latitude: parseFloat(restaurant.Latitude),
+          longitude: parseFloat(restaurant.Longitude),
+        };
+        const dist = haversineDistance(currentLocation, restaurantLocation);
+        return dist <= radius;
+      });
+    }
+  
+    // Pick a random restaurant
+    const randomIndex = Math.floor(Math.random() * restaurantList.length);
+    const randomRestaurant = restaurantList[randomIndex];
+  
+    // Proceed if we have a random restaurant
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      if (currentLocation !== null) {
+      let mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      let mapUrlLocalized = '';
+      if (currentLocation) {
         mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       }
       const mapContainer = (
         <MapContainer>
           {localized ? (
-            <MapFrame src={mapUrlLocalized} allowFullScreen></MapFrame> //Show localized map direction
+            <MapFrame src={mapUrlLocalized} allowFullScreen></MapFrame>
           ) : (
-            <MapFrame src={mapUrl} allowFullScreen></MapFrame> //Show default map location
+            <MapFrame src={mapUrl} allowFullScreen></MapFrame>
           )}
         </MapContainer>
       );
+  
       // Create a link to the restaurant on Google Maps
       const mapFrame = (
         <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
@@ -155,10 +171,30 @@ export default function App() {
     } else {
       setRandomRestaurant(null);
     }
+  
     setTimeout(() => {
       setLoading(false);
     }, 1000);
   };
+  
+  // Haversine distance function
+  const haversineDistance = (coords1, coords2) => {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = deg2rad(coords2.latitude - coords1.latitude);
+    const dLng = deg2rad(coords2.longitude - coords1.longitude);
+    const a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(coords1.latitude)) * Math.cos(deg2rad(coords2.latitude)) *
+      Math.sin(dLng/2) * Math.sin(dLng/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const dist = R * c; // Distance in km
+    return dist;
+  };
+  
+  const deg2rad = (deg) => {
+    return deg * (Math.PI/180);
+  };
+  
 
   // Toggle the info modal
   const toggleModal = () => {
