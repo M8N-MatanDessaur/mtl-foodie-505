@@ -368,12 +368,6 @@ border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 border: 5px solid #6487EF;
 border-top: none;
-
-  &:hover {
-    transform: scale(1.1);
-    transition: 200ms;
-    filter: drop-shadow(5px 5px 25px #2e5bf3);
-  }
 `;
 
 const MapContainer = styled.div`
