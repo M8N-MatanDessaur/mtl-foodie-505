@@ -33,10 +33,10 @@
     }
   ],
   "start_url": ".",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#000000",
   "background_color": "#55b4ae",
+  "theme_color": "#000000",
   "description": "Découvre les restos les plus loufoques et appétissants en ville avec aléoresto, l'application qui fera danser de joie tes papilles gustatives!",
   "dir": "ltr",
   "lang": "fr",
@@ -48,5 +48,6 @@
     "entertainment",
     "food",
     "travel"
-  ]
+  ],
+  "prefer_related_applications": false
 }
