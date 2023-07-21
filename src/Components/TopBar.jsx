@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function TopBar({toggleModal}) {
+export default function TopBar({toggleModal, setRandomRestaurant}) {
     return (
         <Header>
-            <Title>
+            <Title onClick={()=>setRandomRestaurant(null)}>
                 Ya quoi à manger icitte<span>?</span>
             </Title>
             <InfoLink onClick={toggleModal}>

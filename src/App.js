@@ -252,7 +252,7 @@ export default function App() {
   return (
     <Wrapper>
       <AppContainer>
-        <TopBar toggleModal={toggleModal} />
+        <TopBar toggleModal={toggleModal} setRandomRestaurant={setRandomRestaurant}/>
         <ScanlineScreen>
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
