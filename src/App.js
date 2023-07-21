@@ -31,6 +31,8 @@ export default function App() {
 
   // State
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [changeMode, setChangeMode] = useState(false);
@@ -47,7 +49,7 @@ export default function App() {
   const audio3 = new Audio(buttonSoundGo);
 
   useEffect(() => {
-    // Get current location if possible
+    // Get the user's current location initially
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -59,13 +61,29 @@ export default function App() {
           setCurrentLocation(null);
         }
       );
-    }
-    // Alert user if geolocation is not supported
-    else {
+    } else {
       toast.error('Geolocation is not supported by your browser');
       setCurrentLocation(null);
     }
+  
+    // Continuously monitor the user's location
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ latitude, longitude });
+      },
+      (error) => {
+        console.error('Error getting user location', error);
+        setUserLocation(null);
+      }
+    );
+  
+    // Clean up the watch position when the component unmounts
+    return () => {
+      navigator.geolocation.clearWatch(watchId);
+    };
   }, []);
+  
 
 
   const mainButtonPressed = () => {
@@ -125,13 +143,13 @@ export default function App() {
 
     // Filter restaurant list based on the 'localized' value
     let restaurantList = RestaurantList;
-    if (localized && currentLocation) {
-      restaurantList = RestaurantList.filter(restaurant => {
+    if (localized && userLocation) {
+      restaurantList = RestaurantList.filter((restaurant) => {
         const restaurantLocation = {
           latitude: parseFloat(restaurant.Latitude),
           longitude: parseFloat(restaurant.Longitude),
         };
-        const dist = haversineDistance(currentLocation, restaurantLocation);
+        const dist = haversineDistance(userLocation, restaurantLocation);
         return dist <= radius;
       });
     }
