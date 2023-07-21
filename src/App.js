@@ -279,7 +279,7 @@ export default function App() {
                   <p>Si tu veux que j'te trouve un spot à proximité, appuis sur le pitton <span><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 5.25-7 13-7 13S5 14.25 5 9Zm4.5 0a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0Z" clip-rule="evenodd"></path>
                   </svg></span> pour activer la localisation.</p>
-                  <p>Maintiens le même pitton pour changer le radius de proximité, c'est aussi simple que ça !</p>
+                  <p>Glisse le slider pour changer le radius de proximité, c'est aussi simple que ça !</p>
                 </Explication>
               )}
             </>
