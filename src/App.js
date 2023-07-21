@@ -376,7 +376,7 @@ const MapLink = styled.a`
 
 const MapContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 60%;
   margin-top: 20px;
   filter: hue-rotate(318deg);
   border: 5px solid #cd77fa;
