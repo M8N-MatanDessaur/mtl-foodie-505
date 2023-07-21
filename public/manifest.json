@@ -24,6 +24,12 @@
       "type": "image/png",
       "sizes": "72x72 96x96 128x128 144x144 152x152",
       "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "72x72 96x96 128x128 144x144 152x152",
+      "purpose": "maskable"
     }
   ],
   "start_url": ".",
