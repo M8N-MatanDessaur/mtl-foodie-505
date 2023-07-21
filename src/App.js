@@ -284,10 +284,10 @@ export default function App() {
               )}
             </>
           )}
-          {localized &&  (
+          {localized && (
             <RadiusSlider radius={radius} localized={localized} toggleRad={toggleRad} />
           )}
-          
+
         </ScanlineScreen>
         <ButtonWrapper>
           <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
@@ -358,14 +358,16 @@ const ButtonWrapper = styled.div`
   `;
 
 const MapLink = styled.a`
-  font-size: 1.2rem;
-  color: #fff;
-  text-decoration: none;
-  background-color: #2e5bf3;
-  padding: 20px 40px;
-  border-radius: 50px;
-  margin-top: 20px;
-  border: 5px solid #6487fe;
+font-size: 1rem;
+width: 100%;
+color: #fff;
+text-decoration: none;
+background-color: #2e5bf3;
+padding: 20px 40px;
+border-bottom-left-radius: 5px;
+border-bottom-right-radius: 5px;
+border: 5px solid #6487EF;
+border-top: none;
 
   &:hover {
     transform: scale(1.1);
@@ -376,11 +378,12 @@ const MapLink = styled.a`
 
 const MapContainer = styled.div`
   width: 100%;
-  height: 60%;
-  margin-top: 20px;
+  height: 75%;
   filter: hue-rotate(318deg);
   border: 5px solid #cd77fa;
-  border-radius: 5px;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
 
 const MapFrame = styled.iframe`

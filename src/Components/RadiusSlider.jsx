@@ -27,6 +27,7 @@ const SliderContainer = styled.div`
 `;
 
 const SliderLabel = styled.span`
+    font-size: 1rem;
   color: #fff;
   margin-right: 10px;
 `;
