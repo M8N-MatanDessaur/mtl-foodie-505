@@ -1,28 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function LocalizationButton({ toggleLocalized, currentLocation, localized, randomRestaurant, toggleRad, radius }) {
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-    toggleRad();
-  };
-
-  const handleTouchStart = (e) => {
-    let timer = setTimeout(() => {
-      toggleRad();
-    }, 500);
-    
-    const handleTouchEnd = () => {
-      clearTimeout(timer);
-    };
-
-    e.target.addEventListener("touchend", handleTouchEnd);
-  };
+export default function LocalizationButton({ toggleLocalized, currentLocation, localized, randomRestaurant }) {
 
   return (
     <Button
-      radius={radius}
-      onTouchStart={handleTouchStart}
       onClick={toggleLocalized}
       currentLocation={currentLocation}
       localized={localized}
@@ -49,18 +31,8 @@ const Button = styled.button`
   display: flex;
 
   & svg {
-    stroke: ${props => {
-      if (props.radius === 2) return props.localized ? "#13d713" : "#213377";
-      if (props.radius === 8) return props.localized ? "#9fd713" : "#213377";
-      if (props.radius === 20) return props.localized ? "#d7d713" : "#213377";
-      if (props.radius === 45) return props.localized ? "#d71a13" : "#213377";
-    }};
-    fill: ${props => {
-      if (props.radius === 2) return props.localized ? "#13d713" : "#213377";
-      if (props.radius === 8) return props.localized ? "#9fd713" : "#213377";
-      if (props.radius === 20) return props.localized ? "#d7d713" : "#213377";
-      if (props.radius === 45) return props.localized ? "#d71a13" : "#213377";
-    }};
+    stroke: ${props => (props.localized ? "#13d713" : "#213377")};
+    fill: ${props => (props.localized ? "#13d713" : "#213377")};
     height: 30px;
     width: 30px;
   }

@@ -18,6 +18,7 @@ import ListToggleButton from './Components/ListToggleButton';
 import InfoModal from './Components/InfoModal';
 
 import RestaurantList from './Restaurants/RestaurantsList.json';
+import RadiusSlider from './Components/RadiusSlider';
 
 export default function App() {
   // Cookies
@@ -241,26 +242,12 @@ export default function App() {
     }, 1000);
   };
 
-  // Toggle the localization radius
-  const toggleRad = () => {
-    setChangeMode(true);
+  const toggleRad = (value) => {
     coffeeButtonPressed();
-    if (radius === 2) {
-      setRadius(8);
-    }
-    else if (radius === 8) {
-      setRadius(20);
-    }
-    else if (radius === 20) {
-      setRadius(45);
-    }
-    else if (radius === 45) {
-      setRadius(2);
-    }
-    setTimeout(() => {
-      setChangeMode(false);
-    }, 1000);
+    setRadius(value);
   };
+
+
 
   return (
     <Wrapper>
@@ -288,18 +275,22 @@ export default function App() {
                 y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton!
               </Sub>
               {currentLocation !== null && (
-              <Explication>
-                <p>Si tu veux que j'te trouve un spot à proximité, appuis sur le pitton <span><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 5.25-7 13-7 13S5 14.25 5 9Zm4.5 0a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0Z" clip-rule="evenodd"></path>
-                </svg></span> pour activer la localisation.</p>
-                <p>Maintiens le même pitton pour changer le radius de proximité, c'est aussi simple que ça !</p>
-              </Explication>
+                <Explication>
+                  <p>Si tu veux que j'te trouve un spot à proximité, appuis sur le pitton <span><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 5.25-7 13-7 13S5 14.25 5 9Zm4.5 0a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0Z" clip-rule="evenodd"></path>
+                  </svg></span> pour activer la localisation.</p>
+                  <p>Maintiens le même pitton pour changer le radius de proximité, c'est aussi simple que ça !</p>
+                </Explication>
               )}
             </>
           )}
+          {localized &&  (
+            <RadiusSlider radius={radius} localized={localized} toggleRad={toggleRad} />
+          )}
+          
         </ScanlineScreen>
         <ButtonWrapper>
-          <LocalizationButton radius={radius} toggleRad={toggleRad} toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
+          <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurant} currentLocation={currentLocation} countdown={countdown} />
           <ListToggleButton toggleList={toggleList} />
         </ButtonWrapper>
