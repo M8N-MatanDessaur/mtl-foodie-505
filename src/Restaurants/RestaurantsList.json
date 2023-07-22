@@ -12286,5 +12286,71 @@
         "Latitude": 45.4740627,
         "Longitude": -73.6244278,
         "links": "https://www.google.com/maps/place/Le+Petit+Tokebi/@45.4740627,-73.62442779999999,14z/data=!4m8!1m2!2m1!1sLe+Petit+Tokebi!3m4!1s0x4cc9174d3e1b66ef:0xea920a09259f60c5!8m2!3d45.4740627!4d-73.62442779999999"
+    },
+    {
+        "name": "Ibéricos Taverne à Tapas Espagnoles",
+        "links": "https://www.google.com/maps/place/Ib%C3%A9ricos+Taverne+%C3%A0+Tapas+Espagnoles/@45.5239022,-73.5846189,17z/data=!4m15!1m8!3m7!1s0x4cc91bd1a335b183:0xb97825885738f022!2sIb%C3%A9ricos+Taverne+%C3%A0+Tapas+Espagnoles!8m2!3d45.5239022!4d-73.5824302!10e5!16s%2Fg%2F11crx_msl2!3m5!1s0x4cc91bd1a335b183:0xb97825885738f022!8m2!3d45.5239022!4d-73.5824302!16s%2Fg%2F11crx_msl2?entry=ttu",
+        "Latitude": "45.5239022",
+        "Longitude": "-73.5846189"
+    },
+    {
+        "name": "Bloomfield",
+        "links": "https://www.google.com/maps/place/Bloomfield/@45.5227482,-73.6129725,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipPLw8rX5bZ8YPmYlsrkJVKaGI_VOWdoLo-G1BAE!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPLw8rX5bZ8YPmYlsrkJVKaGI_VOWdoLo-G1BAE%3Dw86-h114-k-no!7i3024!8i4032!4m7!3m6!1s0x4cc919761abe82a1:0x6145c58ab0e6d72d!8m2!3d45.5228071!4d-73.6131!10e5!16s%2Fg%2F11gbl3p7ns?entry=ttu",
+        "Latitude": "45.5227482",
+        "Longitude": "-73.6129725"
+    },
+    {
+        "name": "Pub Wolf & Workman",
+        "links": "https://www.google.com/maps/place/Pub+Wolf+%26+Workman/@45.5037134,-73.5547834,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipOoNXmp0JXEygVA1hQiEA-qoFyibniBn4U6fpXg!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOoNXmp0JXEygVA1hQiEA-qoFyibniBn4U6fpXg%3Dw129-h86-k-no!7i5760!8i3840!4m7!3m6!1s0x4cc91bfb6d439143:0x6eeaffb438b9a0ec!8m2!3d45.5037576!4d-73.554915!10e5!16s%2Fg%2F11fkpvvm1g?entry=ttu",
+        "Latitude": "45.5037134",
+        "Longitude": "-73.5547834"
+    },
+    {
+        "name": "BOSSA Prêt à manger",
+        "links": "https://www.google.com/maps/place/BOSSA+Pr%C3%AAt+%C3%A0+manger/@45.5496062,-73.5739802,3a,105.1y,90t/data=!3m8!1e2!3m6!1sAF1QipOmccBw_0C5gegiGffxduFxkL8K3REWbSWPEkO7!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipOmccBw_0C5gegiGffxduFxkL8K3REWbSWPEkO7%3Dw114-h86-k-no!7i670!8i504!4m11!1m2!2m1!1sChicken+Parm+Sandwich+at+Bossa!3m7!1s0x4cc91b401c8578d9:0x69c5940046d14f52!8m2!3d45.5495144!4d-73.5736802!10e5!15sCh5DaGlja2VuIFBhcm0gU2FuZHdpY2ggYXQgQm9zc2FaICIeY2hpY2tlbiBwYXJtIHNhbmR3aWNoIGF0IGJvc3NhkgENc2FuZHdpY2hfc2hvcJoBJENoZERTVWhOTUc5blMwVkpRMEZuU1VSNGJWQXlYelJuUlJBQuABAA!16s%2Fg%2F11pzhj7ycz?entry=ttu",
+        "Latitude": "45.5496062",
+        "Longitude": "-73.5739802"
+    },
+    {
+        "name": "Anemone",
+        "links": "https://www.google.com/maps/place/Anemone/@45.5287842,-73.6160222,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipMnBPxSgm1oRKm5r7mkjh3tyjTNpGnuD82b2xXE!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipMnBPxSgm1oRKm5r7mkjh3tyjTNpGnuD82b2xXE%3Dw114-h86-k-no!7i4080!8i3072!4m7!3m6!1s0x4cc9197339c037c7:0xb7cb374c613a1922!8m2!3d45.5288804!4d-73.6162384!10e5!16s%2Fg%2F11tj8hf5yn?entry=ttu",
+        "Latitude": "45.5287842",
+        "Longitude": "-73.6160222"
+    },
+    {
+        "name": "Nili",
+        "links": "https://www.google.com/maps/place/Nili/@45.5228204,-73.6105985,15z/data=!4m15!1m8!3m7!1s0x4cc919ec09fdc99d:0xc72e2b27d15e733a!2sNili!8m2!3d45.5228204!4d-73.6018438!10e5!16s%2Fg%2F11t5zgwc2_!3m5!1s0x4cc919ec09fdc99d:0xc72e2b27d15e733a!8m2!3d45.5228204!4d-73.6018438!16s%2Fg%2F11t5zgwc2_?entry=ttu",
+        "Latitude": "45.5228204",
+        "Longitude": "-73.6105985"
+    },
+    {
+        "name": "9TailFox",
+        "links": "https://www.google.com/maps/place/9+Tail+Fox/@45.4806826,-73.5789968,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipO1otz841Nf-uZzoUVUObxwsvVpU2ePSfu_h-np!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipO1otz841Nf-uZzoUVUObxwsvVpU2ePSfu_h-np%3Dw86-h152-k-no!7i1080!8i1920!4m7!3m6!1s0x4cc91bdc74d602e5:0x796358b5159c2550!8m2!3d45.480768!4d-73.579095!10e5!16s%2Fg%2F11tfkqhlv4?entry=ttu",
+        "Latitude": "45.4806826",
+        "Longitude": "-73.5789968"
+    },
+    {
+        "name": "Ketiw",
+        "links": "https://www.google.com/maps/place/Ketiw+Comptoir+Cambodgien/@45.4653465,-73.5692174,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91183fb155757:0xf1efa24a563746a4!8m2!3d45.4653428!4d-73.5666425!16s%2Fg%2F11qb86fnln?entry=ttu",
+        "Latitude": "45.4653465",
+        "Longitude": "-73.5692174"
+    },
+    {
+        "name": "Marché des éclusiers",
+        "links": "https://www.google.com/maps/place/March%C3%A9+des+%C3%89clusiers/@45.4985532,-73.552107,17z/data=!4m14!1m7!3m6!1s0x4cc91af5d78ec3e1:0x2d6e91914edfde21!2sMarch%C3%A9+des+%C3%89clusiers!8m2!3d45.4985532!4d-73.552107!16s%2Fg%2F11cn5n9575!3m5!1s0x4cc91af5d78ec3e1:0x2d6e91914edfde21!8m2!3d45.4985532!4d-73.552107!16s%2Fg%2F11cn5n9575?entry=ttu",
+        "Latitude": "45.4985532",
+        "Longitude": "-73.552107"
+    },
+    {
+        "name": "Nevski",
+        "links": "https://www.google.com/maps/place/Nevski/@45.4975179,-73.5545457,17z/data=!3m1!4b1!4m6!3m5!1s0x4cc91b570c781fc9:0xda17e395f614f926!8m2!3d45.4975179!4d-73.5545457!16s%2Fg%2F11ghs2__9f?entry=ttu",
+        "Latitude": "45.4975179",
+        "Longitude": "-73.5545457"
+    },
+    {
+        "name": "Casse-Croute MangeDansMonHood",
+        "links": "https://www.google.com/maps/place/Casse-Cro%C3%BBte+MangeDansMonHood/data=!4m2!3m1!1s0x4cc919bc60f88fb3:0xa607b445f4eb2c40",
+        "Latitude": "45.545712",
+        "Longitude": "-73.608752"
     }
 ]
