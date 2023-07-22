@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { styled } from 'styled-components';
 import Marquee from "react-fast-marquee";
 import Cookies from 'universal-cookie';
@@ -50,34 +50,39 @@ export default function App() {
 
   let watchId;
 
-const getLocation = () => {
+  const getLocation = (locationCallback) => {
     if ('geolocation' in navigator) {
-        watchId = navigator.geolocation.watchPosition(
-            (position) => {
-                const { latitude, longitude } = position.coords;
-                setCurrentLocation({ latitude, longitude });
-            },
-            (error) => {
-                toast.error('Error getting current location', error);
-                setCurrentLocation(null);
-            }
-        );
+      watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation({ latitude, longitude });
+          // Call the callback with the updated location
+          if (locationCallback) {
+            locationCallback({ latitude, longitude });
+          }
+        },
+        (error) => {
+          toast.error('Error getting current location', error);
+          setCurrentLocation(null);
+        }
+      );
     } else {
-        toast.error('Geolocation is not supported by your browser');
-        setCurrentLocation(null);
+      toast.error('Geolocation is not supported by your browser');
+      setCurrentLocation(null);
     }
-}
+  };
 
 
-useEffect(() => {
+
+  useEffect(() => {
     getLocation();
     // Cleanup function to stop watching the user's location when the component is unmounted
     return () => {
-        if (watchId) {
-            navigator.geolocation.clearWatch(watchId);
-        }
+      if (watchId) {
+        navigator.geolocation.clearWatch(watchId);
+      }
     }
-}, []);
+  }, []);
 
 
 
@@ -111,37 +116,9 @@ useEffect(() => {
     }
   };
 
-  async function getDirectionsDistanceKm(originLat, originLng, destinationLat, destinationLng) {
-    const apiKey = 'AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo';
-    const origin = `${originLat},${originLng}`;
-    const destination = `${destinationLat},${destinationLng}`;
-    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
-      origin
-    )}&destination=${encodeURIComponent(destination)}&mode=walking&key=${apiKey}`;
-  
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Error fetching walking distance data');
-      }
-      const data = await response.json();
-      if (data.status !== 'OK') {
-        throw new Error('Error calculating walking distance');
-      }
-      const distanceInMeters = data.routes[0].legs[0].distance.value;
-      const distanceInKm = distanceInMeters / 1000;
-      return distanceInKm;
-    } catch (error) {
-      console.error('Error:', error);
-      return null;
-    }
-  }
-
-  // Pick a random restaurant from the list
-  const pickRandomRestaurant = async () => {
+  const pickRandomRestaurantCallback = useCallback(async () => {
     // Get current location
     getLocation();
-    
 
     // Prevent spamming the button
     if (loading || countdown > 0) {
@@ -165,20 +142,32 @@ useEffect(() => {
     mainButtonPressed();
     setLoading(true);
 
+    const isValidCoordinate = (latitude, longitude) => {
+      // Check if latitude and longitude are valid numbers
+      return !isNaN(latitude) && !isNaN(longitude);
+    };
+
     // Filter restaurant list based on the 'localized' value and 'radius'
     let restaurantList = RestaurantList;
-    if (localized && currentLocation) {
+    if (localized && currentLocation && isValidCoordinate(currentLocation.latitude, currentLocation.longitude)) {
       restaurantList = RestaurantList.filter((restaurant) => {
         const restaurantLocation = {
           latitude: parseFloat(restaurant.Latitude),
           longitude: parseFloat(restaurant.Longitude),
         };
-   
-        const dist = haversineDistance(currentLocation, restaurantLocation);
-        const radiusF = parseFloat(radius);
-        const distInKm = dist.toFixed(2);
 
-        return distInKm <= radiusF && distInKm > 0;
+        if (isValidCoordinate(restaurantLocation.latitude, restaurantLocation.longitude)) {
+          const dist = haversineDistance(currentLocation, restaurantLocation);
+          const radiusF = parseFloat(radius);
+          const distInKm = dist.toFixed(0);
+
+          console.log('Distance:', distInKm);
+          console.log('Radius:', radiusF);
+
+          return dist <= radiusF && dist > 0;
+        } else {
+          return false; // Skip restaurants with invalid coordinates
+        }
       });
     }
 
@@ -238,10 +227,10 @@ useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-  };
-  
+  }, [currentLocation, localized, radius, loading, countdown, setLoading, setCountdown, mainButtonPressed]);
 
-  // Haversine distance function
+
+
   const haversineDistance = (coords1, coords2) => {
     const R = 6371; // Radius of the Earth in km
     const dLat = deg2rad(coords2.latitude - coords1.latitude);
@@ -258,6 +247,7 @@ useEffect(() => {
   const deg2rad = (deg) => {
     return deg * (Math.PI / 180);
   };
+
 
 
   // Toggle the info modal
@@ -343,7 +333,7 @@ useEffect(() => {
         </ScanlineScreen>
         <ButtonWrapper>
           <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
-          <RandomizerButton pickRandomRestaurant={pickRandomRestaurant} currentLocation={currentLocation} countdown={countdown} />
+          <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
           <ListToggleButton toggleList={toggleList} />
         </ButtonWrapper>
         <MarqueeContainer>

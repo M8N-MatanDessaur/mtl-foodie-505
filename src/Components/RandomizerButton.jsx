@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function RandomizerButton({ pickRandomRestaurant, countdown, currentLocation}) {
     return (
-        <Button onClick={pickRandomRestaurant} currentLocation={currentLocation} disabled={countdown > 0} countdownActive={countdown > 0}>
+        <Button onClick={()=>pickRandomRestaurant()} currentLocation={currentLocation} disabled={countdown > 0} countdownActive={countdown > 0}>
             {countdown > 0 ? (
                 <CountdownDisplay>{countdown}</CountdownDisplay>
             ) : (
