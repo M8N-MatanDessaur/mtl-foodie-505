@@ -11,10 +11,8 @@ import TopBar from './Components/TopBar';
 import ScanlineScreen from './Components/ScanlineScreen';
 import ScanlineScreenLoadingOverlay from './Components/ScanlineScreenLoadingOverlay';
 import ScanlineScreenLocalisationModeOverlay from './Components/ScanlineScreenLocalisationModeOverlay';
-import RestaurantListOverlay from './Components/RestaurantListOverlay';
 import RandomizerButton from './Components/RandomizerButton';
 import LocalizationButton from './Components/LocalizationButton';
-import ListToggleButton from './Components/ListToggleButton';
 import InfoModal from './Components/InfoModal';
 
 import RestaurantList from './Restaurants/RestaurantsList.json';
@@ -299,7 +297,6 @@ export default function App() {
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
           <ScanlineScreenLocalisationModeOverlay changeMode={changeMode} radius={radius} localized={localized} />
-          <RestaurantListOverlay listOpened={listOpened} toggleList={toggleList} RestaurantList={RestaurantList} />
           <FullScreenOverlay />
 
           {/* If a restaurant was picked show the mapContainer & Frame if not show the welcome message */}
@@ -334,7 +331,6 @@ export default function App() {
         <ButtonWrapper>
           <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
-          <ListToggleButton toggleList={toggleList} />
         </ButtonWrapper>
         <MarqueeContainer>
           <Marquee>

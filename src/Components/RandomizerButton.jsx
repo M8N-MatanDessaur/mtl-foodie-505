@@ -21,7 +21,7 @@ export default function RandomizerButton({ pickRandomRestaurant, countdown, curr
 }
 
 const Button = styled.button`
-  width: ${props => props.currentLocation === null ? "80%" : "60%"};
+  width: ${props => props.currentLocation === null ? "100%" : "80%"};
   height: 60px;
   border: 0;
   background-color: #2e5bf3;
