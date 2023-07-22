@@ -46,26 +46,37 @@ export default function App() {
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
 
-  useEffect(() => {
-    // Get current location if possible
+  let watchId;
+
+const getLocation = () => {
     if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentLocation({ latitude, longitude });
-        },
-        (error) => {
-          toast.error('Error getting current location', error);
-          setCurrentLocation(null);
+        watchId = navigator.geolocation.watchPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                setCurrentLocation({ latitude, longitude });
+            },
+            (error) => {
+                toast.error('Error getting current location', error);
+                setCurrentLocation(null);
+            }
+        );
+    } else {
+        toast.error('Geolocation is not supported by your browser');
+        setCurrentLocation(null);
+    }
+}
+
+
+useEffect(() => {
+    getLocation();
+    // Cleanup function to stop watching the user's location when the component is unmounted
+    return () => {
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId);
         }
-      );
     }
-    // Alert user if geolocation is not supported
-    else {
-      toast.error('Geolocation is not supported by your browser');
-      setCurrentLocation(null);
-    }
-  }, []);
+}, []);
+
 
 
   const mainButtonPressed = () => {
@@ -98,9 +109,38 @@ export default function App() {
     }
   };
 
+  async function getDirectionsDistanceKm(originLat, originLng, destinationLat, destinationLng) {
+    const apiKey = 'AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo';
+    const origin = `${originLat},${originLng}`;
+    const destination = `${destinationLat},${destinationLng}`;
+    const url = `https://maps.googleapis.com/maps/api/directions/json?origin=${encodeURIComponent(
+      origin
+    )}&destination=${encodeURIComponent(destination)}&mode=walking&key=${apiKey}`;
+  
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Error fetching walking distance data');
+      }
+      const data = await response.json();
+      if (data.status !== 'OK') {
+        throw new Error('Error calculating walking distance');
+      }
+      const distanceInMeters = data.routes[0].legs[0].distance.value;
+      const distanceInKm = distanceInMeters / 1000;
+      return distanceInKm;
+    } catch (error) {
+      console.error('Error:', error);
+      return null;
+    }
+  }
 
   // Pick a random restaurant from the list
-  const pickRandomRestaurant = () => {
+  const pickRandomRestaurant = async () => {
+    // Get current location
+    getLocation();
+    
+
     // Prevent spamming the button
     if (loading || countdown > 0) {
       return;
@@ -123,29 +163,39 @@ export default function App() {
     mainButtonPressed();
     setLoading(true);
 
-    // Filter restaurant list based on the 'localized' value
+    // Filter restaurant list based on the 'localized' value and 'radius'
     let restaurantList = RestaurantList;
     if (localized && currentLocation) {
-      restaurantList = RestaurantList.filter(restaurant => {
+      restaurantList = RestaurantList.filter((restaurant) => {
         const restaurantLocation = {
           latitude: parseFloat(restaurant.Latitude),
           longitude: parseFloat(restaurant.Longitude),
         };
+
+   
         const dist = haversineDistance(currentLocation, restaurantLocation);
-        return dist <= radius;
+        const radiusF = parseFloat(radius);
+        const distInKm = dist.toFixed(2);
+
+        return distInKm <= radiusF && distInKm > 0;
       });
     }
 
-    // Pick a random restaurant
-    const randomIndex = Math.floor(Math.random() * restaurantList.length);
-    const randomRestaurant = restaurantList[randomIndex];
+    // Proceed if we have a filtered restaurant list
+    if (restaurantList.length > 0) {
+      // Pick a random restaurant
+      const randomIndex = Math.floor(Math.random() * restaurantList.length);
+      const randomRestaurant = restaurantList[randomIndex];
 
-    // Proceed if we have a random restaurant
-    if (randomRestaurant) {
-      let mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+      // Create a link to the restaurant on Google Maps
+      let mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(
+        randomRestaurant.name
+      )},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       let mapUrlLocalized = '';
       if (currentLocation) {
-        mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(randomRestaurant.name)},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
+        mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(
+          randomRestaurant.name
+        )},montréal&mode=driving&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
       }
       const mapContainer = (
         <MapContainer>
@@ -157,12 +207,12 @@ export default function App() {
         </MapContainer>
       );
 
-      // Create a link to the restaurant on Google Maps
       const mapFrame = (
         <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
           {randomRestaurant.name}
         </MapLink>
       );
+
       setRandomRestaurant({
         ...randomRestaurant,
         mapContainer,
@@ -174,13 +224,13 @@ export default function App() {
       setRandomRestaurant(null);
 
       toast('Aucun restaurant trouvé. Essayez de changer de rayon ou de désactiver la localisation.', {
-        duration: 5000, // Durée d'affichage du toast en millisecondes
-        position: 'top-center', // Position du toast sur l'écran
+        duration: 5000, // Duration of the toast display in milliseconds
+        position: 'top-center', // Toast position on the screen
         style: {
-          background: '#363636', // Couleur d'arrière-plan du toast
-          color: '#fff', // Couleur du texte du toast
-          fontSize: '18px', // Taille de police du texte du toast
-        }
+          background: '#363636', // Toast background color
+          color: '#fff', // Toast text color
+          fontSize: '18px', // Toast text font size
+        },
       });
     }
 
@@ -188,6 +238,7 @@ export default function App() {
       setLoading(false);
     }, 1000);
   };
+  
 
   // Haversine distance function
   const haversineDistance = (coords1, coords2) => {
@@ -252,7 +303,7 @@ export default function App() {
   return (
     <Wrapper>
       <AppContainer>
-        <TopBar toggleModal={toggleModal} setRandomRestaurant={setRandomRestaurant}/>
+        <TopBar toggleModal={toggleModal} setRandomRestaurant={setRandomRestaurant} />
         <ScanlineScreen>
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
