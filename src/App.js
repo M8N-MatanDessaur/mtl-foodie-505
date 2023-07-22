@@ -31,6 +31,8 @@ export default function App() {
 
   // State
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [changeMode, setChangeMode] = useState(false);
