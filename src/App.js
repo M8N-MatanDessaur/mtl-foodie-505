@@ -171,7 +171,6 @@ useEffect(() => {
           latitude: parseFloat(restaurant.Latitude),
           longitude: parseFloat(restaurant.Longitude),
         };
-
    
         const dist = haversineDistance(currentLocation, restaurantLocation);
         const radiusF = parseFloat(radius);
