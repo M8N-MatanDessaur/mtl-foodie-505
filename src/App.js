@@ -172,7 +172,7 @@ export default function App() {
           openLink = `https://maps.google.com/maps?q=${name}, ${address}`;
         } else {
           // If on desktop or other devices, open the place in the web browser
-          openLink = `https://www.google.com/maps?q=${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}`;
+         let  openLink = `https://www.google.com/maps?q=${randomRestaurant.name}, ${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}, ${randomRestaurant.vicinity}`;
         }
 
         // Create map container
