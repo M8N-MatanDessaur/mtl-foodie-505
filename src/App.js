@@ -33,8 +33,9 @@ export default function App() {
   const [listOpened, setListOpened] = useState(false);
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [navMode, setNavMode] = useState('driving');
   const [countdown, setCountdown] = useState(0);
+  const [navMode, setNavMode] = useState('driving');
+  const [radius, setRadius] = useState(10000);
 
   // Audio
   const audio = new Audio(buttonSound);
@@ -152,7 +153,7 @@ export default function App() {
 
     // Fetch restaurants data from Google Places API via Netlify Function
     try {
-      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=1500&type=restaurant&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
+      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=${radius}&type=restaurant&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
       const data = await response.json();
 
       // Check if results are available
@@ -172,7 +173,7 @@ export default function App() {
           openLink = `https://maps.google.com/maps?q=${name}, ${address}`;
         } else {
           // If on desktop or other devices, open the place in the web browser
-           openLink = `https://www.google.com/maps?q=${randomRestaurant.name}, ${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}, ${randomRestaurant.vicinity}`;
+          openLink = `https://www.google.com/maps?q=${randomRestaurant.name}, ${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}, ${randomRestaurant.vicinity}`;
         }
 
         // Create map container
@@ -252,6 +253,10 @@ export default function App() {
 
   const handleNavModeChange = (mode) => {
     coffeeButtonPressed();
+    mode === 'driving' ? setRadius(12000)
+      : mode === 'bicycling' ? setRadius(5000)
+        : mode === 'walking' ? setRadius(1500)
+          : setRadius(10000);
     changeNavMode(mode);
   };
 
