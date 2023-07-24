@@ -163,7 +163,7 @@ export default function App() {
 
         // Create a link to the restaurant on Google Maps
         let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
-        let openLink = `https://www.google.com/maps/search/${randomRestaurant.name.replace(' ', '+')}/@${currentLocation.latitude},${currentLocation.longitude}`;
+      let openLink = `https://www.google.com/maps/place/?q=place_id:${randomRestaurant.place_id}`;
 
         // Create map container
         const mapContainer = (
