@@ -5,11 +5,11 @@ const useGeolocation = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [rememberLocation, setRememberLocation] = useState(false);
 
-  let watchId;
+  let watchId = null;
 
   const getLocation = useCallback((locationCallback) => {
     if ('geolocation' in navigator) {
-      watchId = navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setCurrentLocation({ latitude, longitude });
@@ -21,6 +21,28 @@ const useGeolocation = () => {
           if (rememberLocation) {
             setUserLocation({ latitude, longitude });
             localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+          }
+          // Once we have the initial location, switch to watching for continuous updates
+          if (!watchId) {
+            watchId = navigator.geolocation.watchPosition(
+              (position) => {
+                const { latitude, longitude } = position.coords;
+                setCurrentLocation({ latitude, longitude });
+                // Call the callback with the updated location
+                if (locationCallback) {
+                  locationCallback({ latitude, longitude });
+                }
+                // If userLocation preference is true, update the user's location in localStorage
+                if (rememberLocation) {
+                  setUserLocation({ latitude, longitude });
+                  localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+                }
+              },
+              (error) => {
+                console.error('Error watching current location', error);
+                setCurrentLocation(null);
+              }
+            );
           }
         },
         (error) => {
@@ -45,6 +67,7 @@ const useGeolocation = () => {
     return () => {
       if (watchId) {
         navigator.geolocation.clearWatch(watchId);
+        watchId = null;
       }
     };
   }, [getLocation]);
