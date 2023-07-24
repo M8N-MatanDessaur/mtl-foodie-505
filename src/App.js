@@ -241,6 +241,7 @@ export default function App() {
   };
 
   const handleNavModeChange = (mode) => {
+    coffeeButtonPressed();
     changeNavMode(mode);
   };
 
