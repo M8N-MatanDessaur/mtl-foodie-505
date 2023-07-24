@@ -4,7 +4,7 @@ exports.handler = async function(event, context) {
   try {
     const restaurantName = event.queryStringParameters.name;
 
-    const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-002/completions", 
+    const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", 
       {
         prompt: `Écrit une blague drole et amusante qui se passe dans un restaurant nommé "${restaurantName}".`,
         max_tokens: 1000,
