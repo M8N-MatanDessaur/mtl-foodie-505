@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { toast } from 'react-hot-toast';
 
 const useGeolocation = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
@@ -39,19 +40,19 @@ const useGeolocation = () => {
                 }
               },
               (error) => {
-                console.error('Error watching current location', error);
+                toast.error('Error watching current location', error);
                 setCurrentLocation(null);
               }
             );
           }
         },
         (error) => {
-          console.error('Error getting current location', error);
+          toast.error('Error getting current location', error);
           setCurrentLocation(null);
         }
       );
     } else {
-      console.error('Geolocation is not supported by your browser');
+      toast.error('Geolocation is not supported by your browser');
       setCurrentLocation(null);
     }
   }, [rememberLocation]);
