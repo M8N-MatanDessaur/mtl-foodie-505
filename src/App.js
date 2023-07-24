@@ -33,6 +33,7 @@ export default function App() {
   const [listOpened, setListOpened] = useState(false);
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [navMode, setNavMode] = useState('driving');
   const [countdown, setCountdown] = useState(0);
 
   // Audio
@@ -161,8 +162,8 @@ export default function App() {
         const randomRestaurant = data.results[randomIndex];
 
         // Create a link to the restaurant on Google Maps
-        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
-        let openLink = `https://www.google.com/maps/dir/?api=1&origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${randomRestaurant.name}/@${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}`;
+        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+        let openLink = `https://www.google.com/maps/search/${randomRestaurant.name.replace(' ', '+')}/@${currentLocation.latitude},${currentLocation.longitude}`;
 
         // Create map container
         const mapContainer = (
@@ -215,10 +216,34 @@ export default function App() {
 
   // Function to toggle the user location preference
   const toggleRememberLocation = () => {
-    setRememberLocation(!rememberLocation);
+    setRememberLocation(prevRememberLocation => !prevRememberLocation);
     // Update the user location preference in localStorage
     localStorage.setItem('rememberLocation', JSON.stringify(!rememberLocation));
   };
+
+  const changeNavMode = (mode) => {
+    // Update the navMode state with the new mode
+    setNavMode(mode);
+  
+    // If a random restaurant is picked, update the mapUrl with the new navMode
+    if (randomRestaurant) {
+      const mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${mode}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+      
+      // Update the randomRestaurant state with the new mapUrl
+      setRandomRestaurant(prevRandomRestaurant => {
+        const updatedRandomRestaurant = {
+          ...prevRandomRestaurant,
+          mapUrl,
+        };
+        return updatedRandomRestaurant;
+      });
+    }
+  };
+
+  const handleNavModeChange = (mode) => {
+    changeNavMode(mode);
+  };
+
 
   return (
     <Wrapper>
@@ -228,7 +253,17 @@ export default function App() {
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
           <FullScreenOverlay />
-
+          <NavModeChange>
+            <NavModeButton onClick={() => handleNavModeChange('driving')} active={navMode === 'driving'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+              <path fill-rule="evenodd" d="M17.5 4c.66 0 1.22.42 1.42 1.01L21 11v8c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-8l2.08-5.99C5.29 4.42 5.84 4 6.5 4h11ZM5 13.5c0 .83.67 1.5 1.5 1.5S8 14.33 8 13.5 7.33 12 6.5 12 5 12.67 5 13.5ZM17.5 15c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Zm-11-9.5L5 10h14l-1.5-4.5h-11Z" clip-rule="evenodd"></path>
+            </svg></NavModeButton>
+            <NavModeButton onClick={() => handleNavModeChange('walking')} active={navMode === 'walking'} ><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+              <path d="M13 5.25c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Zm-3.7 3.4-2.8 14.1h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6a2.145 2.145 0 0 0-2.65-.84L5.5 8.05v4.7h2v-3.4l1.8-.7Z"></path>
+            </svg></NavModeButton>
+            <NavModeButton onClick={() => handleNavModeChange('bicycling')} active={navMode === 'bicycling'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+              <path fill-rule="evenodd" d="M17.5 3.5c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2ZM0 17c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5Zm5 3.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5ZM19.1 11c-2.1 0-3.8-.8-5.1-2.1l-.8-.8-2.4 2.4 2.2 2.3V19h-2v-5l-3.2-2.8c-.4-.3-.6-.8-.6-1.4 0-.5.2-1 .6-1.4l2.8-2.8c.3-.4.8-.6 1.4-.6.6 0 1.1.2 1.6.6l1.9 1.9c.9.9 2.1 1.5 3.6 1.5v2Zm-.1 1c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5Zm-3.5 5c0 1.9 1.6 3.5 3.5 3.5s3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5-3.5 1.6-3.5 3.5Z" clip-rule="evenodd"></path>
+            </svg></NavModeButton>
+          </NavModeChange>
           {/* If a restaurant was picked show the mapContainer & Frame if not show the welcome message */}
           {randomRestaurant ? (
             <>
@@ -389,6 +424,46 @@ const Explication = styled.div`
   svg {
     fill: #fff;
     vertical-align: middle;
+  }
+`;
+
+const NavModeChange = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+`;
+
+const NavModeButton = styled.button`
+  font-size: 1rem;
+  height: 30px;
+  width: 30px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  padding: 5px 5px;
+  background-color: ${props => props.active ? '#2e5bf3' : '#363636'};
+  border: 1px solid #6487fe;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #2e5bf3;
+  }
+
+  &:active {
+    background-color: #363636;
   }
 `;
 
