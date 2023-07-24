@@ -95,7 +95,7 @@ export default function App() {
 
   // Choose a random restaurant
   const pickRandomRestaurantCallback = useCallback(async () => {
-    
+
     // Get current location
     getLocation();
 
@@ -266,7 +266,7 @@ export default function App() {
         <MarqueeContainer>
 
           {randomRestaurant ? (
-            <Marquee>
+            <Marquee speed={100}>
              {description}
             </Marquee>
           ): (
