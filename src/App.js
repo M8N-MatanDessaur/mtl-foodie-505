@@ -13,7 +13,7 @@ import ScanlineScreenLoadingOverlay from './Components/ScanlineScreenLoadingOver
 import RandomizerButton from './Components/RandomizerButton';
 import InfoModal from './Components/InfoModal';
 
-import RestaurantList from './Restaurants/RestaurantsList.json';
+import useGeolocation from './Hooks/useGeolocation';
 
 export default function App() {
   // Cookies
@@ -25,9 +25,6 @@ export default function App() {
   cookies.set('cookieName', 'cookieValue', cookieOptions);
 
   // State
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
-  const [rememberLocation, setRememberLocation] = useState(false);
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [listOpened, setListOpened] = useState(false);
@@ -37,7 +34,8 @@ export default function App() {
   const [navMode, setNavMode] = useState('driving');
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
-
+  
+  
   // GPT DESCRIPTION
   const fetchDescription = async (restaurantName) => {
     try {
@@ -60,60 +58,6 @@ export default function App() {
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
-
-  let watchId;
-
-  const getLocation = useCallback((locationCallback) => {
-    if ('geolocation' in navigator) {
-      watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentLocation({ latitude, longitude });
-          // Call the callback with the updated location
-          if (locationCallback) {
-            locationCallback({ latitude, longitude });
-          }
-          // If userLocation preference is true, update the user's location in localStorage
-          if (rememberLocation) {
-            setUserLocation({ latitude, longitude });
-            localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
-          }
-        },
-        (error) => {
-          toast.error('Error getting current location', error);
-          setCurrentLocation(null);
-        }
-      );
-    } else {
-      toast.error('Geolocation is not supported by your browser');
-      setCurrentLocation(null);
-    }
-  }, [rememberLocation]);
-
-  useEffect(() => {
-    // Check if there's a stored user location preference in localStorage
-    const storedLocationPref = localStorage.getItem('rememberLocation');
-    if (storedLocationPref !== null) {
-      setRememberLocation(JSON.parse(storedLocationPref));
-    }
-    getLocation();
-    // Cleanup function to stop watching the user's location when the component is unmounted
-    return () => {
-      if (watchId) {
-        navigator.geolocation.clearWatch(watchId);
-      }
-    }
-  }, [getLocation]);
-
-  useEffect(() => {
-    // If the userLocation preference is true, get the stored user location from localStorage
-    if (rememberLocation) {
-      const storedUserLocation = localStorage.getItem('userLocation');
-      if (storedUserLocation !== null) {
-        setUserLocation(JSON.parse(storedUserLocation));
-      }
-    }
-  }, [rememberLocation]);
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
@@ -145,7 +89,13 @@ export default function App() {
     }
   };
 
+ // useGeolocation hook to get the user's location
+  const { currentLocation, userLocation, rememberLocation, getLocation } = useGeolocation();
+
+
+  // Choose a random restaurant
   const pickRandomRestaurantCallback = useCallback(async () => {
+    
     // Get current location
     getLocation();
 
@@ -243,13 +193,6 @@ export default function App() {
   const toggleList = () => {
     buttonPressed();
     setListOpened(!listOpened);
-  };
-
-  // Function to toggle the user location preference
-  const toggleRememberLocation = () => {
-    setRememberLocation(prevRememberLocation => !prevRememberLocation);
-    // Update the user location preference in localStorage
-    localStorage.setItem('rememberLocation', JSON.stringify(!rememberLocation));
   };
 
   const changeNavMode = (mode) => {

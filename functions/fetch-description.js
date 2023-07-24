@@ -6,8 +6,8 @@ exports.handler = async function(event, context) {
 
     const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-002/completions", 
       {
-        prompt: `Créez une anecdote drole et amusante pour dans un restaurant nommé "${restaurantName}" en quebecois sans trop décrire le restaurant ou les plats.`,
-        max_tokens: 100,
+        prompt: `Créez une anecdote drole et amusante pour dans un restaurant nommé "${restaurantName}" en quebecois sans trop décrire le restaurant ou les plats. En max 512 charactères`,
+        max_tokens: 1000,
       },
       {
         headers: {
