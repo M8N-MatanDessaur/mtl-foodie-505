@@ -38,25 +38,15 @@ export default function App() {
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
 
+  // GPT DESCRIPTION
   const fetchDescription = async (restaurantName) => {
     try {
-      const response = await fetch("https://api.openai.com/v1/engines/text-davinci-002/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer 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`,
-        },
-        body: JSON.stringify({
-          prompt: `Créez une anecdote drole et amusante pour dans un restaurant nommé "${restaurantName}" en quebecois sans trop décrire le restaurant ou les plats.`,
-          max_tokens: 100,
-        }),
-      });
-  
+      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}`);
       const data = await response.json();
-      if (data && data.choices && data.choices.length > 0) {
-        setDescription(" "+data.choices[0].text.trim());
+      if (data && data.description) {
+        setDescription(data.description);
       } else {
-        setDescription(` Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
+        setDescription(`Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
         Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
         Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
         Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!`);
@@ -66,8 +56,6 @@ export default function App() {
     }
   };
   
-
-
   // Audio
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
