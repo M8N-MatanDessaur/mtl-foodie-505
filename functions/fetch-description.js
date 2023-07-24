@@ -12,7 +12,7 @@ exports.handler = async function(event, context) {
       {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer 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`,
+          "Authorization": `Bearer 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`,
         },
       }
     );
