@@ -6,8 +6,9 @@ exports.handler = async function(event, context) {
 
     const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", 
       {
-        prompt: `Écrit une blague drole et amusante qui se passe dans un restaurant nommé "${restaurantName}".`,
-        max_tokens: 1000,
+        prompt: `Imaginez une blague drôle qui se passe dans un restaurant appelé "${restaurantName}".`,
+        temperature: 0.7,
+        max_tokens: 500,
       },
       {
         headers: {
