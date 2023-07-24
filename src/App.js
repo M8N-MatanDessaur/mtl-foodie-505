@@ -36,6 +36,38 @@ export default function App() {
   const [countdown, setCountdown] = useState(0);
   const [navMode, setNavMode] = useState('driving');
   const [radius, setRadius] = useState(10000);
+  const [description, setDescription] = useState('');
+
+  const fetchDescription = async (restaurantName) => {
+    try {
+      const response = await fetch("https://api.openai.com/v1/engines/text-davinci-002/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer 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`, // Replace with your actual OpenAI API key
+        },
+        body: JSON.stringify({
+          prompt: `Créez une anecdote drole et amusante pour dans un restaurant nommé "${restaurantName}" en quebecois sans trop décrire le restaurant ou les plats.`,
+          max_tokens: 100,
+        }),
+      });
+  
+      const data = await response.json();
+  
+      console.log(data); // Log the response data
+  
+      if (data && data.choices && data.choices.length > 0) {
+        setDescription(data.choices[0].text.trim());
+      } else {
+        console.log("No choices in the response"); // Log a message when there are no choices
+        setDescription("error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  
+
 
   // Audio
   const audio = new Audio(buttonSound);
@@ -153,7 +185,7 @@ export default function App() {
 
     // Fetch restaurants data from Google Places API via Netlify Function
     try {
-      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=${radius}&type=restaurant&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
+      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=${radius}&type=restaurant|cafe|bar|bakery|bistro|buffet|diner|food_court|pizza|ice_cream|fast_food|fine_dining|breakfast|brunch|lunch|dinner|pub|taco|steakhouse|sushi|bbq|vegetarian|food_truck|haitian|creole|indian|chinese|italian|mexican|greek|thai|seafood|burger|dessert|ramen|french|spanish|mediterranean|korean|vietnamese|american|german|middle_eastern|caribbean|peruvian|brazilian|ethiopian|vegan|gluten_free|japanese&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
       const data = await response.json();
 
       // Check if results are available
@@ -189,6 +221,7 @@ export default function App() {
           mapUrl,
           openLink,
         });
+        fetchDescription(randomRestaurant.name)
         setTimeout(() => {
           setLoading(false);  // Data has been loaded, stop loading
         }, 1000);
@@ -260,7 +293,6 @@ export default function App() {
     changeNavMode(mode);
   };
 
-
   return (
     <Wrapper>
       <AppContainer>
@@ -302,18 +334,28 @@ export default function App() {
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
         </ButtonWrapper>
         <MarqueeContainer>
+
+          {randomRestaurant ? (
+            <Marquee>
+             {description}
+            </Marquee>
+          ): (
           <Marquee>
-            Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
-            Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
-            Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
-            Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
-          </Marquee>
-        </MarqueeContainer>
-      </AppContainer>
-      {showModal && (
-        <InfoModal coffeeButtonPressed={coffeeButtonPressed} toggleModal={toggleModal} />
-      )}
-    </Wrapper>
+          Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
+          Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
+          Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
+          Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
+        </Marquee>
+         )}
+
+      </MarqueeContainer>
+    </AppContainer>
+      {
+    showModal && (
+      <InfoModal coffeeButtonPressed={coffeeButtonPressed} toggleModal={toggleModal} />
+    )
+  }
+    </Wrapper >
   );
 }
 
@@ -490,4 +532,5 @@ const MarqueeContainer = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  width: inherit;
 `;

@@ -5,7 +5,7 @@ exports.handler = async function(event, context) {
     const types = "restaurant|cafe|bar|bakery|bistro|buffet|diner|food_court|pizza|ice_cream|fast_food|fine_dining|breakfast|brunch|lunch|dinner|pub|taco|steakhouse|sushi|bbq|vegetarian|food_truck|haitian|creole|indian|chinese|italian|mexican|greek|thai|seafood|burger|dessert|ramen|french|spanish|mediterranean|korean|vietnamese|american|german|middle_eastern|caribbean|peruvian|brazilian|ethiopian|vegan|gluten_free|japanese"; 
 
 
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=${types}&key=${key}`;
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&type=${types}&opennow&key=${key}`;
 
     try {
         const { data } = await axios.get(url);
