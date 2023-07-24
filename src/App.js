@@ -163,7 +163,17 @@ export default function App() {
 
         // Create a link to the restaurant on Google Maps
         let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
-        let  openLink = `https://www.google.com/maps?q=${randomRestaurant.name}, ${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}, ${randomRestaurant.vicinity}`;
+        let openLink;
+
+        if (/(android|iphone|ipad)/i.test(navigator.userAgent)) {
+          // If on mobile, open the place in the Google Maps app
+          const name = encodeURIComponent(randomRestaurant.name);
+          const address = encodeURIComponent(randomRestaurant.vicinity);
+          openLink = `https://maps.google.com/maps?q=${name}, ${address}`;
+        } else {
+          // If on desktop or other devices, open the place in the web browser
+          openLink = `https://www.google.com/maps?q=${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}`;
+        }
 
         // Create map container
         const mapContainer = (
@@ -224,11 +234,11 @@ export default function App() {
   const changeNavMode = (mode) => {
     // Update the navMode state with the new mode
     setNavMode(mode);
-  
+
     // If a random restaurant is picked, update the mapUrl with the new navMode
     if (randomRestaurant) {
       const mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${mode}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
-      
+
       // Update the randomRestaurant state with the new mapUrl
       setRandomRestaurant(prevRandomRestaurant => {
         const updatedRandomRestaurant = {
