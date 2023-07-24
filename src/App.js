@@ -27,15 +27,13 @@ export default function App() {
   // State
   const [currentLocation, setCurrentLocation] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-
+  const [rememberLocation, setRememberLocation] = useState(false);
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
   const [listOpened, setListOpened] = useState(false);
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
-
-  const [radius, setRadius] = useState(1); // Radius in kilometers
 
   // Audio
   const audio = new Audio(buttonSound);
@@ -44,7 +42,7 @@ export default function App() {
 
   let watchId;
 
-  const getLocation = (locationCallback) => {
+  const getLocation = useCallback((locationCallback) => {
     if ('geolocation' in navigator) {
       watchId = navigator.geolocation.watchPosition(
         (position) => {
@@ -53,6 +51,11 @@ export default function App() {
           // Call the callback with the updated location
           if (locationCallback) {
             locationCallback({ latitude, longitude });
+          }
+          // If userLocation preference is true, update the user's location in localStorage
+          if (rememberLocation) {
+            setUserLocation({ latitude, longitude });
+            localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
           }
         },
         (error) => {
@@ -64,11 +67,14 @@ export default function App() {
       toast.error('Geolocation is not supported by your browser');
       setCurrentLocation(null);
     }
-  };
-
-
+  }, [rememberLocation]);
 
   useEffect(() => {
+    // Check if there's a stored user location preference in localStorage
+    const storedLocationPref = localStorage.getItem('rememberLocation');
+    if (storedLocationPref !== null) {
+      setRememberLocation(JSON.parse(storedLocationPref));
+    }
     getLocation();
     // Cleanup function to stop watching the user's location when the component is unmounted
     return () => {
@@ -76,9 +82,17 @@ export default function App() {
         navigator.geolocation.clearWatch(watchId);
       }
     }
-  }, []);
+  }, [getLocation]);
 
-
+  useEffect(() => {
+    // If the userLocation preference is true, get the stored user location from localStorage
+    if (rememberLocation) {
+      const storedUserLocation = localStorage.getItem('userLocation');
+      if (storedUserLocation !== null) {
+        setUserLocation(JSON.parse(storedUserLocation));
+      }
+    }
+  }, [rememberLocation]);
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
@@ -109,16 +123,16 @@ export default function App() {
       audio3.play();
     }
   };
-  
+
   const pickRandomRestaurantCallback = useCallback(async () => {
     // Get current location
     getLocation();
-  
+
     // Prevent spamming the button
     if (loading || countdown > 0) {
       return;
     }
-  
+
     // Countdown animation
     let countdownValue = 3;
     setCountdown(countdownValue);
@@ -131,33 +145,32 @@ export default function App() {
         setCountdown(countdownValue);
       }
     }, 400);
-  
+
     mainButtonPressed();
     setLoading(true);
-  
+
     // Fetch restaurants data from Google Places API via Netlify Function
     try {
       const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=1500&type=restaurant&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
       const data = await response.json();
-  
+
       // Check if results are available
       if (data.results.length > 0) {
         // Pick a random restaurant
         const randomIndex = Math.floor(Math.random() * data.results.length);
         const randomRestaurant = data.results[randomIndex];
-  
+
         // Create a link to the restaurant on Google Maps
         let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
         let openLink = `https://www.google.com/maps/dir/?api=1&origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${randomRestaurant.name}/@${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}`;
 
-  
         // Create map container
         const mapContainer = (
           <MapContainer>
             <MapFrame src={mapUrl} allowFullScreen></MapFrame>
           </MapContainer>
         );
-  
+
         setRandomRestaurant({
           ...randomRestaurant,
           mapContainer,
@@ -165,7 +178,7 @@ export default function App() {
           openLink,
         });
         setTimeout(() => {
-        setLoading(false);  // Data has been loaded, stop loading
+          setLoading(false);  // Data has been loaded, stop loading
         }, 1000);
       } else {
         setRandomRestaurant(null);
@@ -179,16 +192,14 @@ export default function App() {
           },
         });
         setTimeout(() => {
-        setLoading(false);  // Data has been loaded, stop loading
+          setLoading(false);  // Data has been loaded, stop loading
         }, 1000);
       }
     } catch (error) {
       console.error(`Error while fetching data from Google Places API: ${error}`);
       setLoading(false);  // Error occurred, stop loading
     }
-  }, [currentLocation, loading, countdown, setLoading, setCountdown, mainButtonPressed]);
-  
-
+  }, [currentLocation, loading, countdown, setLoading, setCountdown, mainButtonPressed, getLocation]);
 
   // Toggle the info modal
   const toggleModal = () => {
@@ -202,12 +213,12 @@ export default function App() {
     setListOpened(!listOpened);
   };
 
-  const toggleRad = (value) => {
-    coffeeButtonPressed();
-    setRadius(value);
+  // Function to toggle the user location preference
+  const toggleRememberLocation = () => {
+    setRememberLocation(!rememberLocation);
+    // Update the user location preference in localStorage
+    localStorage.setItem('rememberLocation', JSON.stringify(!rememberLocation));
   };
-
-
 
   return (
     <Wrapper>
@@ -222,7 +233,6 @@ export default function App() {
           {randomRestaurant ? (
             <>
               {randomRestaurant.mapContainer}
-              {randomRestaurant.mapFrame}
               <MapLink href={randomRestaurant.openLink} target="_blank" rel="noopener noreferrer">{randomRestaurant.name}</MapLink>
             </>
           ) : (
@@ -233,14 +243,6 @@ export default function App() {
               <Sub>
                 y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton!
               </Sub>
-              {currentLocation !== null && (
-                <Explication>
-                  <p>Si tu veux que j'te trouve un spot à proximité, appuis sur le pitton <span><svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M5 9c0-3.87 3.13-7 7-7s7 3.13 7 7c0 5.25-7 13-7 13S5 14.25 5 9Zm4.5 0a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0-5 0Z" clip-rule="evenodd"></path>
-                  </svg></span> pour activer la localisation.</p>
-                  <p>Glisse le slider pour changer le radius de proximité, c'est aussi simple que ça !</p>
-                </Explication>
-              )}
             </>
           )}
 
@@ -264,7 +266,6 @@ export default function App() {
   );
 }
 
-
 const Wrapper = styled.div`
   position: relative;
   height: 100%;
@@ -274,7 +275,7 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #282c34;
   background-image: url(https://uploads-ssl.webflow.com/62e3ee10882dc50bcae8d07a/631a5d4631d4c55a475f3e34_noise-50.png);
-  background-size: 20%; 
+  background-size: 20%;
 `;
 
 const AppContainer = styled.div`
@@ -309,19 +310,19 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  `;
+`;
 
 const MapLink = styled.a`
-font-size: 1rem;
-width: 100%;
-color: #fff;
-text-decoration: none;
-background-color: #2e5bf3;
-padding: 20px 40px;
-border-bottom-left-radius: 5px;
-border-bottom-right-radius: 5px;
-border: 5px solid #6487EF;
-border-top: none;
+  font-size: 1rem;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+  background-color: #2e5bf3;
+  padding: 20px 40px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 5px solid #6487EF;
+  border-top: none;
 `;
 
 const MapContainer = styled.div`
@@ -390,7 +391,6 @@ const Explication = styled.div`
     vertical-align: middle;
   }
 `;
-
 
 const MarqueeContainer = styled.div`
   border-bottom: 5px solid #2e5bf3;

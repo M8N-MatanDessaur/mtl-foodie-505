@@ -11,7 +11,8 @@ export default function InfoModal({coffeeButtonPressed, toggleModal}) {
             </CoffeeButton>
             <ModalText>
               <br />
-              Aléoresto te lance des restos au pif, en pigeant dans les spots de bouffe proches de toi, le tout de manière aléatoire 🍔🍕🌯🍜🍣🍛
+              Aléoresto te lance des restos au pif, en pigeant dans les spots de bouffe proches de toi, le tout de manière aléatoire <br/>
+              🍔🍕🌯🍜🍣🍛🍚🍲🥙🥩
               <br /> <br />
               Créé par un fan de bouffe, pour les fans de bouffe 😋
               <br /> <br />
