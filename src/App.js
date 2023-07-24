@@ -10,13 +10,10 @@ import buttonSoundGo from './button_pressed_go.mp3';
 import TopBar from './Components/TopBar';
 import ScanlineScreen from './Components/ScanlineScreen';
 import ScanlineScreenLoadingOverlay from './Components/ScanlineScreenLoadingOverlay';
-import ScanlineScreenLocalisationModeOverlay from './Components/ScanlineScreenLocalisationModeOverlay';
 import RandomizerButton from './Components/RandomizerButton';
-import LocalizationButton from './Components/LocalizationButton';
 import InfoModal from './Components/InfoModal';
 
 import RestaurantList from './Restaurants/RestaurantsList.json';
-import RadiusSlider from './Components/RadiusSlider';
 
 export default function App() {
   // Cookies
@@ -33,13 +30,12 @@ export default function App() {
 
   const [randomRestaurant, setRandomRestaurant] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [changeMode, setChangeMode] = useState(false);
   const [listOpened, setListOpened] = useState(false);
-  const [localized, setLocalized] = useState(false);
+  const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
 
-  const [radius, setRadius] = useState(2); // Radius in kilometers
+  const [radius, setRadius] = useState(1); // Radius in kilometers
 
   // Audio
   const audio = new Audio(buttonSound);
@@ -113,16 +109,16 @@ export default function App() {
       audio3.play();
     }
   };
-
+  
   const pickRandomRestaurantCallback = useCallback(async () => {
     // Get current location
     getLocation();
-
+  
     // Prevent spamming the button
     if (loading || countdown > 0) {
       return;
     }
-
+  
     // Countdown animation
     let countdownValue = 3;
     setCountdown(countdownValue);
@@ -131,121 +127,67 @@ export default function App() {
       if (countdownValue === 0) {
         clearInterval(countdownInterval);
         setCountdown(0);
-        setLoading(false);
       } else {
         setCountdown(countdownValue);
       }
     }, 400);
-
+  
     mainButtonPressed();
     setLoading(true);
+  
+    // Fetch restaurants data from Google Places API via Netlify Function
+    try {
+      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=1500&type=restaurant&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
+      const data = await response.json();
+  
+      // Check if results are available
+      if (data.results.length > 0) {
+        // Pick a random restaurant
+        const randomIndex = Math.floor(Math.random() * data.results.length);
+        const randomRestaurant = data.results[randomIndex];
+  
+        // Create a link to the restaurant on Google Maps
+        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+        let openLink = `https://www.google.com/maps/dir/?api=1&origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${randomRestaurant.name}/@${randomRestaurant.geometry.location.lat},${randomRestaurant.geometry.location.lng}`;
 
-    const isValidCoordinate = (latitude, longitude) => {
-      // Check if latitude and longitude are valid numbers
-      return !isNaN(latitude) && !isNaN(longitude);
-    };
-
-    // Filter restaurant list based on the 'localized' value and 'radius'
-    let restaurantList = RestaurantList;
-    if (localized && currentLocation && isValidCoordinate(currentLocation.latitude, currentLocation.longitude)) {
-      restaurantList = RestaurantList.filter((restaurant) => {
-        const restaurantLocation = {
-          latitude: parseFloat(restaurant.Latitude),
-          longitude: parseFloat(restaurant.Longitude),
-        };
-
-        if (isValidCoordinate(restaurantLocation.latitude, restaurantLocation.longitude)) {
-          const dist = haversineDistance(currentLocation, restaurantLocation);
-          const radiusF = parseFloat(radius);
-          const distInKm = dist.toFixed(0);
-
-          console.log('Distance:', distInKm);
-          console.log('Radius:', radiusF);
-
-          return dist <= radiusF && dist > 0;
-        } else {
-          return false; // Skip restaurants with invalid coordinates
-        }
-      });
-    }
-
-    // Proceed if we have a filtered restaurant list
-    if (restaurantList.length > 0) {
-      // Pick a random restaurant
-      const randomIndex = Math.floor(Math.random() * restaurantList.length);
-      const randomRestaurant = restaurantList[randomIndex];
-
-      // Create a link to the restaurant on Google Maps
-      let mapUrl = `https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(
-        randomRestaurant.name
-      )},montréal&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      let mapUrlLocalized = '';
-      if (currentLocation) {
-        mapUrlLocalized = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=${encodeURIComponent(
-          randomRestaurant.name
-        )},montréal&mode=driving&key=AIzaSyBu0MZ1OGyDCbamYAJH24STXOLYJRt3YAo`;
-      }
-      const mapContainer = (
-        <MapContainer>
-          {localized ? (
-            <MapFrame src={mapUrlLocalized} allowFullScreen></MapFrame>
-          ) : (
+  
+        // Create map container
+        const mapContainer = (
+          <MapContainer>
             <MapFrame src={mapUrl} allowFullScreen></MapFrame>
-          )}
-        </MapContainer>
-      );
-
-      const mapFrame = (
-        <MapLink href={randomRestaurant.links} target="_blank" rel="noopener noreferrer">
-          {randomRestaurant.name}
-        </MapLink>
-      );
-
-      setRandomRestaurant({
-        ...randomRestaurant,
-        mapContainer,
-        mapFrame,
-        mapUrl,
-        mapUrlLocalized,
-      });
-    } else {
-      setRandomRestaurant(null);
-
-      toast('Aucun restaurant trouvé. Essayez de changer de rayon ou de désactiver la localisation.', {
-        duration: 5000, // Duration of the toast display in milliseconds
-        position: 'top-center', // Toast position on the screen
-        style: {
-          background: '#363636', // Toast background color
-          color: '#fff', // Toast text color
-          fontSize: '18px', // Toast text font size
-        },
-      });
+          </MapContainer>
+        );
+  
+        setRandomRestaurant({
+          ...randomRestaurant,
+          mapContainer,
+          mapUrl,
+          openLink,
+        });
+        setTimeout(() => {
+        setLoading(false);  // Data has been loaded, stop loading
+        }, 1000);
+      } else {
+        setRandomRestaurant(null);
+        toast('No restaurants found. Try changing the radius or disabling localization.', {
+          duration: 5000,
+          position: 'top-center',
+          style: {
+            background: '#363636',
+            color: '#fff',
+            fontSize: '18px',
+          },
+        });
+        setTimeout(() => {
+        setLoading(false);  // Data has been loaded, stop loading
+        }, 1000);
+      }
+    } catch (error) {
+      console.error(`Error while fetching data from Google Places API: ${error}`);
+      setLoading(false);  // Error occurred, stop loading
     }
-
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, [currentLocation, localized, radius, loading, countdown, setLoading, setCountdown, mainButtonPressed]);
-
-
-
-  const haversineDistance = (coords1, coords2) => {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = deg2rad(coords2.latitude - coords1.latitude);
-    const dLng = deg2rad(coords2.longitude - coords1.longitude);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(coords1.latitude)) * Math.cos(deg2rad(coords2.latitude)) *
-      Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const dist = R * c; // Distance in km
-    return dist;
-  };
-
-  const deg2rad = (deg) => {
-    return deg * (Math.PI / 180);
-  };
-
+  }, [currentLocation, loading, countdown, setLoading, setCountdown, mainButtonPressed]);
+  
 
 
   // Toggle the info modal
@@ -258,28 +200,6 @@ export default function App() {
   const toggleList = () => {
     buttonPressed();
     setListOpened(!listOpened);
-  };
-
-  // Toggle the localization mode
-  const toggleLocalized = () => {
-    setChangeMode(true);
-    coffeeButtonPressed();
-    setLocalized(!localized);
-    if (randomRestaurant) {
-      const mapUrl = localized ? randomRestaurant.mapUrl : randomRestaurant.mapUrlLocalized;
-      const updatedMapContainer = (
-        <MapContainer>
-          <MapFrame src={mapUrl} allowFullScreen></MapFrame>
-        </MapContainer>
-      );
-      setRandomRestaurant(prevRandomRestaurant => ({
-        ...prevRandomRestaurant,
-        mapContainer: updatedMapContainer,
-      }));
-    }
-    setTimeout(() => {
-      setChangeMode(false);
-    }, 1000);
   };
 
   const toggleRad = (value) => {
@@ -296,7 +216,6 @@ export default function App() {
         <ScanlineScreen>
           <Toaster position="top-center" toastOptions={{ duration: 3000, style: { background: '#363636', color: '#fff', fontSize: '16px' } }} />
           <ScanlineScreenLoadingOverlay loading={loading} />
-          <ScanlineScreenLocalisationModeOverlay changeMode={changeMode} radius={radius} localized={localized} />
           <FullScreenOverlay />
 
           {/* If a restaurant was picked show the mapContainer & Frame if not show the welcome message */}
@@ -304,6 +223,7 @@ export default function App() {
             <>
               {randomRestaurant.mapContainer}
               {randomRestaurant.mapFrame}
+              <MapLink href={randomRestaurant.openLink} target="_blank" rel="noopener noreferrer">{randomRestaurant.name}</MapLink>
             </>
           ) : (
             <>
@@ -323,13 +243,9 @@ export default function App() {
               )}
             </>
           )}
-          {localized && (
-            <RadiusSlider radius={radius} localized={localized} toggleRad={toggleRad} />
-          )}
 
         </ScanlineScreen>
         <ButtonWrapper>
-          <LocalizationButton toggleLocalized={toggleLocalized} currentLocation={currentLocation} localized={localized} randomRestaurant={randomRestaurant} />
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
         </ButtonWrapper>
         <MarqueeContainer>

@@ -11,12 +11,11 @@ export default function InfoModal({coffeeButtonPressed, toggleModal}) {
             </CoffeeButton>
             <ModalText>
               <br />
-              Aléoresto te balance des restos au pif, avec toutes les infos dont t'as besoin.
-              Le resto est choisi de façon aléatoire d'une méga liste de spots de bouffe variés à MTL.
-              <br />
-              Créé par un fan de bouffe, pour les fans de bouffe.
+              Aléoresto te lance des restos au pif, en pigeant dans les spots de bouffe proches de toi, le tout de manière aléatoire 🍔🍕🌯🍜🍣🍛
               <br /> <br />
-              Pour les nerds, Aléoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code> et en utilisant l'API de google maps.
+              Créé par un fan de bouffe, pour les fans de bouffe 😋
+              <br /> <br />
+              Pour les nerds, Aléoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code> et en utilisant l'API de google maps 📍🌎
               <br /> <br />
               Pour les curieux, le nom <b><i>aléoresto</i></b> vien du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
             </ModalText>
