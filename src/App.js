@@ -31,7 +31,7 @@ export default function App() {
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
-  const [navMode, setNavMode] = useState({mode: 'driving', level: '2'}); 
+  const [navMode, setNavMode] = useState({mode: 'walking', level: '1'}); 
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
 
