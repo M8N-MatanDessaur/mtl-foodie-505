@@ -8,63 +8,52 @@ const useGeolocation = () => {
 
   let watchId = null;
 
+  const updateLocation = useCallback((position, locationCallback) => {
+    const { latitude, longitude } = position.coords;
+    setCurrentLocation({ latitude, longitude });
+
+    if (locationCallback) {
+      locationCallback({ latitude, longitude });
+    }
+
+    if (rememberLocation) {
+      setUserLocation({ latitude, longitude });
+      localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+    }
+  }, [rememberLocation]);
+
+  const handleError = useCallback((error, message) => {
+    toast.error(message, error);
+    setCurrentLocation(null);
+  }, []);
+
   const getLocation = useCallback((locationCallback) => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentLocation({ latitude, longitude });
-          // Call the callback with the updated location
-          if (locationCallback) {
-            locationCallback({ latitude, longitude });
-          }
-          // If userLocation preference is true, update the user's location in localStorage
-          if (rememberLocation) {
-            setUserLocation({ latitude, longitude });
-            localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
-          }
-          // Once we have the initial location, switch to watching for continuous updates
-          if (!watchId) {
-            watchId = navigator.geolocation.watchPosition(
-              (position) => {
-                const { latitude, longitude } = position.coords;
-                setCurrentLocation({ latitude, longitude });
-                // Call the callback with the updated location
-                if (locationCallback) {
-                  locationCallback({ latitude, longitude });
-                }
-                // If userLocation preference is true, update the user's location in localStorage
-                if (rememberLocation) {
-                  setUserLocation({ latitude, longitude });
-                  localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
-                }
-              },
-              (error) => {
-                toast.error('Error watching current location', error);
-                setCurrentLocation(null);
-              }
-            );
-          }
-        },
-        (error) => {
-          toast.error('Error getting current location', error);
-          setCurrentLocation(null);
-        }
+        (position) => updateLocation(position, locationCallback),
+        (error) => handleError(error, 'Error getting current location')
       );
+
+      if (!watchId) {
+        watchId = navigator.geolocation.watchPosition(
+          (position) => updateLocation(position, locationCallback),
+          (error) => handleError(error, 'Error watching current location')
+        );
+      }
     } else {
       toast.error('Geolocation is not supported by your browser');
       setCurrentLocation(null);
     }
-  }, [rememberLocation]);
+  }, [updateLocation, handleError]);
 
   useEffect(() => {
-    // Check if there's a stored user location preference in localStorage
     const storedLocationPref = localStorage.getItem('rememberLocation');
     if (storedLocationPref !== null) {
       setRememberLocation(JSON.parse(storedLocationPref));
     }
+
     getLocation();
-    // Cleanup function to stop watching the user's location when the component is unmounted
+
     return () => {
       if (watchId) {
         navigator.geolocation.clearWatch(watchId);
@@ -74,7 +63,6 @@ const useGeolocation = () => {
   }, [getLocation]);
 
   useEffect(() => {
-    // If the userLocation preference is true, get the stored user location from localStorage
     if (rememberLocation) {
       const storedUserLocation = localStorage.getItem('userLocation');
       if (storedUserLocation !== null) {

@@ -31,11 +31,11 @@ export default function App() {
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
-  const [navMode, setNavMode] = useState('driving');
+  const [navMode, setNavMode] = useState({mode: 'driving', level: '2'}); 
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
-  
-  
+
+
   // GPT DESCRIPTION
   const fetchDescription = async (restaurantName) => {
     try {
@@ -53,7 +53,7 @@ export default function App() {
       console.error("Error:", error);
     }
   };
-  
+
   // Audio
   const audio = new Audio(buttonSound);
   const audio2 = new Audio(buttonSoundAlt);
@@ -89,7 +89,7 @@ export default function App() {
     }
   };
 
- // useGeolocation hook to get the user's location
+  // useGeolocation hook to get the user's location
   const { currentLocation, userLocation, rememberLocation, getLocation } = useGeolocation();
 
 
@@ -132,7 +132,7 @@ export default function App() {
         const randomRestaurant = data.results[randomIndex];
 
         // Create a link to the restaurant on Google Maps
-        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode.mode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
         let openLink;
 
         if (/(android|iphone|ipad)/i.test(navigator.userAgent)) {
@@ -195,9 +195,8 @@ export default function App() {
     setListOpened(!listOpened);
   };
 
-  const changeNavMode = (mode) => {
-    // Update the navMode state with the new mode
-    setNavMode(mode);
+  const changeNavMode = (mode, level) => {
+    setNavMode({mode, level});
 
     // If a random restaurant is picked, update the mapUrl with the new navMode
     if (randomRestaurant) {
@@ -214,13 +213,14 @@ export default function App() {
     }
   };
 
-  const handleNavModeChange = (mode) => {
+  const handleNavModeChange = (mode, level) => {
     coffeeButtonPressed();
-    mode === 'driving' ? setRadius(12000)
-      : mode === 'bicycling' ? setRadius(5000)
-        : mode === 'walking' ? setRadius(1500)
-          : setRadius(10000);
-    changeNavMode(mode);
+    mode === 'driving' && level === '2' ? setRadius(12000)
+      : mode === 'bicycling' && level === '2' ? setRadius(5000)
+        : mode === 'walking' && level === '2' ? setRadius(1500)
+          : mode === 'walking' && level === '1' ? setRadius(500)
+            : setRadius(10000);
+    changeNavMode(mode, level);
   };
 
   return (
@@ -232,14 +232,17 @@ export default function App() {
           <ScanlineScreenLoadingOverlay loading={loading} />
           <FullScreenOverlay />
           <NavModeChange>
-            <NavModeButton onClick={() => handleNavModeChange('driving')} active={navMode === 'driving'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
-              <path fill-rule="evenodd" d="M17.5 4c.66 0 1.22.42 1.42 1.01L21 11v8c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-8l2.08-5.99C5.29 4.42 5.84 4 6.5 4h11ZM5 13.5c0 .83.67 1.5 1.5 1.5S8 14.33 8 13.5 7.33 12 6.5 12 5 12.67 5 13.5ZM17.5 15c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Zm-11-9.5L5 10h14l-1.5-4.5h-11Z" clip-rule="evenodd"></path>
+            <NavModeButton onClick={() => handleNavModeChange('walking', '1')} active={navMode.mode === 'walking' && navMode.level==='1'} ><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+              <path fill-rule="evenodd" d="M12 2C8.14 2 5 5.14 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.86-3.14-7-7-7Zm0 2a2 2 0 1 1 .001 4.001A2 2 0 0 1 12 4Zm-4 7.85c.86 1.3 2.33 2.15 4 2.15s3.14-.85 4-2.15c-.02-1.32-2.67-2.05-4-2.05s-3.98.73-4 2.05Z" clip-rule="evenodd"></path>
             </svg></NavModeButton>
-            <NavModeButton onClick={() => handleNavModeChange('walking')} active={navMode === 'walking'} ><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+            <NavModeButton onClick={() => handleNavModeChange('walking', '2')} active={navMode.mode === 'walking' && navMode.level==='2'} ><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
               <path d="M13 5.25c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2Zm-3.7 3.4-2.8 14.1h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6a2.145 2.145 0 0 0-2.65-.84L5.5 8.05v4.7h2v-3.4l1.8-.7Z"></path>
             </svg></NavModeButton>
-            <NavModeButton onClick={() => handleNavModeChange('bicycling')} active={navMode === 'bicycling'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+            <NavModeButton onClick={() => handleNavModeChange('bicycling', '2')} active={navMode.mode === 'bicycling' && navMode.level==='2'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
               <path fill-rule="evenodd" d="M17.5 3.5c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2ZM0 17c0-2.8 2.2-5 5-5s5 2.2 5 5-2.2 5-5 5-5-2.2-5-5Zm5 3.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5ZM19.1 11c-2.1 0-3.8-.8-5.1-2.1l-.8-.8-2.4 2.4 2.2 2.3V19h-2v-5l-3.2-2.8c-.4-.3-.6-.8-.6-1.4 0-.5.2-1 .6-1.4l2.8-2.8c.3-.4.8-.6 1.4-.6.6 0 1.1.2 1.6.6l1.9 1.9c.9.9 2.1 1.5 3.6 1.5v2Zm-.1 1c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5Zm-3.5 5c0 1.9 1.6 3.5 3.5 3.5s3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5-3.5 1.6-3.5 3.5Z" clip-rule="evenodd"></path>
+            </svg></NavModeButton>
+            <NavModeButton onClick={() => handleNavModeChange('driving', '2')} active={navMode.mode === 'driving' && navMode.level==='2'}><svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill='white'>
+              <path fill-rule="evenodd" d="M17.5 4c.66 0 1.22.42 1.42 1.01L21 11v8c0 .55-.45 1-1 1h-1c-.55 0-1-.45-1-1v-1H6v1c0 .55-.45 1-1 1H4c-.55 0-1-.45-1-1v-8l2.08-5.99C5.29 4.42 5.84 4 6.5 4h11ZM5 13.5c0 .83.67 1.5 1.5 1.5S8 14.33 8 13.5 7.33 12 6.5 12 5 12.67 5 13.5ZM17.5 15c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5Zm-11-9.5L5 10h14l-1.5-4.5h-11Z" clip-rule="evenodd"></path>
             </svg></NavModeButton>
           </NavModeChange>
           {/* If a restaurant was picked show the mapContainer & Frame if not show the welcome message */}
@@ -267,24 +270,24 @@ export default function App() {
 
           {randomRestaurant ? (
             <Marquee speed={100}>
-             {description}
+              {description}
             </Marquee>
-          ): (
-          <Marquee>
-          Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
-          Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
-          Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
-          Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
-        </Marquee>
-         )}
+          ) : (
+            <Marquee>
+              Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
+              Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
+              Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
+              Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
+            </Marquee>
+          )}
 
-      </MarqueeContainer>
-    </AppContainer>
+        </MarqueeContainer>
+      </AppContainer>
       {
-    showModal && (
-      <InfoModal coffeeButtonPressed={coffeeButtonPressed} toggleModal={toggleModal} />
-    )
-  }
+        showModal && (
+          <InfoModal coffeeButtonPressed={coffeeButtonPressed} toggleModal={toggleModal} />
+        )
+      }
     </Wrapper >
   );
 }

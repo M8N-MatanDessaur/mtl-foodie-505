@@ -18,7 +18,7 @@ export default function InfoModal({coffeeButtonPressed, toggleModal}) {
               <br /> <br />
               Pour les nerds, Aléoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code> et en utilisant l'API de google maps 📍🌎
               <br /> <br />
-              Pour les curieux, le nom <b><i>aléoresto</i></b> vien du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
+              Pour les curieux, le nom <b><i>aléoresto</i></b> vient du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
             </ModalText>
             <CloseButton toggleFunction={toggleModal} />
           </ModalContent>
