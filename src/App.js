@@ -219,7 +219,7 @@ export default function App() {
       : mode === 'bicycling' && level === '2' ? setRadius(5000)
         : mode === 'walking' && level === '2' ? setRadius(1500)
           : mode === 'walking' && level === '1' ? setRadius(500)
-            : setRadius(10000);
+            : setRadius(500);
     changeNavMode(mode, level);
   };
 
