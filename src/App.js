@@ -31,7 +31,7 @@ export default function App() {
   const [localized, setLocalized] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [countdown, setCountdown] = useState(0);
-  const [navMode, setNavMode] = useState({mode: 'walking', level: '1'}); 
+  const [navMode, setNavMode] = useState({mode: 'driving', level: '2'}); 
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
 
@@ -219,7 +219,7 @@ export default function App() {
       : mode === 'bicycling' && level === '2' ? setRadius(5000)
         : mode === 'walking' && level === '2' ? setRadius(1500)
           : mode === 'walking' && level === '1' ? setRadius(500)
-            : setRadius(500);
+            : setRadius(10000);
     changeNavMode(mode, level);
   };
 
