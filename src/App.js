@@ -295,9 +295,11 @@ export default function App() {
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
         </ButtonWrapper>
         <MarqueeContainer>
+          {randomRestaurant && (
             <Marquee speed={100}>
-              {randomRestaurant.name} &nbsp; {randomRestaurant.vicinity} &nbsp; {randomRestaurant.rating} &nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;
-            </Marquee>
+            {randomRestaurant.name} &nbsp; {randomRestaurant.vicinity} &nbsp; {randomRestaurant.rating} &nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;
+          </Marquee>
+          )}
         </MarqueeContainer>
       </AppContainer>
       {
