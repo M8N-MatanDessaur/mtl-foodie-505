@@ -36,6 +36,7 @@ export default function App() {
   const [description, setDescription] = useState('');
   const [mainText, setMainText] = useState('');
   const [subText, setSubText] = useState('');
+  const [language, setLanguage] = useState('');
 
 
   // GPT DESCRIPTION
@@ -56,9 +57,9 @@ export default function App() {
     }
   };
 
-  const fetchMainText = async () => {
+  const fetchMainText = async (language) => {
     try{
-    const response = await fetch(`/.netlify/functions/fetch-main-text?language=en`);
+    const response = await fetch(`/.netlify/functions/fetch-main-text?language=${language}`);
     const data = await response.json();
       if (data && data.mainText) {
         setMainText(data.mainText);
@@ -70,9 +71,9 @@ export default function App() {
     }
   };
 
-  const fetchSubText = async () => {
+  const fetchSubText = async (language) => {
     try{
-    const response = await fetch(`/.netlify/functions/fetch-sub-text?language=en`);
+    const response = await fetch(`/.netlify/functions/fetch-sub-text?language=${language}`);
     const data = await response.json();
       if (data && data.subText) {
         setSubText(data.subText);
@@ -90,9 +91,23 @@ export default function App() {
   const audio3 = new Audio(buttonSoundGo);
 
   useEffect(() => { 
-    fetchMainText();
-    fetchSubText();
+    if (navigator) {
+      // get the browser's language preference
+      const detectedLanguage = navigator.language || navigator.userLanguage;
+      
+      // map language code to language name
+      const languageName = getLanguageName(detectedLanguage);
+      setLanguage(languageName);
+    }
   }, []);
+
+  useEffect(() => {
+    if (language) {
+      fetchMainText(language);
+      fetchSubText(language);
+    }
+  }, [language]);
+  
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {

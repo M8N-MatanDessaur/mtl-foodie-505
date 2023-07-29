@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
 
     const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", 
       {
-        prompt: `rewrite "There's an abundance of food here! There are all kinds of restaurants and snack bars that will make you drool to the point of holding back the drool from your chin!" in ${language} (language). Only return the translated text.`,
+        prompt: `rewrite "There's an abundance of food here! There are all kinds of restaurants and snack bars that will make you drool to the point of holding back the drool from your chin!" in ${language}. Only return the translated text.`,
         temperature: 0.7,
         max_tokens: 1000,
       },
