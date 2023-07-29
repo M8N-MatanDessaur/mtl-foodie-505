@@ -7,18 +7,18 @@ export default function InfoModal({coffeeButtonPressed, toggleModal}) {
         <ModalWrapper>
           <ModalContent>
             <CoffeeButton onClick={coffeeButtonPressed}>
-              <a href="https://www.buymeacoffee.com/matandessaur" target="_blank" rel="noreferrer">Achetez-moi un café ☕</a>
+              <a href="https://www.buymeacoffee.com/matandessaur" target="_blank" rel="noreferrer">Buy me a coffee ☕</a>
             </CoffeeButton>
             <ModalText>
               <br />
-              Aléoresto te lance des restos au pif, en pigeant dans les spots de bouffe proches de toi, le tout de manière aléatoire <br/>
+              Aléoresto randomly suggests restaurants to you, drawing from food spots near your location in a completely random manner. <br/>
               🍔🍕🌯🍜🍣🍛🍚🍲🥙🥩
               <br /> <br />
-              Créé par un fan de bouffe, pour les fans de bouffe 😋
+              Created by a food lover, for food lovers. 😋
               <br /> <br />
-              Pour les nerds, Aléoresto est codé en <code>React</code>, avec un peu de <code>styled-components</code> et en utilisant l'API de google maps 📍🌎
+              For the nerds, Aleoresto is coded in <code>React</code>, with a bit of <code>styled-components</code> and using Google Maps' API. 📍🌎
               <br /> <br />
-              Pour les curieux, le nom <b><i>aléoresto</i></b> vient du jeu de mots d'<u><i>aléatoire</i></u> et <u><i>resto</i></u> pour faire un nom qui sonne comme "aller au resto".
+              For the curious, the name <b><i>aleoresto</i></b> comes from the wordplay of <u><i>aleatoire</i></u> (random) and <u><i>resto</i></u> (restaurant), to create a name that sounds like "going to a restaurant".
             </ModalText>
             <CloseButton toggleFunction={toggleModal} />
           </ModalContent>
