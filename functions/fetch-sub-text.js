@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
 
     const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", 
       {
-        prompt: `rewrite "You're in for a culinary adventure! From quick bites at bustling fast food joints to gourmet experiences at upscale establishments, a vast selection of dining delights await to satisfy your every craving!" in ${getLanguageName(language)}. Only return the translated text.`,
+        prompt: `rewrite "You're in for a culinary adventure! From quick bites to gourmet experiences, a vast selection of dining delights await to satisfy your every craving!" in ${getLanguageName(language)}. Only return the translated text.`,
         temperature: 0.7,
         max_tokens: 1000,
       },
