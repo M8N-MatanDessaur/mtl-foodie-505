@@ -94,10 +94,7 @@ export default function App() {
     if (navigator) {
       // get the browser's language preference
       const detectedLanguage = navigator.language || navigator.userLanguage;
-      
-      // map language code to language name
-      const languageName = getLanguageName(detectedLanguage);
-      setLanguage(languageName);
+      setLanguage(detectedLanguage);
     }
   }, []);
 
@@ -107,7 +104,7 @@ export default function App() {
       fetchSubText(language);
     }
   }, [language]);
-  
+
 
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
