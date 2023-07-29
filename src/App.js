@@ -89,6 +89,11 @@ export default function App() {
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
 
+  useEffect(() => { 
+    fetchMainText();
+    fetchSubText();
+  }, []);
+
   const mainButtonPressed = () => {
     if ('vibrate' in navigator) {
       audio.play();
