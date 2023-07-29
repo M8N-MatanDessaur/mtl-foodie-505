@@ -42,15 +42,15 @@ export default function App() {
   // GPT DESCRIPTION
   const fetchDescription = async (restaurantName) => {
     try {
-      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}&language=en`);
+      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}&language=${language}`);
       const data = await response.json();
       if (data && data.description) {
         setDescription(data.description);
       } else {
-        setDescription(`Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
-        Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
-        Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
-        Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!`);
+        setDescription(`Listen here now, I have food spots that are gonna have you chuckling into your little belly! Is your stomach crying out for a poutine that'll make you drool into your hoodie? No worries, my friend! There are places for that, I tell you! And if you're in the mood for some tender smoked meat that'll melt your heart, there are spots for that too, damn right!
+        And for those who love seafood, there's a place that'll blow your palate away, I swear! I won't tell you where, but it's worth exploring!
+        Oh, and for burger fans, there's a spot that'll make you salivate like a hungry wolf! I'll let you discover it for yourself, my buddy!
+        So now, my friend, grab your hoodie, your sense of humor and go discover these spots where you might drool and laugh at the same time!`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -314,20 +314,9 @@ export default function App() {
           <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
         </ButtonWrapper>
         <MarqueeContainer>
-
-          {randomRestaurant ? (
             <Marquee speed={100}>
               {description}
             </Marquee>
-          ) : (
-            <Marquee>
-              Asteur écoute icitte, j'ai des spots de bouffe qui vont t'en faire glousser dans ton p'tit bedon! T'as l'estomac qui crie pour une poutine à te faire baver dans ton hoodie? Pas d'soucis, mon chum! Y'a des places pour ça, j'te dis! Pis si t'es plutôt d'humeur pour du smoked meat tendre à te faire fondre l'coeur, y'a des endroits pour ça aussi, crissement!
-              Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
-              Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
-              Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!
-            </Marquee>
-          )}
-
         </MarqueeContainer>
       </AppContainer>
       {
