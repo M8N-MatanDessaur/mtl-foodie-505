@@ -5,7 +5,7 @@ export default function TopBar({toggleModal, setRandomRestaurant}) {
     return (
         <Header>
             <Title onClick={()=>setRandomRestaurant(null)}>
-                aleoresto<span>!</span>
+                aleoresto &nbsp;<span>!</span>
             </Title>
             <InfoLink onClick={toggleModal}>
                 <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@ const Title = styled.h1`
 & span {
   position: absolute;
   left: 105%;
-  transform: scale(1.3) rotate(35deg);
+  transform: scale(1.3) rotate(15deg);
 }
 
 `;
