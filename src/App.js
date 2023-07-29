@@ -39,7 +39,7 @@ export default function App() {
   // GPT DESCRIPTION
   const fetchDescription = async (restaurantName) => {
     try {
-      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}`);
+      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}&language=en`);
       const data = await response.json();
       if (data && data.description) {
         setDescription(data.description);

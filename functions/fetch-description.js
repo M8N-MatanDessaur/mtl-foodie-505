@@ -1,17 +1,14 @@
 const axios = require('axios');
 
-exports.handler = async function (event, context) {
-  function getPreferredLanguageFromHeader(acceptLanguageHeader) {
-    return acceptLanguageHeader.split(',')[0];
-  }
-  const preferredLanguage = getPreferredLanguageFromHeader(event.headers['Accept-Language']);
-  
+exports.handler = async function(event, context) {
   try {
     const restaurantName = event.queryStringParameters.name;
+    const language = event.queryStringParameters.language;
 
-    const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions",
+    const response = await axios.post("https://api.openai.com/v1/engines/text-davinci-003/completions", 
       {
-        prompt: `Imagine a funny joke or pun that takes place in a restaurant named "${restaurantName}" in ${preferredLanguage}.`;
+        prompt: `Imaginez une blague ou un jeu de mots drôle et amusant(e) qui se passe dans un restaurant appelé "${restaurantName}" en ${language}.`,
+        temperature: 0.7,
         max_tokens: 1000,
       },
       {
@@ -27,7 +24,7 @@ exports.handler = async function (event, context) {
     if (data && data.choices && data.choices.length > 0) {
       return {
         statusCode: 200,
-        body: JSON.stringify({ description: " " + data.choices[0].text.trim() }),
+        body: JSON.stringify({ description: " "+data.choices[0].text.trim() }),
       };
     } else {
       return {
