@@ -414,7 +414,7 @@ const Explication = styled.div`
   color: #fff;
   text-align: left;
   margin-top: 35px;
-  line-height: 1.2rem;
+  line-height: 1.4rem;
   padding: 10px 20px;
   background-color: #2e5bf3f0;
   border-radius: 15px;
