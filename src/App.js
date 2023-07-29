@@ -284,9 +284,9 @@ export default function App() {
               <Main>
                 {mainText}
               </Main>
-              <Sub>
+              <Explication>
                 {subText}
-              </Sub>
+              </Explication>
             </>
           )}
 
