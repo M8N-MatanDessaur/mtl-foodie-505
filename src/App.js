@@ -34,6 +34,8 @@ export default function App() {
   const [navMode, setNavMode] = useState({mode: 'driving', level: '2'}); 
   const [radius, setRadius] = useState(10000);
   const [description, setDescription] = useState('');
+  const [mainText, setMainText] = useState('');
+  const [subText, setSubText] = useState('');
 
 
   // GPT DESCRIPTION
@@ -48,6 +50,32 @@ export default function App() {
         Et pour ceux qui aiment les fruits de mer, y'a un coin qui va te faire décoller le palais, osti! J'te dis pas où, mais ça vaut la peine d'explorer!
         Ah, pis pour les amateurs de burgers, y'a un spot qui va te faire saliver comme un loup affamé! J'te laisse découvrir par toi-même, mon pote!
         Faque là, mon chum, prends ton hoodie, ton sens de l'humour et vas-y découvrir ces spots où tu risques de baver et de rire en même temps!`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const fetchMainText = async => {
+    const response = await fetch(`/.netlify/functions/fetch-main-text?language=en`);
+    const data = await response.json();
+      if (data && data.mainText) {
+        setMainText(data.mainText);
+      } else {
+        setMainText(`Press on the button ▷ to randomly choose where to eat!`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const fetchSubText = async => {
+    const response = await fetch(`/.netlify/functions/fetch-sub-text?language=en`);
+    const data = await response.json();
+      if (data && data.subText) {
+        setSubText(data.subText);
+      } else {
+        setSubText(`There's an abundance of food here! There are all kinds of restaurants and snack bars that will make you drool to the point of holding back the drool from your chin!`);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -254,10 +282,10 @@ export default function App() {
           ) : (
             <>
               <Main>
-                Appuis s'ul pitton ▷ pour choisir aléatoirement où manger!
+                {mainText}
               </Main>
               <Sub>
-                y'a d'la bouffe à profusion icitte! Y a toutes sortes de restos et d'casses-croûtes qui vont te faire saliver à s'en r'tenir la bave au menton!
+                {subText}
               </Sub>
             </>
           )}
