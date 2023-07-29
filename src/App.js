@@ -297,7 +297,7 @@ export default function App() {
         <MarqueeContainer>
           {randomRestaurant && (
             <Marquee speed={100}>
-            {randomRestaurant.name} &nbsp; {randomRestaurant.vicinity} &nbsp; {randomRestaurant.rating} &nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;
+            {randomRestaurant.name} &nbsp;&nbsp; {randomRestaurant.vicinity} &nbsp;&nbsp; {randomRestaurant.rating} / 5 &nbsp;&nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;&nbsp;
           </Marquee>
           )}
         </MarqueeContainer>
