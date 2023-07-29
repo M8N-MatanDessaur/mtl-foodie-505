@@ -410,7 +410,7 @@ const Sub = styled.p`
 `;
 
 const Explication = styled.div`
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #fff;
   text-align: left;
   margin-top: 35px;
