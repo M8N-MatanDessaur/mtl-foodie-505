@@ -187,7 +187,6 @@ export default function App() {
           mapUrl,
           openLink,
         });
-        fetchDescription(randomRestaurant.name)
         setTimeout(() => {
           setLoading(false);  // Data has been loaded, stop loading
         }, 1000);
