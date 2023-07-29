@@ -72,10 +72,18 @@ export default function App() {
   const audio2 = new Audio(buttonSoundAlt);
   const audio3 = new Audio(buttonSoundGo);
 
+  useEffect(() => { 
+    if (navigator) {
+      // get the browser's language preference
+      const detectedLanguage = navigator.language;
+      setLanguage(detectedLanguage);
+    }
+  }, []);
+
   useEffect(() => {
     if (language) {
-      fetchMainText(navigator.language);
-      fetchSubText(navigator.language);
+      fetchMainText(language);
+      fetchSubText(language);
     }
   }, [language]);
 
