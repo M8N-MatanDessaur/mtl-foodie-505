@@ -39,24 +39,6 @@ export default function App() {
   const [language, setLanguage] = useState('');
 
 
-  // GPT DESCRIPTION
-  const fetchDescription = async (restaurantName) => {
-    try {
-      const response = await fetch(`/.netlify/functions/fetch-description?name=${restaurantName}&language=${language}`);
-      const data = await response.json();
-      if (data && data.description) {
-        setDescription(data.description);
-      } else {
-        setDescription(`Listen here now, I have food spots that are gonna have you chuckling into your little belly! Is your stomach crying out for a poutine that'll make you drool into your hoodie? No worries, my friend! There are places for that, I tell you! And if you're in the mood for some tender smoked meat that'll melt your heart, there are spots for that too, damn right!
-        And for those who love seafood, there's a place that'll blow your palate away, I swear! I won't tell you where, but it's worth exploring!
-        Oh, and for burger fans, there's a spot that'll make you salivate like a hungry wolf! I'll let you discover it for yourself, my buddy!
-        So now, my friend, grab your hoodie, your sense of humor and go discover these spots where you might drool and laugh at the same time!`);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   const fetchMainText = async (language) => {
     try{
     const response = await fetch(`/.netlify/functions/fetch-main-text?language=${language}`);
@@ -315,7 +297,7 @@ export default function App() {
         </ButtonWrapper>
         <MarqueeContainer>
             <Marquee speed={100}>
-              {description}
+              {randomRestaurant.name} &nbsp; {randomRestaurant.vicinity} &nbsp; {randomRestaurant.rating} &nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;
             </Marquee>
         </MarqueeContainer>
       </AppContainer>
