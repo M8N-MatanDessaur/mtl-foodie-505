@@ -5,7 +5,7 @@ export default function TopBar({toggleModal, setRandomRestaurant}) {
     return (
         <Header>
             <Title onClick={()=>setRandomRestaurant(null)}>
-                Ya quoi à manger icitte<span>?</span>
+                aleoresto<span>!</span>
             </Title>
             <InfoLink onClick={toggleModal}>
                 <svg fill="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
