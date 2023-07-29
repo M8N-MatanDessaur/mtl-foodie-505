@@ -56,7 +56,8 @@ export default function App() {
     }
   };
 
-  const fetchMainText = async => {
+  const fetchMainText = async () => {
+    try{
     const response = await fetch(`/.netlify/functions/fetch-main-text?language=en`);
     const data = await response.json();
       if (data && data.mainText) {
@@ -69,7 +70,8 @@ export default function App() {
     }
   };
 
-  const fetchSubText = async => {
+  const fetchSubText = async () => {
+    try{
     const response = await fetch(`/.netlify/functions/fetch-sub-text?language=en`);
     const data = await response.json();
       if (data && data.subText) {
