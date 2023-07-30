@@ -2,76 +2,43 @@ import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'react-hot-toast';
 
 const useGeolocation = () => {
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const [userLocation, setUserLocation] = useState(null);
-  const [rememberLocation, setRememberLocation] = useState(false);
+  const [location, setLocation] = useState({
+    current: JSON.parse(localStorage.getItem('currentLocation')) || null,
+    user: JSON.parse(localStorage.getItem('userLocation')) || null,
+  });
 
-  let watchId = null;
-
-  const updateLocation = useCallback((position, locationCallback) => {
+  const handlePosition = useCallback(position => {
     const { latitude, longitude } = position.coords;
-    setCurrentLocation({ latitude, longitude });
+    const newLocation = { latitude, longitude };
 
-    if (locationCallback) {
-      locationCallback({ latitude, longitude });
-    }
-
-    if (rememberLocation) {
-      setUserLocation({ latitude, longitude });
-      localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
-    }
-  }, [rememberLocation]);
-
-  const handleError = useCallback((error, message) => {
-    toast.error(message, error);
-    setCurrentLocation(null);
+    setLocation(prevState => ({ ...prevState, current: newLocation, user: newLocation }));
+    localStorage.setItem('currentLocation', JSON.stringify(newLocation));
+    localStorage.setItem('userLocation', JSON.stringify(newLocation));
   }, []);
 
-  const getLocation = useCallback((locationCallback) => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => updateLocation(position, locationCallback),
-        (error) => handleError(error, 'Error getting current location')
-      );
+  const handleError = useCallback(error => {
+    toast.error(`Error: ${error.message}`);
+    setLocation(prevState => ({ ...prevState, current: null }));
+  }, []);
 
-      if (!watchId) {
-        watchId = navigator.geolocation.watchPosition(
-          (position) => updateLocation(position, locationCallback),
-          (error) => handleError(error, 'Error watching current location')
-        );
-      }
-    } else {
+  const getLocation = useCallback(() => {
+    if (!navigator.geolocation) {
       toast.error('Geolocation is not supported by your browser');
-      setCurrentLocation(null);
+      return;
     }
-  }, [updateLocation, handleError]);
+
+    const options = { enableHighAccuracy: true, maximumAge: 0 }; // No timeout option
+    navigator.geolocation.getCurrentPosition(handlePosition, handleError, options);
+  }, [handlePosition, handleError]);
 
   useEffect(() => {
-    const storedLocationPref = localStorage.getItem('rememberLocation');
-    if (storedLocationPref !== null) {
-      setRememberLocation(JSON.parse(storedLocationPref));
-    }
-
     getLocation();
+    const watchId = navigator.geolocation.watchPosition(handlePosition, handleError);
 
-    return () => {
-      if (watchId) {
-        navigator.geolocation.clearWatch(watchId);
-        watchId = null;
-      }
-    };
-  }, [getLocation]);
+    return () => navigator.geolocation.clearWatch(watchId);
+  }, [getLocation, handlePosition, handleError]);
 
-  useEffect(() => {
-    if (rememberLocation) {
-      const storedUserLocation = localStorage.getItem('userLocation');
-      if (storedUserLocation !== null) {
-        setUserLocation(JSON.parse(storedUserLocation));
-      }
-    }
-  }, [rememberLocation]);
-
-  return { currentLocation, userLocation, rememberLocation, getLocation };
+  return { ...location, getLocation };
 };
 
 export default useGeolocation;

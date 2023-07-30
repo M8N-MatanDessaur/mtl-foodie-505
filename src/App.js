@@ -119,7 +119,7 @@ export default function App() {
   };
 
   // useGeolocation hook to get the user's location
-  const { currentLocation, userLocation, rememberLocation, getLocation } = useGeolocation();
+  const { current, user, remember, getLocation } = useGeolocation();
 
 
   // Choose a random restaurant
@@ -151,7 +151,7 @@ export default function App() {
 
     // Fetch restaurants data from Google Places API via Netlify Function
     try {
-      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${currentLocation.latitude}&longitude=${currentLocation.longitude}&radius=${radius}&type=restaurant|cafe|bar|bakery|bistro|buffet|diner|food_court|pizza|ice_cream|fast_food|fine_dining|breakfast|brunch|lunch|dinner|pub|taco|steakhouse|sushi|bbq|vegetarian|food_truck|haitian|creole|indian|chinese|italian|mexican|greek|thai|seafood|burger|dessert|ramen|french|spanish|mediterranean|korean|vietnamese|american|german|middle_eastern|caribbean|peruvian|brazilian|ethiopian|vegan|gluten_free|japanese&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
+      const response = await fetch(`/.netlify/functions/getPlaces?latitude=${current.latitude}&longitude=${current.longitude}&radius=${radius}&type=restaurant|cafe|bar|bakery|bistro|buffet|diner|food_court|pizza|ice_cream|fast_food|fine_dining|breakfast|brunch|lunch|dinner|pub|taco|steakhouse|sushi|bbq|vegetarian|food_truck|haitian|creole|indian|chinese|italian|mexican|greek|thai|seafood|burger|dessert|ramen|french|spanish|mediterranean|korean|vietnamese|american|german|middle_eastern|caribbean|peruvian|brazilian|ethiopian|vegan|gluten_free|japanese&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`);
       const data = await response.json();
 
       // Check if results are available
@@ -161,7 +161,7 @@ export default function App() {
         const randomRestaurant = data.results[randomIndex];
 
         // Create a link to the restaurant on Google Maps
-        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode.mode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+        let mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${current.latitude},${current.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${navMode.mode}&&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
         let openLink;
 
         if (/(android|iphone|ipad)/i.test(navigator.userAgent)) {
@@ -209,7 +209,7 @@ export default function App() {
       console.error(`Error while fetching data from Google Places API: ${error}`);
       setLoading(false);  // Error occurred, stop loading
     }
-  }, [currentLocation, loading, countdown, setLoading, setCountdown, mainButtonPressed, getLocation]);
+  }, [current, loading, countdown, setLoading, setCountdown, mainButtonPressed, getLocation]);
 
   // Toggle the info modal
   const toggleModal = () => {
@@ -228,7 +228,7 @@ export default function App() {
 
     // If a random restaurant is picked, update the mapUrl with the new navMode
     if (randomRestaurant) {
-      const mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${currentLocation.latitude},${currentLocation.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${mode}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
+      const mapUrl = `https://www.google.com/maps/embed/v1/directions?origin=${current.latitude},${current.longitude}&destination=place_id:${randomRestaurant.place_id}&mode=${mode}&key=AIzaSyAmNrNmvYsOCOp5rsSOI4cYDpALlHBetGQ`;
 
       // Update the randomRestaurant state with the new mapUrl
       setRandomRestaurant(prevRandomRestaurant => {
@@ -292,12 +292,12 @@ export default function App() {
 
         </ScanlineScreen>
         <ButtonWrapper>
-          <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} currentLocation={currentLocation} countdown={countdown} />
+          <RandomizerButton pickRandomRestaurant={pickRandomRestaurantCallback} current={current} countdown={countdown} />
         </ButtonWrapper>
         <MarqueeContainer>
           {randomRestaurant && (
             <Marquee speed={100}>
-            {randomRestaurant.name} &nbsp;&nbsp; {randomRestaurant.vicinity} &nbsp;&nbsp; {randomRestaurant.rating} / 5 &nbsp;&nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;&nbsp;
+            {randomRestaurant.name} &nbsp;&nbsp; {randomRestaurant.vicinity} &nbsp;&nbsp; {randomRestaurant.rating}&nbsp;/&nbsp;5 &nbsp;&nbsp; {'$'.repeat(randomRestaurant.price_level)} &nbsp;&nbsp;
           </Marquee>
           )}
         </MarqueeContainer>
