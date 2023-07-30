@@ -12,8 +12,6 @@ const useGeolocation = () => {
     const newLocation = { latitude, longitude };
 
     setLocation(prevState => ({ ...prevState, current: newLocation, user: newLocation }));
-    localStorage.setItem('currentLocation', JSON.stringify(newLocation));
-    localStorage.setItem('userLocation', JSON.stringify(newLocation));
   }, []);
 
   const handleError = useCallback(error => {
@@ -37,6 +35,16 @@ const useGeolocation = () => {
 
     return () => navigator.geolocation.clearWatch(watchId);
   }, [getLocation, handlePosition, handleError]);
+
+  // New useEffect to update localStorage
+  useEffect(() => {
+    if (location.current) {
+      localStorage.setItem('currentLocation', JSON.stringify(location.current));
+    }
+    if (location.user) {
+      localStorage.setItem('userLocation', JSON.stringify(location.user));
+    }
+  }, [location.current, location.user]);
 
   return { ...location, getLocation };
 };
